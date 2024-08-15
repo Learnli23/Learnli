@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ 
+
+
+<h1>   <button class="btn btn-outline-success" onclick="typeWriter()">About us</button>
+ </h1>
+<p id="demo"></p>
+
+<script>
+var i = 0;
+var txt = 'LearnLi: Your one  stop academic center , "Expertise  matters" ';
+var speed = 50;
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+</script>
+<br/>
+<br/>
+
+<!--sld sh cntana-->
+<!--<div class="slideshow-container">
+    
+  <div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="media/image/bag.jpg" style="width:100%">
+  <div class="text">image One </div>
+  </div>
+  
+  <div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="media/image/glosh.jpg" style="width:100%">
+  <div class="text">image Two</div>
+  </div>
+  
+  <div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="media/image/hapi.jpg" style="width:100%">
+  <div class="text">image Three</div>
+  </div>
+  
+  
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+  
+</div>
+<br>
+
+<div style="text-align:center" >
+<span   class="dot" onclick="currentSlide(1)"></span>
+<span  class="dot" onclick="currentSlide(2)"></span>
+<span  class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+  
+  function plusSlides(n) {
+  showSlides(slideIndex += n);
+  }
+  
+  function currentSlide(n) {
+  showSlides(slideIndex = n);
+  }
+  
+  function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  }
+</script>-->
+
+
+
+<!---what we do -->
+<h2 style="text-align:center ;">Meet The Team</h2>
+<br/><br/>
+
+<div class="column">
+    <div class="flip-card">
+    <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="media/paula.jpg" alt="Avatar" style="width:300px;height:350px;">
+    </div>
+    <div class="flip-card-back">
+      <h1>Hamidah Mugerwa</h1>
+      <p>People operations & Talent acquisition</p>
+       
+    </div>
+    </div>
+    </div>
+     
+</div>
+
+<div class="column">
+  <div class="flip-card">
+  <div class="flip-card-inner">
+  <div class="flip-card-front">
+    <img src="media/jose.jpg" alt="Avatar" style="width:300px;height:350px;">
+  </div>
+  <div class="flip-card-back">
+    <h1>Mugish Erick</h1>
+    <p>Chief Engineer & Product manager</p>
+     
+  </div>
+  </div>
+  </div>
+</div>
+
+ 
+
+<div class="column">
+  <div class="flip-card">
+  <div class="flip-card-inner">
+  <div class="flip-card-front">
+    <img src="media\amos.jpg" alt="Avatar" style="width:300px;height:350px;">
+  </div>
+  <div class="flip-card-back">
+    <h1>Josep Mubiru</h1>
+    <p>CEO and QA manager</p>
+     
+  </div>
+  </div>
+  </div>
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+<div class="container"> <h2 style="text-align:center ;"></h2></div>
+ 
+ 
+<br/><br/>
+<div class="row">
+  <h2 style="text-align:center ;"> WHAT WE DO</h2>
+        <div class="column">
+          <div class="card">
+          <img src="media\courses.jpg" alt="John" style="width:100%">
+          <div class="container">
+            <h3>Course creation tool that support all fields of study</h3>
+            
+            <p>You can creat from self paced to ontime large courses</p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+      </div>
+      </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+        <img src="media\ebooks.jpg" alt="John" style="width:100%">
+        <div class="container">
+          <h3> Flexable tools to create you ebook</h3>
+          
+          <p>with our tools, you can be your own publisher</p>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+      </div>
+      </div>
+      </div>
+
+      <div class="column">
+      <div class="card">
+      <img src="media\communication.jpg" alt="John" style="width:100%">
+      <div class="container">
+        <h3>in built communication means</h3>
+        
+        <p>with our ontime messaging features, we ensure flexible communication</p>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+      </div>
+      </div>
+      </div>
+</div>
+
+<br>
+<div class="row">
+      <div class="column">
+        <div class="card">
+        <img src="media\exam.jpg" alt="John" style="width:100%">
+        <div class="container">
+          <h3>Tools to create and control exams</h3>
+          
+          <p>with our flexible tools, you can create and control exams</p>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+    </div>
+    </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+      <img src="media\exams.jpg" alt="John" style="width:100%">
+      <div class="container">
+        <h2> flexible interaction width instruuctor</h2>
+        
+        <p>with our ontime messaging features, we ensure flexible communication</p>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+    </div>
+    </div>
+    </div>
+
+    <div class="column">
+    <div class="card">
+    <img src="media\communication.jpg" alt="John" style="width:100%">
+    <div class="container">
+      <h2> flexible interaction width instruuctor</h2>
+      
+      <p>with our ontime messaging features, we ensure flexible communication</p>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- chart form-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<button class="open-button" onclick="openForm()">Chat with us</button>
+
+<div class="chat-popup" id="myForm">
+
+    <form method="POST" action=" " class="form-container" enctype="multipart/form-data">
+      <h1 style="color:blue ;">Chat</h1>
+      {% csrf_token %}
+
+      <label for="msg"><b>Message</b></label>
+      <textarea  placeholder="Type message.." name="msg" required></textarea>
+
+
+      <input type="submit"  value="Send" class="btn btn-success"/>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+ 
+
+
+
+
+ 
+ 
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h2>Search class</h2>
+ 
+<div class="row">
+  <!--lft-->
+  <div class="left" style="background-color:#bbb;">
+    <h2>Menu</h2>
+    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search by category.." title="Type in a category">
+    <ul id="myMenu">
+
+      {% for class in classes %}
+      {% if class.created_by  in request.user.follows.all %}
+        <!--nam-->
+      <li><a href="#">{{ class }}</a></li>
+      {% endif %}
+      {% endfor %}
+ 
+    </ul>
+  </div>
+
+
+ <!--ght-->
+  <div class="right" style="background-color:#ddd;">
+
+ 
+   {% for class in classes %}
+   {% if class.created_by  in request.user.follows.all %}
+  
+        <div class="card mb-3" style="max-width: 640px;">
+          <div class="row g-0">
+
+              <div class="col-md-4">
+              {% if class.image %}      
+             <a  href="{% url 'enroll' class.id%}"><img  src="{{class.image.url }}"  alt ="image" width="225" height="300" class="d-inline-block align-text-top" ></a> 
+             {% endif %}
+             <br/><br/>
+          
+             
+              <!--form to Enroll or un Enroll from a course-->
+          
+           
+               
+
+              <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="{% url 'enroll' class.id%}">Details</a></button>
+             
+              
+         
+       
+              </div>
+              
+              <div class="col-md-8">
+              <div class="card-body"> 
+               <a href="{% url 'enroll' class.id%}"><h2 class="card-title" style="color:darkblue;"><strong style="color: black;"></strong>{{class.title}}</h2></a> 
+               <strong style="color:darkred;font-size: small; font-style:italic;">tap image or title for details!</strong>
+                <p class="card-text"><strong style="color:black;">Created on:</strong>{{class.created_on}}</a></p>
+                <p class="card-text"><strong style="color:black;">Duration:</strong>{{class.Duration}}</a></p>
+                <p class="card-text"><strong style="color:black;"></strong>{{class.level}}</a></p>
+                <p class="card-text"><a href="{% url 'profile' class.created_by.id %} ">BY:{{class.created_by}}</a></p>
+                <br/>
+               
+                 
+    
+                  
+                  <button class="btn btn-outline-primary"><a href="{% url 'class_subjects' class.id %} ">
+                    <strong style="color:black ;">Course Units</strong></a>
+                    </button>
+
+                  {%if request.user == class.created_by%}
+
+                  
+                  <button class="btn btn-outline-secondary"><a href=" {% url 'edit_class' class.id %}"><strong 
+                    style="color:black;">Edit Course</strong></a>
+                  </button>
+                  {% endif %}
+
+                  {%if request.user == class.created_by%}
+                  <button class="btn btn-outline-danger"><a href="{% url 'delete_class' class.id  %}"><strong 
+                    style="color:black;">Delete Course </strong></a>
+                  </button>
+                  {% endif %}
+
+                    <div>
+                     
+                      <strong style="color:darkred ; font-size: small;">{{ class.Enroll.all.count }}:have Enrolled</strong>
+                      
+
+                    </div>
+                 
+                    
+
+              </div>
+              </div>
+          </div>
+          </div>
+          
+        {%  endif %}
+      {% endfor %}
+  
+ 
+  </div>
+</div>
+
+
+
+<script>
+function myFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("mySearch");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myMenu");
+  li = ul.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+
+
+{% endblock %}

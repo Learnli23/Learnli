@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <title>Ebooks</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .grid-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .grid-item img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+ 
+ 
+    <h1>Ebooks</h1>
+    <div class="grid-container">
+    {% if profile %}
+        {% for book in books %}
+        {% if book.author == profile %}
+     <div class="grid-item">
+        
+        <a href="{% url 'book_details' book.pk %}"><Title></Title>{{ book.title }}</a>
+        {% if book.display_image %}
+        <a href="{% url 'book_details' book.pk %}"> <img src="{{ book.display_image.url }}" width="450" height="300" class="d-inline-block align-text-top" alt=" "> </a>  
+        {% endif %}
+        <a href="{% url 'profile' book.author.id %} ">Author:{{ book.author }}</a>
+        <P>Updated:{{ book.date_updated }}</P>
+        <P style="font-size:x-small; color: darkblue;"><strong>ISBN:{{ book.ISBN }}</strong></P>
+
+        <strong data-bs-toggle="collapse" data-bs-target="#book" style="color:darkred;">Description(tap me!)</strong>
+        <div id="book" class="collapse hide">
+        <div class="container mt-3">
+        {{book.description |safe |linebreaks}}
+        </div>
+
+        </div>
+
+      </div>
+        
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    </div>
+
+    {% if request.user.is_teacher or request.user.is_institution %}
+    <button class="btn btn-outline-success" style="border:black ;"><a href="{% url 'add_book' %}"><strong style="color:darkred ;">Add new Ebook</strong></a></button>
+        
+    {% endif %}
+ 
+
+
+{% endblock %}

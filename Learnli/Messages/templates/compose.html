@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+{% block content %}
+    
+
+<div class="col-md-6 offset-md-3">
+    <h2>create a message</h2>
+    
+    <div>
+
+        {% if user.is_authenticated %}
+        <br/><br/>
+        {% if submitted %}
+        your  message has been created 
+        {% else %}
+            
+        <P>
+        
+            <form  method="POST" action="" class="form-control"  enctype="multipart/form-data">
+                {% csrf_token %}
+            
+            {{form.as_p}}
+            {{ form.media }}
+                
+                <input type="submit"  value="Create" class="btn btn-success"/>
+            
+            </form>
+        
+        </p>
+        
+        {% endif %}
+        {%else%}
+        <h1>You need to be loged in to access this page</h1>
+        <a href="{% url 'log in' %}">log in</a>
+        
+        {%endif%}
+
+    </div>
+ 
+
+</div>
+{% endblock %}
+
+ 

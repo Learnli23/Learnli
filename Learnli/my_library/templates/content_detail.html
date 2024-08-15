@@ -1,0 +1,114 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+
+
+  <div class="col-md-4">
+    <h2 style="text-align:center;color:darkblue;">{{content.title}}</h2>
+    {% if content.display_image %}
+    <a href="{% url 'content_detail' content.id %}"> <img src="{{ content.display_image.url }}" width="740" height="300" class="d-inline-block align-text-top" alt=" "> </a>
+    {% endif %}
+    <div class="card-body"> 
+      <strong> Author:</strong style="color:darkblue;">{{content.author}}</strong><br/>
+      <strong>Type:</strong><strong style="color:darkblue; font-size:smaller;">{{content.content_type}}</strong><br/>
+      <strong>upload date:</strong><strong style="color:darkred;font-size:smaller;">{{content.upload_date}}</strong><br/>
+      <strong>Description:</strong>{{content.description |safe | linebreaks}} 
+
+
+      {%  if content.video %}
+      <div class="video-card">
+        <video width="400" height="300" controls>
+          <source src=" {{content.video.url }}" type="video/mp4">
+          Your browser does not support the video tag.
+       
+        </video>
+        {% endif %}
+        <card class=" ">
+          {%  if content.video %}
+            <button class="btn btn-outline-secondary" style="border:black;">
+              <a href=" {{content.video.url}} " download>Download video </a>
+            </button>
+            
+
+            <button class="btn btn-outline-success" style="border:black;">
+              <a href=" {{content.video.url}} ">new window</a>
+            </button>
+            {% endif %}
+            <br/><br/>
+
+            {% if content.paper_file %}
+             <button class="btn btn-outline-success"><a href="{{content.paper_file.url}}" download>Download book</a></button> 
+            {% endif %}
+
+            <br/><br/>
+
+            {% if content.Audeo %}
+            <strong>Audio File:</strong>{{content.Audeo}}  
+            {% endif %}
+
+            <br/><br/>
+             
+
+          </card>
+       
+       </div>
+
+      
+    </div>
+  </div>
+
+
+ 
+
+
+            
+{%  if request.user == content.author %}
+<button class="btn btn-outline-danger"><a href="{% url 'delete_content' content.id %} "><strong 
+  style="color:black;">Delete ebook</strong></a>
+</button>
+
+<button class="btn btn-outline-success"><a href="{% url 'edit_content' content.id %} "><strong 
+  style="color:black;">Edited ebook</strong></a>
+</button>
+
+{% endif %}
+
+
+
+
+
+    <strong data-bs-toggle="collapse" data-bs-target="#comments" style="color:darkred;"> comments({{ comments.count }})</strong>
+    <div id="comments" class="collapse hide">
+    
+    {% for comment in comments %}
+    
+    <div class="container mt-3">
+    <p style="color:black ; font-size: smaller;"><strong style="color:darkblue;"  >@<a href="{% url 'profile' comment.Commenter.id %}">{{ comment.Commenter }}</a>:</strong>{{ comment.created_at}}:{{ comment.text|linebreaks}}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+
+  
+    {% if user.is_authenticated %}
+
+    <strong style="color:darkblue;" data-bs-toggle="collapse" data-bs-target="#comment"> +Comment </strong>
+    <div id="comment" class="collapse hide">
+        <form method="post">
+          {% csrf_token %}
+          {{ comment_form.as_p }}
+              
+              <button class="btn btn-primary" type="submit">comment</button>
+          </form>
+    </div>
+
+    {% endif %}
+  
+
+
+{% endblock %}
+ 
+ 
+
+ 

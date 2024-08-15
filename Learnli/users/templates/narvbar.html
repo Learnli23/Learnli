@@ -1,0 +1,322 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg" style="background-color: #010b13;">
+  <div class="container-fluid">
+    
+    <a class="navbar-brand" href="#"><strong style="color:blue ;">Learn</strong><strong style="color:red ;">Li</strong>  <br/>
+
+    <img src="{{ user.profile_image.url }}" alt="" width="60" height="60" class="d-inline-block align-text-top"><br/>
+    {% if user.is_authenticated %}
+     <p style="color:blue;">{{user}}</p>
+     {% else %}
+     <p></p>
+     {% endif %}
+       
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+          <a class="nav-link active" aria-current="page" href="{% url 'blog_list' %}"><strong style="color: brown ;font-size: medium;">Home</strong></a>
+         
+          
+          
+          {% else %}
+          <a class="nav-link active" aria-current="page" href="{% url 'about' %}"><strong style="color: brown ;font-size: medium;">about us</strong></a>
+          {% endif %}
+        </li>
+        
+        
+        {% if user.is_authenticated %}
+
+            <!--user profiles -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <strong style="color: brown ;font-size: medium;">Users</strong>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'students' %} "><strong style="color: blue ;">students</strong></a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'teachers' %}  "><strong style="color: red ;">Teachers</strong></a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'institutions' %}  "><strong style="color: green ;">Institutions</strong></a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'profiles' %}"><strong style="color: black ;">all users</strong></a></li>
+            </ul>
+            </li>
+        
+        
+      
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'profile' user.id %}"><strong style="color: brown ; font-size: medium;">My profile</strong></a>
+          </li>
+            <!--class for student -->
+            {% if user.is_student %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">study</strong>
+            </a>
+            <ul class="dropdown-menu">
+              
+             <li><a class="dropdown-item" href="{% url 'classes' %}"><strong style="color: black;">Courses</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'my_courses' %}"><strong style="color:black;">My Courses</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'exams' %}"><strong style="color: blue ;">Exams</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'answers' %}"><strong style="color:blue ;">Exams Answers</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'exam_results' %}"><strong style="color:black ;">Exam Reults</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'RegisterforExam' %}"><strong style="color:black;">Register for Exam</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'test_answers' %}"><strong style="color:brown ;">Test Answers</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'test_results' %}"><strong style="color:brown ;">Test Reults</strong></a></li>
+             
+              
+            </ul>
+
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">communicate</strong>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'compose' %}"><strong style="color:blue;"> messages</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'inbox' %} "><strong style="color: blue ;">inbox</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'outbox' %} "><strong style="color:black ;">outbox</strong></a></li>
+              <li><a class="dropdown-item" href=""><strong style="color:black;">reminder</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'create_blog' %}"><strong style="color:brown;">create blog</strong></a></li>
+            </ul>
+          </li>
+          <!--Library-->
+           <!--Ebooks and library-->
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">Library</strong>
+            </a>
+          <ul class="dropdown-menu">
+            
+            <li><a class="dropdown-item" href="{% url 'profile_library' user.id %}"><strong style="color:darkblue;"> My Uploaded books</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'book_list' %}"><strong style="color:red;"> Ebooks</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'content_list' %}"><strong style="color:darkblue;"> Uploaded books</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'upload_content' %}"><strong style="color:black;">Upload Books</strong></a></li>
+          </ul>
+         </li>
+          {% endif %}
+
+          <!--office for teachers -->
+            {% if user.is_teacher %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">office</strong>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'classes' %}"><strong style="color: black;">Courses</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'my_courses' %}"><strong style="color: black;">My Courses</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'create_class' %}"><strong style="color:black;">creat course</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'subjects' %} "><strong style="color: blue ;">Course Units</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'create_subject' %}  "><strong style="color:blue;">create course unit</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'lessons' %} "><strong style="color:brown;">lessons</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'create_lesson' %}"><strong style="color:brown">create lesson</strong></a></li>
+              
+              
+
+            </ul>
+          </li>
+       <!--Ebooks and library-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">Library</strong>
+            </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'profile_books' user.id %}"><strong style="color:red;">  My Ebooks</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'profile_library' user.id %}"><strong style="color:darkblue;"> My Uploaded books</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'book_list' %}"><strong style="color:red;"> Ebooks</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'content_list' %}"><strong style="color:darkblue;"> Uploaded books</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'upload_content' %}"><strong style="color:black;">Upload Books</strong></a></li>
+          </ul>
+         </li>
+
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">Examinations</strong>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'my_exams' %}"><strong style="color:brown;">My Exams</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'exams' %}"><strong style="color:brown;">Exams</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'exam' %}"><strong style="color:brown;">creat Exam </strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'answers' %}"><strong style="color:darkblue;">Exams Answers</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'exam_results' %}"><strong style="color:darkblue;">Exam Reults</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'RegisterforExam' %}"><strong style="color:black;">Register for Exam</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'examRegister' %}"><strong style="color:black;">candidates</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'tests' %}"><strong style="color:red;">Tests</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'test' %}"><strong style="color:red ;">creat Test </strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'test_answers' %}"><strong style="color:darkblue ;">Test Answers</strong></a></li>
+             <li><a class="dropdown-item" href="{% url 'test_results' %}"><strong style="color:darkblue;">Test Reults</strong></a></li>
+            </ul>
+          </li>
+<!--Communication and blogoing-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">communicate</strong>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'compose' %}"><strong style="color:blue;"> messages</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'inbox' %} "><strong style="color: blue ;">inbox</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'outbox' %} "><strong style="color:black ;">outbox</strong></a></li>
+              <li><a class="dropdown-item" href=""><strong style="color:black;">reminder</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'create_blog' %}"><strong style="color:brown;">create blog</strong></a></li>
+            </ul>
+          </li>
+          {% endif %}
+
+            <!--compass for institutions -->
+            {% if user.is_institution %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <strong style="color: brown ;font-size: medium;">Compass</strong>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'classes' %}"><strong style="color: black;">Courses</strong></a></li>
+                <li><a class="dropdown-item" href="{% url 'my_courses' %}"><strong style="color: black;">My Courses</strong></a></li>
+                <li><a class="dropdown-item" href="{% url 'create_class' %}"><strong style="color:black;">creat course</strong></a></li>
+                <li><a class="dropdown-item" href="{% url 'subjects' %} "><strong style="color: blue ;">Course Units</strong></a></li>
+                <li><a class="dropdown-item" href="{% url 'create_subject' %}  "><strong style="color:blue;">create course unit</strong></a></li>
+                <li><a class="dropdown-item" href="{% url 'lessons' %} "><strong style="color:brown;">lessons</strong></a></li>
+                <li><a class="dropdown-item" href="{% url 'create_lesson' %}"><strong style="color:brown">create lesson</strong></a></li>
+                
+                
+  
+              </ul>
+            </li>
+
+            <!--Library-->
+             <!--Ebooks and library-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;font-size: medium;">Library</strong>
+            </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'profile_books' user.id %}"><strong style="color:red;">  My Ebooks</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'profile_library' user.id %}"><strong style="color:darkblue;"> My Uploaded books</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'book_list' %}"><strong style="color:red;"> Ebooks</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'content_list' %}"><strong style="color:darkblue;"> Uploaded books</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'upload_content' %}"><strong style="color:black;">Upload Books</strong></a></li>
+          </ul>
+         </li>
+
+
+
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <strong style="color: brown ;font-size: medium;">Examinations</strong>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'my_exams' %}"><strong style="color:brown;">My Exams</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'exams' %}"><strong style="color:brown;">Exams</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'exam' %}"><strong style="color:brown;">creat Exam </strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'answers' %}"><strong style="color:darkblue;">Exams Answers</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'exam_results' %}"><strong style="color:darkblue;">Exam Reults</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'RegisterforExam' %}"><strong style="color:black;">Register for Exam</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'examRegister' %}"><strong style="color:black;">candidates</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'tests' %}"><strong style="color:red;">Tests</strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'test' %}"><strong style="color:red ;">creat Test </strong></a></li>
+            <li><a class="dropdown-item" href="{% url 'test_answers' %}"><strong style="color:darkblue ;">Test Answers</strong></a></li>
+           <li><a class="dropdown-item" href="{% url 'test_results' %}"><strong style="color:darkblue;">Test Reults</strong></a></li>
+          </ul>
+        </li>
+
+
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <strong style="color: brown ;font-size: medium;">commmunicat</strong>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'compose' %}"><strong style="color:blue;"> messages</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'inbox' %} "><strong style="color: blue ;">inbox</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'outbox' %} "><strong style="color:black ;">outbox</strong></a></li>
+              <li><a class="dropdown-item" href=""><strong style="color:black;">reminder</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'create_blog' %}"><strong style="color:brown;">create blog</strong></a></li>
+                <li><a class="dropdown-item" href=""><strong style="color:brown;">news feeds</strong></a></li>
+                <li><a class="dropdown-item" href=""><strong style="color: darkblue ;">Adds</strong></a></li>
+                
+              </ul>
+            </li>
+            
+
+
+            {% endif %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}"><strong style="color:blue ;">logout</strong></a>
+          </li>
+        
+      {% else %}
+
+            <!-- login  -->
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'login' %}"><strong style="color:blue ;">login
+            </strong></a>
+            </li>
+          
+
+          <!-- the Creatind account menue -->
+           
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong style="color: brown ;">Create account</strong>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'register_student' %}"><strong style="color: blue ;">student account</strong></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href=" {% url 'register_teacher' %}"><strong style="color:darkblue ;">teacher account</strong></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'register_institution' %}"><strong style="color:black ;">institution account</strong></a></li>
+            </ul>
+          </li>
+      
+      {% endif %}
+         
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      
+
+      
+        
+         
+    </div>
+  </div>
+          <div>
+
+            
+            <!---Dark/light  mode-->
+          <style>
+            body {
+              padding: 0px;
+              background-color: white;
+              color:black;
+              font-size: 18px;
+            }
+            
+            .dark-mode {
+              background-color: black;
+              color:blue;
+            }
+            </style>
+            </head>
+            <body>
+            <button class="btn btn-outline-primary"  onclick="myFunction()">dark-mode on/off</button>
+            
+            <script>
+            function myFunction() {
+              var element = document.body;
+              element.classList.toggle("dark-mode");
+            }
+            </script>
+          </div>
+  
+</nav>

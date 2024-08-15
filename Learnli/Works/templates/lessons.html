@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+<h2>Search lesson</h2>
+
+<div class="row">
+  <!--lft-->
+  <div class="left" style="background-color:#bbb;">
+    <h2>Menu</h2>
+    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+    <ul id="myMenu">
+      {% for lesson in lessons %}
+      {% if lesson.taught_by  in request.user.follows.all or  lesson.taught_by == request.user %}
+        <!--nam-->
+      <li><a href="">{{ lesson }}</a></li>
+      {% endif %}
+      {% endfor %}
+ 
+    </ul>
+  </div>
+
+
+ <!--ght-->
+  <div class="right" style="background-color:#ddd;">
+  {% for lesson in lessons %}
+  {% if lesson.taught_by  in request.user.follows.all or  lesson.taught_by == request.user %}
+
+    <div class="card mb-3" style="max-width: 740px;">
+      <div class="row g-0">
+
+          <div class="col-md-4">
+            {% if lesson.display_image  %}
+          <img src="{{lesson.display_image.url }}"  alt ="" width="225" height="300" class="d-inline-block align-text-top" >
+        {% endif %} 
+        </div>
+          
+          <div class="col-md-8">
+          <div class="card-body"> 
+            <h2 class="card-title" style="color:maroon;"><strong style="color: black;"></strong>{{lesson.title}}</h2>
+            <p class="card-text"><strong style="color:black; font-size:medium;">uploded on:{{lesson.created_on}}</strong></a></p>
+            <p class="card-text"><strong style="color:black;">Taught by:</strong>{{lesson.taught_by}}</a></p>
+
+            {% if lesson.video  %}
+            <div class="video-card">
+              <h2>{{ video.title }}</h2>
+              <p>{{ video.description }}</p>
+              <video width="400" height="300" controls>
+                <source src=" {{lesson.video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+             
+               
+              </video>
+              <card class=" ">
+                  <button class="btn btn-outline-secondary" style="border:black;">
+                    <a href=" {{lesson.video.url}} " download>Download video </a>
+                  </button>
+
+                  <button class="btn btn-outline-success" style="border:black;">
+                    <a href=" {{lesson.video.url}} ">new window</a>
+                  </button>
+
+                   
+                    <a href="{{lesson.notes.url}}" download>Download notes</a>
+                   
+
+                </card>
+             
+             </div>
+             {% endif %}
+
+          
+            <button class="btn btn-outline-primary" style="border:black;"> 
+              <a href="{% url 'classes' %} ">Back to Courses</a>
+            </button>
+           
+          {%if request.user == lesson.taught_by%}
+
+          <button class="btn btn-outline-secondary" style="border:black;">
+            <a href="{% url 'edit_lesson' lesson.id %}">Edit lessons</a>
+          </button>
+           
+          {% endif %}
+
+
+          {%if request.user == lesson.taught_by%}
+          <button class="btn btn-outline-danger" style="border:black;">
+            <a href="{% url 'delete_lesson' lesson.id  %}">Delete lessons</a>
+          </button>
+           
+          {% endif %}
+              
+          </div>
+          </div>
+      </div>
+      </div>
+
+
+    {% endif %}
+
+  {% endfor %}
+ 
+  </div>
+</div>
+
+<script>
+function myFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("mySearch");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myMenu");
+  li = ul.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+{% endblock %}
+
+
+
+
+ 
+
+   
+
+ 
+
+

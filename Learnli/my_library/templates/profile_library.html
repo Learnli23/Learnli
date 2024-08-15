@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+<title>Uploaded books</title>
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+    .grid-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+    .grid-item img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+
+<h1>Uploaded books</h1>
+<div class="grid-container">
+ {% if profile %}       
+{% for content in contents %}
+{% if content.author == profile %}     
+    
+ <div class="grid-item">
+        <a href="{% url 'content_detail' content.id %}"><h2 style="text-align:center">{{content.title}}</h2></a>
+                
+        {% if content.display_image %}
+                <a href="{% url 'content_detail' content.id %}"> <img src="{{ content.display_image.url }}" width="450" height="300" class="d-inline-block align-text-top" alt=" "> </a>
+        {% endif %}        
+                <strong> Author:</strong style="color:darkblue;">{{content.author}}</strong><br/>
+                <strong>Type:</strong><strong style="color:darkblue; font-size:smaller;">{{content.content_type}}</strong><br/>
+                <strong>upload date:</strong><strong style="color:darkred;font-size:smaller;">{{content.upload_date}}</strong><br/>
+                
+                <strong data-bs-toggle="collapse" data-bs-target="#content" style="color:darkred;">Description(tap me!)</strong>
+                <div id="content" class="collapse hide">
+                <div class="container mt-3">
+                {{content.description |safe |linebreaks}}
+                </div>
+   
+                </div>
+ </div>
+    
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</div>
+
+ 
+
+
+
+
+
+     
+ 
+{% endblock %}

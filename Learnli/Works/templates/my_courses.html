@@ -1,0 +1,67 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<title>My Courses</title>
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+    .grid-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+    .grid-item img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<div class="grid-container">
+    {% for course in my_courses %}
+    {% if course.created_by  in request.user.follows.all and request.user in course.Enroll.all or request.user == course.created_by %}
+  <div class="grid-item">
+     
+     
+    <a href="{% url 'enroll' course.id%}"><h2 class="card-title" style="color:darkblue;"><strong style="color: black;"></strong>{{course.title}}</h2></a>
+    <strong style="color:darkred;font-size: small; font-style:italic;">tap image or title for details!</strong>
+    {% if course.image %}
+    <a  href="{% url 'enroll' course.id%}" ><img src="{{course.image.url }}"  alt ="" width="225" height="300" class="d-inline-block align-text-top" ></a> 
+    {% endif %}
+    <p class="card-text"><strong style="color:black;">Created on:</strong>{{course.created_on}}</a></p>
+    <p class="card-text"><strong style="color:black;">Duration:</strong>{{course.Duration}}</a></p>
+    <p class="card-text"><strong style="color:black;"></strong>{{course.level}}</a></p>
+    <p><a href="{% url 'profile' course.created_by.id %} ">BY:{{course.created_by}}</a></p>
+    
+    <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="{% url 'enroll' course.id%}">Details</a></button>
+        <button class="btn btn-outline-primary"><a href="{% url 'class_subjects' course.id %} ">
+            <strong style="color:black ;">Course Units</strong></a>
+           </button>
+           {% if request.user == course.created_by %}
+                   
+           <button class="btn btn-outline-secondary"><a href=" {% url 'edit_class' course.id %}"><strong 
+           style="color:black;">Edit Course</strong></a>
+           </button>
+          {% endif %}
+
+          <div>
+                 
+             
+            <strong style="color:darkred ; font-size: small;">{{ course.Enroll.all.count }}:have Enrolled</strong>
+            
+    
+          </div>
+
+
+   </div>
+     
+     {% endif %}
+     {% endfor %}
+
+ </div>
+
+
+{% endblock %}

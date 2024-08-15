@@ -1,0 +1,63 @@
+
+{% extends 'base.html'%}
+
+{%  block content  %}
+
+<div class="container mt-3" style="text-align:end;">
+   
+    <button type="button" class="btn btn-primary">
+        Tests available<span class="badge bg-danger">{{tests.count}}</span>
+    </button>
+   
+  </div>
+  <br/>
+    
+    {% for test in tests %}
+    {% if test.created_by in  request.user.follows.all or request.user == test.created_by %}
+
+            <div class="right" style="background-color:#ddd;"> 
+
+                <div class="col-md-8">
+                    <div class="card-body"> 
+                        <h5 class="card-title" style="text-align:center;"><strong  style="color:rgb(7, 7, 7);">{{ test.Subject_name }}</strong></h5>
+                       
+                        <p class="card-text"  style="text-align:center;"><strong style="color:black;"></strong>Semester:{{ test.semester }}</a></p>
+                        <p class="card-text" ><strong style="color:black ;"></strong>{{ test.Date }}</a></p>
+                        <p class="card-text"><strong style="color:black ;"><br/>Duration: </strong>{{ test.Duration}} Hours</a></p>
+                    
+                        <br/>
+                        <p class="card-text"><strong style="color:black ;">instructins:<br/></strong><pre>{{ test.instructins | safe| linebreaks}}</pre></a></p>
+                        <br/>
+                        <p class="card-text" style="text-align:left;"><strong style="color:black;">Questions<br/></strong>{{ test.Question |safe |linebreaks }}</a></p>
+
+                       
+                        <br/><br/><br/><br/>
+                        <p class="card-text"><strong style="color:black ;">created by:</strong>{{ test.created_by }}</a></p>
+                        
+
+
+                        <br/><br/> 
+
+                        <button class="btn btn-outline-success"><a href="{% url 'test_answer' test.id %} "><strong 
+                            style="color:black;">Start answering</strong></a>
+                        </button>
+                        {% if request.user == test.created_by %}
+
+                        <button class="btn btn-outline-primary"><a href="{% url 'edit_test' test.id %} "><strong 
+                            style="color:black;">Edit Test</strong></a>
+                        </button>
+
+                        <button class="btn btn-outline-danger"><a href="{% url 'delete_test' test.id %} "><strong 
+                            style="color:black;">Delete Test</strong></a>
+                        </button>
+
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div> 
+            <br/><br/><br/><br/>
+
+    {% endif %}
+    {% endfor %}
+{% endblock %}
