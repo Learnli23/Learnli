@@ -3,37 +3,26 @@
 
  
 
-<head>
-    <title>Create Ebook</title>
-    <script src="{%  static 'ckeditor/ckeditor/ckeditor.js"></script>
-    <script src="{%  static 'ckeditor/ckeditor/ckeditor- init.js"></script>
-    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</head>
-    
+ 
       
-<div class="col-md-6 offset-md-3">
-    <h2>Create a course unit</h2>
+<h2>create  course unit</h2>
     
     <div>
 
         {% if user.is_authenticated %}
         <br/><br/>
         {% if submitted %}
-        your  subject has been created 
+        your  course unit has been created 
         {% else %}
             
         <P>
         
-            <form  method="POST" action="" class="form-control"  enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            
-            {{form.as_p}}
-            {{ form.media }}
-                
-                <input type="submit"  value="Create" class="btn btn-success"/>
-            
-            </form>
+                {{ form.as_p }}
+                {{ form.media }}
+                <button type="submit">Upload</button>
+              </form>
         
         </p>
         
@@ -45,7 +34,4 @@
         {%endif%}
 
     </div>
- 
-
-</div>
 {% endblock %}
