@@ -2,12 +2,9 @@
 {% block content %}
 
     <card class="c">
-
-        
         {% if section.section_image %}
         <h3>{{ section.title }}</h3>
-        <img src="{{section.section_image.url }}" width="450" height="300" class="d-inline-block align-text-top" alt=" "> 
-       
+        <img src="{{section.section_image.url }}" width="200" height="200" class="d-inline-block align-text-top" alt=" "> 
         {% endif %}
         
     </card>
@@ -18,7 +15,7 @@
             display: flex;
         }
         .toc {
-            width: 40%;
+            width: 20%;
             padding-right: 20px;
         }
         .content {
@@ -39,7 +36,7 @@
         <div class="container" style="display:flex ;">
             
             <div class="toc">
-                <h2>Table of Contents</h2>
+                <h5>subsections</h5>
             {% if sub_sections %}
                 <ul>
                     {% for sub_section in sub_sections %}
@@ -47,7 +44,7 @@
                         <li><a href="javascript:void(0);" onclick="showSection('section-{{ sub_section.id }}')">{{ sub_section.title }}</a></li>
                     {% if forloop.last %} 
                         {% if request.user ==  sub_section.subsection_author %}
-                        <button class="btn btn-outline-success" style="border:black ;"><a href="{% url 'add_sub_section' section.pk %}"><strong style="color:darkred ;">Add subsection</strong></a></button> 
+                        <button class="btn btn-outline-success" style="border:black ;text-align:left;"><a href="{% url 'add_sub_section' section.pk %}"><strong style="color:darkred ;">+subsection</strong></a></button> 
                         {% endif %}  
                     {% endif %}  
         
@@ -56,35 +53,31 @@
             {% else %}       
                 
              <button class="btn btn-outline-success" style="border:black ;"><a href="{% url 'add_sub_section' section.pk %}"><strong style="color:darkred ;">Add subsection</strong></a></button> 
-                          
-            {% endif %}  
-
-                    
-                    <br/>
-                    
-                   
-                </ul>
+            <br/>
+               </ul>
+               {% endif %}  
                 
             </div>
             
 
 
-            <div class="content" style="display:flex ;">
+            <div class="content" style="display:flex ;border-right-style:double;border-bottom-style:double;border-left-style:double;border-top-style:double;background-color:burlywood;">
                 {% for sub_section in sub_sections %}
                     <div id="section-{{ sub_section.id }}" class="section" style="display: none;">
                         
-                        <h2>{{ sub_section.title }}</h2>
+                        <h5 style="text-align: center;">{{ sub_section.title }}</h5>
                         {% if sub_section.section_image %}
-                        <img src="{{sub_section.section_image.url }}" width="450" height="300" class="d-inline-block align-text-top" alt=" ">
+                        <img src="{{sub_section.section_image.url }}" width="800" height="300" class="d-inline-block align-text-top" alt=" ">
                        {% endif %}
                         <br/><br/>
                         {%  if sub_section.section_video %}
+                    <card>
                         <div class="video-card">
-                          <video width="450" height="300" controls>
-                            <source src=" {{sub_section.section_video.url }}" type="video/mp4">
+                          <video width="800" height="300" controls>
+                            <source src=" {{sub_section.section_video.url }}" type="video/mp4"></source>
                             Your browser does not support the video tag.
-                         
                           </video>
+                        </div>
                           {% endif %}
 
                           <card class=" ">
@@ -98,14 +91,15 @@
                               </button>
                               {% endif %}
 
-                              <div>
+                            <div>
                                 <p>{{ sub_section.content|safe }}</p> 
                                 <a href=" ">back to top</a>
                             </div>
             
                            </card>
 
-                        </div>
+                        
+                    </card>
                           
                     </div>
                     {% endfor  %}
@@ -114,6 +108,9 @@
                    
             </div>
         </div>
+
+
+        
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 if (sections.length > 0) {
@@ -122,5 +119,4 @@
             });
         </script>
     
-
 {% endblock %}

@@ -82,7 +82,8 @@
               <li><a class="dropdown-item" href="{% url 'compose' %}"><strong style="color:blue;"> messages</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'inbox' %} "><strong style="color: blue ;">inbox</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'outbox' %} "><strong style="color:black ;">outbox</strong></a></li>
-              <li><a class="dropdown-item" href=""><strong style="color:black;">reminder</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'calendar' %}"><strong style="color:black;">Events</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'add_event' %}"><strong style="color:black;">Add event</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'create_blog' %}"><strong style="color:brown;">create blog</strong></a></li>
             </ul>
           </li>
@@ -164,7 +165,8 @@
               <li><a class="dropdown-item" href="{% url 'compose' %}"><strong style="color:blue;"> messages</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'inbox' %} "><strong style="color: blue ;">inbox</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'outbox' %} "><strong style="color:black ;">outbox</strong></a></li>
-              <li><a class="dropdown-item" href=""><strong style="color:black;">reminder</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'calendar' %}"><strong style="color:black;">Events</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'add_event' %}"><strong style="color:black;">Add event</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'create_blog' %}"><strong style="color:brown;">create blog</strong></a></li>
             </ul>
           </li>
@@ -237,7 +239,8 @@
                 <li><a class="dropdown-item" href="{% url 'compose' %}"><strong style="color:blue;"> messages</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'inbox' %} "><strong style="color: blue ;">inbox</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'outbox' %} "><strong style="color:black ;">outbox</strong></a></li>
-              <li><a class="dropdown-item" href=""><strong style="color:black;">reminder</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'calendar' %}"><strong style="color:black;">Events</strong></a></li>
+              <li><a class="dropdown-item" href="{% url 'add_event' %}"><strong style="color:black;">Add event</strong></a></li>
               <li><a class="dropdown-item" href="{% url 'create_blog' %}"><strong style="color:brown;">create blog</strong></a></li>
                 <li><a class="dropdown-item" href=""><strong style="color:brown;">news feeds</strong></a></li>
                 <li><a class="dropdown-item" href=""><strong style="color: darkblue ;">Adds</strong></a></li>
@@ -279,47 +282,69 @@
       {% endif %}
          
       </ul>
-     <!--
-      
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-     --> 
-      
-
-      
-        
-         
+       
     </div>
-  </div>
-          <div>
+  </div> 
 
             
-            <!---Dark/light  mode-->
-          <style>
-            body {
-              padding: 0px;
-              background-color: white;
-              color:black;
-              font-size: 18px;
-            }
-            
-            .dark-mode {
-              background-color: black;
-              color:blue;
-            }
-            </style>
-            </head>
-            <body>
-            <button class="btn btn-outline-primary"  onclick="myFunction()">dark-mode on/off</button>
-            
-            <script>
-            function myFunction() {
-              var element = document.body;
-              element.classList.toggle("dark-mode");
-            }
-            </script>
-          </div>
+        
+ <!--DARK MODE-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+ 
+</head>
+<body class="{% if request.COOKIES.darkmode == 'on' %}dark-mode{% endif %}">
+    
+        <!-- Dark Mode Toggle Button -->
+        <button  class="btn btn-outline-success" id="darkModeToggle">Dark Mode on/off</button>
+     
+ 
+
+    <script>
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            var isDarkMode = document.body.classList.toggle('dark-mode');
+            document.cookie = "darkmode=" + (isDarkMode ? 'on' : 'off') + ";path=/";
+        });
+    </script>
+</body>
+</html>
+
+
+
+<style>
+/* Default Light Mode Styles */
+body {
+    background-color: #fff;
+    color:black;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color:black;
+    color:brown;
+}
+
+
+body.dark-mode header {
+    background-color:black;
+}
+
+button#darkModeToggle {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+body.dark-mode button#darkModeToggle {
+    background-color:black;
+}
+ <body class="{% if request.COOKIES.darkmode == 'on' %}dark-mode{% endif %}">
+</style>  
   
 </nav>

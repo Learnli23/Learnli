@@ -1,0 +1,36 @@
+ 
+<!-- chart form-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<button class="open-button" onclick="openForm()">Chat with us</button>
+
+<div class="chat-popup" id="myForm">
+
+    <form method="POST" action=" {% url 'contact_message' %}" class="form-container" enctype="multipart/form-data">
+      <h1 style="color:blue ;">Chat</h1>
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <input type="submit"  value="Send" class="btn btn-success"/>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+
+
+
+ 
+
+
+ 

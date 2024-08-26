@@ -13,6 +13,10 @@ def home(request):
      return render(request,'home.html',{
               })
 
+#copyright page
+def copyright(request):
+     return render(request,'copyright.html',{
+              })
 
 # about us view 
 def about(request):
