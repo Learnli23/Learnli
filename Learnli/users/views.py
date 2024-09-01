@@ -80,6 +80,7 @@ def profile(request, pk) :
         Registered_exams = RegisterforExam.objects.filter(name = profile).count
         Tests_created = Test.objects.filter(created_by = profile).count
         Blogs = BlogPost.objects.filter(author = profile).count
+        
         #post form logic
         if request.method=='POST':
             #get current user
@@ -100,9 +101,9 @@ def profile(request, pk) :
             'ebooks':ebooks,
             'uploaded_books':uploaded_books,
             'Exams_created':Exams_created,
-            ' Registered_exams': Registered_exams,
+            'Registered_exams': Registered_exams,
             'Tests_created':Tests_created,
-            ' Blogs':Blogs,
+            'Blogs':Blogs,
              
              
             })   

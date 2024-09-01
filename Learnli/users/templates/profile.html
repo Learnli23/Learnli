@@ -211,19 +211,11 @@
 
           <tr>
             <td>Registered Exams</td>
-            <td style="color:brown ;">{{  Registered_exams }}</td>
+            <td style="color:brown ;">{{Registered_exams}}</td>
             <td></td>
         </tr>
 
-        <tr>
-          <td>Registered Exams</td>
-          <td>
-              <ul>
-                  
-              </ul>
-          </td>
-          <td></td>
-      </tr>
+ 
 
 
         {% if user.is_teacher or user.is_institution %}  
@@ -237,15 +229,13 @@
         {% endif %}
 
 
-        
+        {% if profile %}
           <tr>
               <td>Blogs created</td>
-              <td style="color:brown ;">{{Blogs}}</td>
-              <td>
-                  <ul>
-                      
-              </td>
+              <td style="color:brown ;">{{ Blogs }}</td>
+              <td></td>
           </tr>
+          {% endif %}
       
 
       </table>
