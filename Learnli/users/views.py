@@ -6,8 +6,32 @@ from django.contrib.auth import authenticate,login,logout
 from . models import user_Profile,User
 from django.http import HttpResponseRedirect
 from .import forms
+from Works.models import Classes
+from my_library.models import Ebook,Content
+from Examination.models import Exam,RegisterforExam,Test
+from blogs.models import BlogPost
+from Works.recommendations import get_course_recommendations, get_book_recommendations, get_teacher_recommendations
+# recommendation views
 
-# Create your views here
+ 
+
+
+def user_profile(request, user_id):
+    user = user_Profile.objects.get(id=user_id)
+    recommended_courses = get_course_recommendations(user)
+    recommended_books = get_book_recommendations(user)
+    recommended_teachers = get_teacher_recommendations(user)
+   
+    context = {
+        'user': user,
+        'recommended_courses': recommended_courses,
+        'recommended_books': recommended_books,
+        'recommended_teachers': recommended_teachers,
+    }
+   
+    return render(request, 'profile.html', context)
+
+#  views here
 
 def home(request):
      return render(request,'home.html',{
@@ -27,6 +51,7 @@ def about(request):
  
 #update user profile
 def update_profile(request):
+    
     if request.user.is_authenticated:
         current_user =user_Profile.objects.get(id=request.user.id)
         user_form = student_SignupForm(request.POST or None,  request.FILES or None ,instance = current_user)
@@ -48,6 +73,13 @@ def update_profile(request):
 def profile(request, pk) :
      if request.user.is_authenticated:
         profile = user_Profile.objects.get(id = pk)
+        courses = Classes.objects.filter(created_by = profile).count
+        ebooks = Ebook.objects.filter(author = profile).count
+        uploaded_books = Content.objects.filter(author = profile).count
+        Exams_created = Exam.objects.filter(created_by = profile).count
+        Registered_exams = RegisterforExam.objects.filter(name = profile).count
+        Tests_created = Test.objects.filter(created_by = profile).count
+        Blogs = BlogPost.objects.filter(author = profile).count
         #post form logic
         if request.method=='POST':
             #get current user
@@ -64,6 +96,14 @@ def profile(request, pk) :
             
         return render(request,'profile.html',{
             'profile':profile,
+            'courses':courses,
+            'ebooks':ebooks,
+            'uploaded_books':uploaded_books,
+            'Exams_created':Exams_created,
+            ' Registered_exams': Registered_exams,
+            'Tests_created':Tests_created,
+            ' Blogs':Blogs,
+             
              
             })   
      else: 

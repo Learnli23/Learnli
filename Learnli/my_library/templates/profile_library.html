@@ -8,7 +8,7 @@
 <style>
     .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 10px;
         padding: 10px;
     }
@@ -40,8 +40,8 @@
                 <strong>Type:</strong><strong style="color:darkblue; font-size:smaller;">{{content.content_type}}</strong><br/>
                 <strong>upload date:</strong><strong style="color:darkred;font-size:smaller;">{{content.upload_date}}</strong><br/>
                 
-                <strong data-bs-toggle="collapse" data-bs-target="#content" style="color:darkred;">Description(tap me!)</strong>
-                <div id="content" class="collapse hide">
+                <strong data-bs-toggle="collapse" data-bs-target="#{{content.id}}" style="color:darkred;">Description(tap me!)</strong>
+                <div id="{{content.id}}" class="collapse hide">
                 <div class="container mt-3">
                 {{content.description |safe |linebreaks}}
                 </div>

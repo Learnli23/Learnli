@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User,AbstractUser
 from django.db.models.signals import post_save
 from django.conf import settings
+ 
 # create your models here
  
 # ***** MODEL TO HANDLE USERS****
@@ -32,3 +33,6 @@ class  user_Profile(AbstractUser):
         if created:
             self.follows.add(self)
             self.save()
+
+
+

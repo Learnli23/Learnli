@@ -32,6 +32,13 @@ AUTH_USER_MODEL ='users.user_Profile'
 # Application definition
 
 INSTALLED_APPS = [
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_email',
+    'two_factor',
+    'two_factor.plugins.phonenumber',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +64,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'django_otp.middleware.OTPMiddleware',
 ]
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'Learnli.urls'
 
@@ -155,4 +166,5 @@ EMAIL_HOST_PASSWORD = '@learnli5895'  # Replace with your email passwor.........
 DEFAULT_FROM_EMAIL = 'webmaster@example.com'
 
 
- 
+LOGIN_URL = 'two_factor:login'
+LOGIN_REDIRECT_URL ='/'

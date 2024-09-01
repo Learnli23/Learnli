@@ -1,10 +1,12 @@
+ 
 {% extends 'base.html' %}
 
 {% block content %}
-from works.views import claesses
 
  
+ 
 {% if profile %}
+ 
 
 <!--dash board-->
 <div class="dashboard-container">
@@ -12,7 +14,7 @@ from works.views import claesses
       <!-- Existing profile content here -->
 
 <!---USER PROFILE-->
-<div class="card mb-3" style="max-width: 540px;">
+<div class="card mb-3" style="max-width: 540px; background-color: white;">
 
   <div  class="card mb-3" style="max-width: 540px; background-color:black;"> 
     <p style="color:blue; padding: 15px;">{{profile.username}}'s profile</p>
@@ -57,6 +59,7 @@ from works.views import claesses
     </button>
 
   </div>
+  <!--PROFILE CARD-->
   
   
 
@@ -64,28 +67,28 @@ from works.views import claesses
   
   <!--form to follow or unfollow and updating profiles-->
   
-  <form  method="post">
-    {% csrf_token %}
-    {% if profile in user.follows.all  %} 
+      <form  method="post">
+        {% csrf_token %}
+        {% if profile in user.follows.all  %} 
 
-    <button class="btn btn-outline-danger" name="follow" value="unfollow" type="submit">unfollow<strong 
-      style="color:blue ;">{{profile.username}}</strong>
+        <button class="btn btn-outline-danger" name="follow" value="unfollow" type="submit">unfollow<strong 
+          style="color:blue ;">{{profile.username}}</strong>
 
-    </button>
-    {% else %}
-    <button class="btn btn-outline-success" name="follow" value="follow" type="submit">follow <strong 
-      style="color:blue ;">{{profile.username}}</strong>
-    </button>
+        </button>
+        {% else %}
+        <button class="btn btn-outline-success" name="follow" value="follow" type="submit">follow <strong 
+          style="color:blue ;">{{profile.username}}</strong>
+        </button>
 
-    {% endif %}
-    <!--updated profile-->
-    {% if request.user.id == profile.id %}
-    <button class="btn btn-outline-secondary" name="Update user"><a style="text-decoration:none ;" href="{% url 'update_profile' %}">Update profile</a></button>
-     {% endif %}
-  </button>
+        {% endif %}
+        <!--updated profile-->
+        {% if request.user.id == profile.id %}
+        <button class="btn btn-outline-secondary" name="Update user"><a style="text-decoration:none ;" href="{% url 'update_profile' %}">Update profile</a></button>
+        {% endif %}
+      </button>
 
 
- </form>
+    </form>
 
  <!--  the followers profiles-->
  <strong data-bs-toggle="collapse" data-bs-target="#followers" style="color:darkblue; font-size: smaller;"> followers <strong style="color:brown ;">{{profile.followed_by.all.count}}</strong></strong>
@@ -93,38 +96,15 @@ from works.views import claesses
  <div class="col-4">
     <div id="followers" class="collapse hide">
       
-        <div class="card">
+        <div class="card" style="background-color: white;">
   
         {% for followed in profile.followed_by.all %}
 
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-             
-              <img src="{{ followed.profile_image.url }}"class="img-fluid rounded-start" alt="profile image">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body"> 
-                <h5 class="card-title" style="color:darkblue;">{{followed}}</h5>
-                <p class="card-text" style="color:crimson ;">profile:<a style="text-decoration:none ;" href="{% url 'profile'  followed.id%}">{{followed}}</a></p>
-                <p class="card-text" style="color:crimson ;">email:<a href="">{{followed.email}}</a></p>
-               
-                <div style="margin: 24px 0;">
-                  <a href="#"><i class="fa fa-twitter"></i></a>  
-                  <a href="#"><i class="fa fa-linkedin"></i></a>  
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                </div>
-               
-                {% if followed.is_institution %}
-                 <p class="card-text" style="color:crimson ;">website:<a href="">{{followed.website}}</a></p>
-                {% endif %}
-                <br/>
-                <p class="card-text"><small class="text-muted"> Last updated: {{followed.date_modified }}</small></p>
-              </div>
-            </div>
-          </div>
-        </div> 
-        
+      <div class="contact-card">
+          <img src="{{ followed.profile_image.url }}" alt="Profile Picture" class="contact-image">
+          <div class="contact-name"><a style="font-size: small;" href="{% url 'profile'  followed.id%}">{{followed}}</a></div>
+      </div>
+
         {% endfor %}
   
       </div>
@@ -134,45 +114,21 @@ from works.views import claesses
  <!--  the following profiles-->
  <strong data-bs-toggle="collapse" data-bs-target="#following" style="color:darkblue;font-size: smaller"> following <strong style="color:brown ;">{{profile.follows.all.count}}</strong></strong>
 
-    <div id="following" class="collapse hide">
-        <div class="card">
+    <div id="following" class="collapse hide"  style="background-color:white;">
+         
              
 
             {% for following in profile.follows.all %}
 
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                 
-                  <img src="{{ following.profile_image.url }}"class="img-fluid rounded-start" alt="profile image">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body"> 
-                    <h5 class="card-title" style="color:crimson ;">{{following}}</h5>
-                    <p class="card-text" style="color:crimson ;">profile:<a style="text-decoration:none ;" href="{%url 'profile'  following.id%}">{{following}}</a></p>
-                    <p class="card-text" style="color:crimson ;">email:<a style="text-decoration:none ;" href="">{{following.email}}</a></p>
-                  
-                    <div style="margin: 24px 0;">
-                      <a href="#"><i class="fa fa-twitter"></i></a>  
-                      <a href="#"><i class="fa fa-linkedin"></i></a>  
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                    </div>
-                  
-                    {% if following.is_institution %}
-                    <p class="card-text" style="color:crimson ;">website:<a href="">{{following.website}}</a></p>
-                    {% endif %}  
-                    <br/>
-                    <p class="card-text"><small class="text-muted"> Last updated: {{following.date_modified }}</small></p>
-                    <br/>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="contact-card">
+              <img src="{{ following.profile_image.url }}" alt="Profile Picture" class="contact-image">
+              <div class="contact-name"><a style="font-size: small;" href="{% url 'profile'  following.id%}">{{following}}</a></div>
+          </div>
 
             {% endfor %}
 
         
-        </div>
+        
       </div>
         <br/>
      
@@ -183,8 +139,10 @@ from works.views import claesses
 
         {% endif %}
 
-
-  </div><br/>
+  </div>
+  
+  <br/>
+  
   <div class="dashboard-card">
       <h5>{{user}}'s dashboard</h5>
 
@@ -208,23 +166,9 @@ from works.views import claesses
           <tr>
            
               <td>Courses Created</td>
-              <td>
-                  <ul>
-                      {% for course in classes.object. %}
-                      {% if request.user == course.created_by %}
-                      <li>{{ course.count }}</li>
-                      {% endif %}
-                      {% endfor %}
-                  </ul>
-              </td>
+              <td style="color:brown ;">{{courses}}</td>
             
-              <td>
-                  <ul>
-                      {% for course in classes %}
-                      <li>Created on {{ course.created_at }}</li>
-                      {% endfor %}
-                  </ul>
-              </td>
+              <td></td> 
              
           </tr>
           {% endif %} 
@@ -235,50 +179,30 @@ from works.views import claesses
           <tr>
             
               <td>eBooks Created</td>
-              <td>
-                  <ul>
-                      {% for ebook in ebooks %}
-                      <li>{{ ebook.title }}</li>
-                      {% endfor %}
-                  </ul>
-              </td>
-              <td>
-                  <ul>
-                      {% for ebook in ebooks %}
-                      <li>Created on {{ ebook.created_at }}</li>
-                      {% endfor %}
-                  </ul>
-              </td>
+              
+              <td style="color:brown ;">{{ ebooks }} </td>
+               
+
+              <td>  </td>
+              
           </tr>
       {% endif %}
 
+
+
           <tr>
               <td>Uploaded Books</td>
+              <td style="color:brown ;">{{ uploaded_books }}</td>
               <td>
                   <ul>
-                      {% for book in uploaded_books %}
-                      <li>{{ book.title }}</li>
-                      {% endfor %}
-                  </ul>
-              </td>
-              <td>
-                  <ul>
-                      {% for book in uploaded_books %}
-                      <li>{{ book.file_size }}MB - Uploaded on {{ book.created_at }}</li>
-                      {% endfor %}
+                       
                   </ul>
               </td>
           </tr>
           {% if user.is_teacher or user.is_institution %}
           <tr>
-              <td>Enrolled Students</td>
-              <td>
-                  <ul>
-                      {% for course in courses %}
-                      <li>{{ course.title }} - {{ course.enrollments.count }} students</li>
-                      {% endfor %}
-                  </ul>
-              </td>
+              <td>Exams created</td>
+              <td style="color:brown ;">{{ Exams_created }}</td>
               <td></td>
           </tr>
           
@@ -286,14 +210,8 @@ from works.views import claesses
 
 
           <tr>
-            <td>Enrolled courses</td>
-            <td>
-                <ul>
-                    {% for course in courses %}
-                    <li>{{ course.title }} - {{ course.enrollments.count }} students</li>
-                    {% endfor %}
-                </ul>
-            </td>
+            <td>Registered Exams</td>
+            <td style="color:brown ;">{{  Registered_exams }}</td>
             <td></td>
         </tr>
 
@@ -301,9 +219,7 @@ from works.views import claesses
           <td>Registered Exams</td>
           <td>
               <ul>
-                  {% for course in courses %}
-                  <li>{{ course.title }} - {{ course.enrollments.count }} students</li>
-                  {% endfor %}
+                  
               </ul>
           </td>
           <td></td>
@@ -312,44 +228,25 @@ from works.views import claesses
 
         {% if user.is_teacher or user.is_institution %}  
           <tr>
-              <td>Exams Created</td>
+              <td>Tests created</td>
+              <td style="color:brown ;">{{ Tests_created }}</td>
               <td>
-                  <ul>
-                      {% for exam in exams %}
-                      <li>{{ exam.title }}</li>
-                      {% endfor %}
-                  </ul>
-              </td>
-              <td>
-                  <ul>
-                      {% for exam in exams %}
-                      <li>{{ exam.registrations.count }} students registered</li>
-                      {% endfor %}
-                  </ul>
+                 
               </td>
           </tr>
         {% endif %}
 
 
-        {% if user.is_teacher or user.is_institution %}
+        
           <tr>
-              <td>Tests Created</td>
+              <td>Blogs created</td>
+              <td style="color:brown ;">{{Blogs}}</td>
               <td>
                   <ul>
-                      {% for test in tests %}
-                      <li>{{ test.title }}</li>
-                      {% endfor %}
-                  </ul>
-              </td>
-              <td>
-                  <ul>
-                      {% for test in tests %}
-                      <li>{{ test.registrations.count }} students registered</li>
-                      {% endfor %}
-                  </ul>
+                      
               </td>
           </tr>
-       {% endif %}
+      
 
       </table>
   </div>
@@ -357,62 +254,120 @@ from works.views import claesses
 
 
 
+<!--Recommendations for activities and content-->
+<div class="recommendations-section">
+  <strong>Recommended Courses</strong>
+  <ul>
+      {% for course in recommended_courses %}
+          <li>{{ course.title }}</li>
+      {% empty %}
+      <p style="color:blue; font-size: small;">No recommendations available.</p>
+      {% endfor %}
+  </ul>
+ 
+  <strong>Recommended Books</strong>
+  <ul>
+      {% for book in recommended_books %}t
+          <li>{{ book.title }}</li>
+      {% empty %}
+      <p style="color:blue; font-size: small;">No recommendations available.</p>
+      {% endfor %}
+  </ul>
+ 
+  <strong>Recommended Teachers</strong>
+  <ul>
+      {% for teacher in recommended_teachers %}
+          <li>{{ teacher.username }}</li>
+      {% empty %}
+          <p style="color:blue; font-size: small;">No recommendations available.</p>
+      {% endfor %}
+  </ul>
+</div>
+
+
 <!--styling-->
+
 <style>
-  .dashboard-container {
+  .contact-card {
       display: flex;
-      justify-content: space-between;
-      padding: 5px;
-  }
-  
-  .profile-card {
-      width: 45%;
-      /* Add styling for the profile card */
-  }
-  
-  .dashboard-card {
-      width: 45%;
+      align-items: center;
+      border: 1px solid #ddd;
+      padding: 10px;
+      max-width: 300px; /* Adjust the width as needed */
       background-color: #f9f9f9;
-      padding: 5px;
       border-radius: 8px;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   }
   
-  .dashboard-card h5 {
-      text-align: center;
-      margin-bottom: 0px;
-      background-color:aqua;
+  .contact-image {
+      width: 50px; /* Adjust the size of the image */
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px; /* Space between the image and name */
   }
   
-  .dashboard-table {
-      width: 100%;
-      border-collapse: collapse;
-  }
-  
-  .dashboard-table th, .dashboard-table td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-  }
-  
-  .dashboard-table th {
-      background-color:aqua;
-      color:black;
-  }
-  
-  .dashboard-table tr:hover {
-      background-color:azure;
-  }
-  
-  .dashboard-table ul {
-      padding-left: 20px;
-      list-style-type: square;
-  }
-  
-  .dashboard-table ul li {
-      margin-bottom: 5px;
+  .contact-name {
+      font-size: 18px; /* Adjust the font size */
+      font-weight: bold;
+      color: #333; /* Adjust the text color */
   }
   </style>
+  
+  <style>
+    .dashboard-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+    }
+    
+    .profile-card {
+        width: 45%;
+        /* Add styling for the profile card */
+    }
+    
+    .dashboard-card {
+        width: 45%;
+        background-color: #f9f9f9;
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dashboard-card h5 {
+        text-align: center;
+        margin-bottom: 0px;
+        background-color:aqua;
+    }
+    
+    .dashboard-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .dashboard-table th, .dashboard-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .dashboard-table th {
+        background-color:aqua;
+        color:black;
+    }
+    
+    .dashboard-table tr:hover {
+        background-color:azure;
+    }
+    
+    .dashboard-table ul {
+        padding-left: 20px;
+        list-style-type: square;
+    }
+    
+    .dashboard-table ul li {
+        margin-bottom: 5px;
+    }
+    </style>
+  
 
 
 {% endblock %}

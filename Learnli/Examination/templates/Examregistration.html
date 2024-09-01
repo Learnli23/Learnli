@@ -26,23 +26,19 @@
         
     {% for candidate in candidates %}
 
-    {% if request.user == candidate.teacher  %}
-        <tr>
-          <td>{{candidate.name}}</td>
-          <td>{{candidate.exam}}</td>
-      <td>  
-        <button class="btn btn-outline-danger"><a href="{% url 'delete_candidate' candidate.id %} "><strong 
-            style="color:black;">Delete candidate </strong></a>
-        </button>
-      </td>
+        {% if request.user == candidate.teacher or request.user == candidate.name %}
+            <tr>
+              <td>{{candidate.name}}</td>
+              <td>{{candidate.exam}}</td>
+          {% endif %}  
+          {% if request.user == candidate.teacher %}  
+          <td>  
+            <button class="btn btn-outline-danger"><a href="{% url 'delete_candidate' candidate.id %} "><strong 
+                style="color:black;">Delete candidate </strong></a>
+            </button>
+          </td></tr>
 
-
-
-
-          
-        </tr>
-
-        {% endif %} 
+            {% endif %} 
 
         {% endfor %} 
    

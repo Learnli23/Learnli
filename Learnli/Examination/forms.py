@@ -24,12 +24,11 @@ class ExamForm(ModelForm):
 class RegisterforExamForm(ModelForm):
  
    exam =forms.Select(attrs = {'class':"form-select","placeholder":" created by ",})
-   name=forms.Select(attrs = {'class':"form-select","placeholder":" created by ",})
-   teacher=forms.Select(attrs = {'class':"form-select","placeholder":" created by ",})
+   
 
    class Meta:
         model = RegisterforExam
-        fields =['name','exam','teacher']        
+        fields =['exam',]        
 
 
 

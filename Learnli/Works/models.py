@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import user_Profile
 from ckeditor.fields import RichTextField
+from my_library.models  import Ebook
 
 # Create your models here.
 #*****MODEELS TO HANDLE TEACHER CONTENT*******
@@ -60,3 +61,24 @@ class Classes(models.Model):
 
     def __str__(self):
        return  f"{self.title}"
+
+
+# Recommendations models
+#user  recommendations(suggestions for similar content and persons)
+class UserCourseActivity(models.Model):
+    user = models.ForeignKey(user_Profile, on_delete=models.CASCADE)
+    course = models.ForeignKey(Classes , on_delete=models.CASCADE)
+    activity_type = models.CharField(max_length=50, choices=[('enrolled', 'Enrolled'), ('liked', 'Liked'), ('completed', 'Completed')])
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+class UserBookActivity(models.Model):
+    user = models.ForeignKey(user_Profile, on_delete=models.CASCADE)
+    book = models.ForeignKey(Ebook, on_delete=models.CASCADE)
+    activity_type = models.CharField(max_length=50, choices=[('read', 'Read'), ('liked', 'Liked'), ('downloaded', 'Downloaded')])
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+class UserTeacherActivity(models.Model):
+    user = models.ForeignKey(user_Profile, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(user_Profile, related_name='recommended_teachers', on_delete=models.CASCADE)
+    activity_type = models.CharField(max_length=50, choices=[('followed', 'Followed'), ('liked', 'Liked')])
+    timestamp = models.DateTimeField(auto_now_add=True)

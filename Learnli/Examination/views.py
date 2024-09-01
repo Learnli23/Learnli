@@ -36,11 +36,11 @@ def register(request):
     if request.method == 'POST':
         form =RegisterforExamForm(request.POST, request.FILES)
         if form.is_valid():
-            #classes=form.save(commit=False)
-            #classes.teacher = request.user.id
-            #classes.save_m2m()
+            candidate=form.save(commit=False)
+            candidate.name = request.user
+            candidate.teacher = candidate.exam.created_by
             form.save() 
-            return HttpResponseRedirect('Examregistration/?submitted = True')
+        return redirect('examRegister')
 
     else:
          form = RegisterforExamForm()
