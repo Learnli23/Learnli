@@ -73,13 +73,13 @@ def update_profile(request):
 def profile(request, pk) :
      if request.user.is_authenticated:
         profile = user_Profile.objects.get(id = pk)
-        courses = Classes.objects.filter(created_by = profile).count
-        ebooks = Ebook.objects.filter(author = profile).count
-        uploaded_books = Content.objects.filter(author = profile).count
-        Exams_created = Exam.objects.filter(created_by = profile).count
-        Registered_exams = RegisterforExam.objects.filter(name = profile).count
-        Tests_created = Test.objects.filter(created_by = profile).count
-        Blogs = BlogPost.objects.filter(author = profile).count
+        courses = Classes.objects.filter(created_by = request.user).count
+        ebooks = Ebook.objects.filter(author = request.user).count
+        uploaded_books = Content.objects.filter(author = request.user).count
+        Exams_created = Exam.objects.filter(created_by = request.user).count
+        Registered_exams = RegisterforExam.objects.filter(name = request.user).count
+        Tests_created = Test.objects.filter(created_by = request.user).count
+        Blogs = BlogPost.objects.filter(author = request.user).count
         
         #post form logic
         if request.method=='POST':
