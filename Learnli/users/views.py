@@ -275,7 +275,7 @@ def login_user(request):
         if user is  not None:
             login(request,user)
             messages.success(request,('you are successfuly loged in'))
-            return redirect('about') 
+            return redirect('home') 
         else:
             
             messages.success(request,('there was an error loging in, please try again'))   
