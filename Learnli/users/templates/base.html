@@ -445,6 +445,66 @@
         {% endblock %}
 
     </div>
+
+     <!-- chart with us -->
+ <div id="chat-button" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; background-color:green; padding: 10px 20px; border-radius: 30px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); display: flex; align-items: center;">
+  <i class="fas fa-comment-alt" style="color:blue; font-size: 24px; margin-right: 10px;"></i>
+  <span style="color: white; font-size: 16px;">Chat with us</span>
+</div>
+
+<div id="chat-form" style="display: none; position: fixed; bottom: 80px; right: 0px; background: pink; border: 1px solid #ccc; padding: 20px; width: 300px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);">
+  <form id="chatForm" method="post" action="{% url 'contact_message' %} ">
+      {% csrf_token %}
+      
+      <div style="display: flex; flex-direction: column;">
+           
+         
+          <label for="id_message" style="color: blue;">chart:</label>
+          <textarea name="message" id="id_message" required>Type a message...</textarea>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+              <button type="submit" style="background-color: green; color: white;">Send</button>
+              <button id="close-chat" type="button" style="background-color: red; color: white;">Close</button>
+          </div>
+      </div>
+  </form>
+</div>
+
+<script>
+  // Show the chat form when the button is clicked
+  document.getElementById('chat-button').onclick = function() {
+      document.getElementById('chat-form').style.display = 'block';
+  };
+ 
+  // Hide the chat form when the close button is clicked
+  
+  document.getElementById('close-chat').onclick = function() {
+      document.getElementById('chat-form').style.display = 'none';
+  };
+ 
+  // Change the text area color and placeholder on focus and blur
+  const messageField = document.getElementById('id_message');
+  messageField.style.color = 'black';
+ 
+  messageField.onfocus = function() {
+      if (messageField.value === 'Type a message...') {
+          messageField.value = '';
+      }
+      messageField.style.color = 'white';
+      messageField.style.backgroundColor = 'black';
+  };
+ 
+  messageField.onblur = function() {
+      if (messageField.value === '') {
+          messageField.value = 'Type a message...';
+          messageField.style.color = 'black';
+          messageField.style.backgroundColor = 'white';
+      }
+  };
+</script>
+
+
+
      <!-- Footer-->
         <footer style="background-color: rgb(2, 11, 19);"class="py-5">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; LearnLi 2024</p></div><br/>
