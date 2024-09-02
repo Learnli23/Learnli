@@ -5,7 +5,7 @@
 <style>
     .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
         gap: 10px;
         padding: 10px;
     }
@@ -19,17 +19,17 @@
         height: auto;
     }
 </style>
-
+<h4>my courses</h4>
 <div class="grid-container">
     {% for course in my_courses %}
     {% if course.created_by  in request.user.follows.all and request.user in course.Enroll.all or request.user == course.created_by %}
   <div class="grid-item">
      
      
-    <a href="{% url 'enroll' course.id%}"><h2 class="card-title" style="color:darkblue;"><strong style="color: black;"></strong>{{course.title}}</h2></a>
+    <a href="{% url 'enroll' course.id%}"><h2 class="card-title" style="color:darkblue; font-size:medium;"><strong style="color: black;"></strong>{{course.title}}</h2></a>
     <strong style="color:darkred;font-size: small; font-style:italic;">tap image or title for details!</strong>
     {% if course.image %}
-    <a  href="{% url 'enroll' course.id%}" ><img src="{{course.image.url }}"  alt ="" width="225" height="300" class="d-inline-block align-text-top" ></a> 
+    <a  href="{% url 'enroll' course.id%}" ><img src="{{course.image.url }}"  alt ="" width="450" height="300" class="d-inline-block align-text-top" ></a> 
     {% endif %}
     <p class="card-text"><strong style="color:black;">Created on:</strong>{{course.created_on}}</a></p>
     <p class="card-text"><strong style="color:black;">Duration:</strong>{{course.Duration}}</a></p>
