@@ -34,8 +34,25 @@ def user_profile(request, user_id):
 #  views here
 
 def home(request):
-     return render(request,'home.html',{
-              })
+    # Fetch counts
+    book_count = Ebook.objects.count
+    course_count = Classes.objects.count
+    user_count = user_Profile.objects.count
+    teacher_count = user_Profile.objects.filter(is_teacher = True).count
+    institution_count = user_Profile.objects.filter(is_institution = True).count
+    student_count =user_Profile.objects.filter(is_student = True).count
+
+    # Pass counts to the template
+    context = {
+        'book_count': book_count,
+        'course_count': course_count,
+        'user_count': user_count,
+        'teacher_count': teacher_count,
+        'institution_count': institution_count,
+        'student_count': student_count,
+    }
+    return render(request, 'home.html', context)
+ 
 
 #copyright page
 def copyright(request):
@@ -73,13 +90,13 @@ def update_profile(request):
 def profile(request, pk) :
      if request.user.is_authenticated:
         profile = user_Profile.objects.get(id = pk)
-        courses = Classes.objects.filter(created_by = profile).count
-        ebooks = Ebook.objects.filter(author = profile).count
-        uploaded_books = Content.objects.filter(author = profile).count
-        Exams_created = Exam.objects.filter(created_by = profile).count
-        Registered_exams = RegisterforExam.objects.filter(name = profile).count
-        Tests_created = Test.objects.filter(created_by = profile).count
-        Blogs = BlogPost.objects.filter(author = profile).count
+        courses = Classes.objects.filter(created_by = request.user).count
+        ebooks = Ebook.objects.filter(author = request.user).count
+        uploaded_books = Content.objects.filter(author = request.user).count
+        Exams_created = Exam.objects.filter(created_by = request.user).count
+        Registered_exams = RegisterforExam.objects.filter(name = request.user).count
+        Tests_created = Test.objects.filter(created_by = request.user).count
+        Blogs = BlogPost.objects.filter(author = request.user).count
         
         #post form logic
         if request.method=='POST':

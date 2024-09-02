@@ -58,11 +58,23 @@
                     {% endif %}  
                         
                     </div>
-                    
-
 
                     <div class="content" style="display:flex ;border-right-style:double;border-bottom-style:double;border-left-style:double;border-top-style:double;background-color:burlywood;">
+                        <!-- Toolbar for Icons -->
+                        <div class="toolbar">
+                            <button id="translateBtn" title="Translate">
+                                <i class="fa fa-language"></i>
+                            </button>
+                            <button id="themeToggleBtn" title="Change Theme">
+                                <i class="fa fa-adjust"></i>
+                            </button>
+                            <button id="readAloudBtn" title="Read Aloud">
+                                <i class="fa fa-volume-up"></i>
+                            </button>
+                        </div>
+                       
                         {% for sub_section in sub_sections %}
+                        
                             <div id="section-{{ sub_section.id }}" class="section" style="display: none;">
                                 
                                 <h5 style="text-align: center;">{{ sub_section.title }}</h5>
@@ -72,6 +84,7 @@
                                 <br/><br/>
                                 {%  if sub_section.section_video %}
                             <card>
+                               
                                 <div class="video-card">
                                 <video width="800" height="300" controls>
                                     <source src=" {{sub_section.section_video.url }}" type="video/mp4"></source>
@@ -118,6 +131,86 @@
                         }
                     });
                 </script>
-</html>                
+</html>  
+
+
+ <style>
+ 
+
+.toolbar {
+    position:absolute;
+    
+    gap: 10px;
+}
+
+button {
+    background-color:#000000;
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color:darkred;
+}
+
+button i {
+    font-size: 20px;
+}
+
+ 
+
+.dark-theme {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+.page.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+</style>
+
+<script>
+    // ebook_content.js
+    
+    // Selectors
+    const translateBtn = document.getElementById('translateBtn');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const readAloudBtn = document.getElementById('readAloudBtn');
+    const content = document.getElementById('ebookContent');
+    
+    // Global variables for themes
+    let currentTheme = 'light';
+    
+    // Function to translate text using an external translation API (e.g., Google Translate API)
+    translateBtn.addEventListener('click', () => {
+        // Example translation using Google Translate API
+        // Note: You need to implement server-side handling for API requests or use a third-party service.
+        alert('Translation feature triggered. Implement API integration here.');
+    });
+    
+    // Function to toggle between dark and light themes
+    themeToggleBtn.addEventListener('click', () => {
+        if (currentTheme === 'light') {
+            document.body.classList.add('dark-theme');
+            document.body.classList.remove('light-theme');
+            currentTheme = 'dark';
+        } else {
+            document.body.classList.add('light-theme');
+            document.body.classList.remove('dark-theme');
+            currentTheme = 'light';
+        }
+    });
+    
+    // Function to read aloud the content using Web Speech API
+    readAloudBtn.addEventListener('click', () => {
+        const speech = new SpeechSynthesisUtterance(content.innerText);
+        speech.lang = 'en-US'; // Set language based on user preference or detect automatically
+        window.speechSynthesis.speak(speech);
+    });
+    </script>
     
 {% endblock %}
