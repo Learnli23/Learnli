@@ -70,12 +70,12 @@ const typed = new Typed('#typed', {
 // CountUp.js for Counting Animation
 document.addEventListener('DOMContentLoaded', () => {
     const options = { duration: 2, separator: ',' };
-    new CountUp('book-count', { book_count }, options).start();
-    new CountUp('course-count', { course_count }, options).start();
-    new CountUp('user-count', {user_count }, options).start();
-    new CountUp('teacher-count', { teacher_count }, options).start();
-    new CountUp('institution-count', { institution_count }, options).start();
-    new CountUp('student-count', { student_count }, options).start();
+    new CountUp('book-count', {{ book_count }}, options).start();
+    new CountUp('course-count', {{ course_count }}, options).start();
+    new CountUp('user-count', {{ user_count }}, options).start();
+    new CountUp('teacher-count', {{ teacher_count }}, options).start();
+    new CountUp('institution-count', {{ institution_count }}, options).start();
+    new CountUp('student-count', {{ student_count }}, options).start();
 });
 </script>
 
