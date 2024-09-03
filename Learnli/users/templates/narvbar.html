@@ -2,8 +2,17 @@
 
 <nav class="navbar navbar-expand-lg" style="background-color:springgreen;">
   <div class="container-fluid">
+    <svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="45" stroke="blue" stroke-width="10" fill="transparent">
+        <animate attributeName="r" values="45;40;45" dur="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="stroke" values="blue;purple;blue" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="black">
     
     <a class="navbar-brand" href="{% url 'home' %}"><strong style="color:blue ;">Learn</strong><strong style="color:red ;">Li</strong>  <br/>
+          <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+    </text>
+  </svg>
 
     <img src="{{ user.profile_image.url }}" alt="" width="60" height="60" class="d-inline-block align-text-top"><br/>
     {% if user.is_authenticated %}
