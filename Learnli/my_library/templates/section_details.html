@@ -71,6 +71,12 @@
                             <button id="readAloudBtn" title="Read Aloud">
                                 <i class="fa fa-volume-up"></i>
                             </button>
+                        <button id="fontTypeBtn" title="Change Font Type">
+                     <i class="fa fa-font"></i>
+                        </button>
+                   <button id="fontSizeBtn" title="Change Font Size">
+                       <i class="fa fa-text-height"></i>
+                     </button>
                         </div>
                        
                         {% for sub_section in sub_sections %}
@@ -214,6 +220,49 @@ button i {
         window.speechSynthesis.speak(speech);
     });
     </script>
+
+<script>
+
+            // Function to change the font type
+document.getElementById('fontTypeBtn').addEventListener('click', function () {
+    // List of font options
+    const fonts = ['Arial', 'Georgia', 'Times New Roman', 'Verdana', 'Courier New'];
+    // Prompt the user to select a font type
+    const selectedFont = prompt('Choose a font type:', fonts.join(', '));
+
+    if (fonts.includes(selectedFont)) {
+        document.body.style.fontFamily = selectedFont;
+    } else {
+        alert('Selected font is not available. Please choose from the listed fonts.');
+    }
+});
+
+// Function to change the font size
+document.getElementById('fontSizeBtn').addEventListener('click', function () {
+    // Prompt the user to select a font size
+    const selectedSize = prompt('Enter font size (e.g., 12px, 14px, 16px):', '14px');
+
+    if (selectedSize.match(/^\d+px$/)) {
+        document.body.style.fontSize = selectedSize;
+    } else {
+        alert('Invalid font size. Please enter a valid size in pixels, e.g., 14px.');
+    }
+});
+
+// Event listeners for other toolbar buttons
+document.getElementById('translateBtn').addEventListener('click', function () {
+    // Implement translation functionality here
+});
+
+document.getElementById('themeToggleBtn').addEventListener('click', function () {
+    // Implement theme toggle functionality here
+});
+
+document.getElementById('readAloudBtn').addEventListener('click', function () {
+    // Implement read aloud functionality here
+});
+
+</script>
 
  
  
