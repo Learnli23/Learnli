@@ -58,7 +58,7 @@
                     {% endif %}  
                         
                     </div>
-
+ 
                     <div class="content" style="display:flex ;border-right-style:double;border-bottom-style:double;border-left-style:double;border-top-style:double;background-color:burlywood;">
                         <!-- Toolbar for Icons -->
                         <div class="toolbar" >
@@ -110,7 +110,7 @@
                                     </button>
                                     {% endif %}
 
-                                    <div>
+                                    <div id="content" class="content-area">
                                         <p>{{ sub_section.content|safe }}</p> 
                                         <a href=" ">back to top</a>
                                     </div>
@@ -223,44 +223,55 @@ button i {
 
 <script>
 
-            // Function to change the font type
-document.getElementById('fontTypeBtn').addEventListener('click', function () {
-    // List of font options
-    const fonts = ['Arial', 'Georgia', 'Times New Roman', 'Verdana', 'Courier New'];
-    // Prompt the user to select a font type
-    const selectedFont = prompt('Choose a font type:', fonts.join(', '));
+           // Web Safe Fonts and Google Fonts List
+const fonts = [
+    'Arial', 'Verdana', 'Helvetica', 'Georgia', 'Times New Roman', 'Courier New',
+    'Trebuchet MS', 'Lucida Console', 'Comic Sans MS', 'Impact', 
+    'Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Oswald', 'Raleway' // Add more Google Fonts as desired
+];
 
-    if (fonts.includes(selectedFont)) {
-        document.body.style.fontFamily = selectedFont;
-    } else {
-        alert('Selected font is not available. Please choose from the listed fonts.');
-    }
+// Font Type Functionality
+document.getElementById('fontTypeBtn').addEventListener('click', function () {
+    // Create a dropdown to select font
+    const selectFont = document.createElement('select');
+    selectFont.id = 'fontSelector';
+
+    // Populate dropdown with font options
+    fonts.forEach(font => {
+        const option = document.createElement('option');
+        option.value = font;
+        option.style.fontFamily = font; // Display the font in its style
+        option.textContent = font;
+        selectFont.appendChild(option);
+    });
+
+    // Show the dropdown and apply the selected font
+    selectFont.addEventListener('change', function () {
+        document.getElementById('content').style.fontFamily = this.value;
+    });
+
+    // Append the dropdown to the toolbar temporarily
+    document.querySelector('.toolbar').appendChild(selectFont);
+
+    // Remove the dropdown after selection or click outside
+    document.addEventListener('click', (event) => {
+        if (!selectFont.contains(event.target) && event.target !== document.getElementById('fontTypeBtn')) {
+            selectFont.remove();
+        }
+    });
 });
 
-// Function to change the font size
+// Font Size Functionality
 document.getElementById('fontSizeBtn').addEventListener('click', function () {
-    // Prompt the user to select a font size
     const selectedSize = prompt('Enter font size (e.g., 12px, 14px, 16px):', '14px');
 
     if (selectedSize.match(/^\d+px$/)) {
-        document.body.style.fontSize = selectedSize;
+        document.getElementById('content').style.fontSize = selectedSize;
     } else {
         alert('Invalid font size. Please enter a valid size in pixels, e.g., 14px.');
     }
 });
 
-// Event listeners for other toolbar buttons
-document.getElementById('translateBtn').addEventListener('click', function () {
-    // Implement translation functionality here
-});
-
-document.getElementById('themeToggleBtn').addEventListener('click', function () {
-    // Implement theme toggle functionality here
-});
-
-document.getElementById('readAloudBtn').addEventListener('click', function () {
-    // Implement read aloud functionality here
-});
 
 </script>
 
