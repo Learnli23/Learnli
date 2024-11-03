@@ -58,6 +58,10 @@ class Classes(models.Model):
     Duration = models.CharField(max_length=2000)
     created_on =models.DateField(auto_now=True)
     category = models.CharField(max_length=100000000, choices=CATEGORY)
+    price = models.DecimalField(max_digits=10, decimal_places=2)  #field for price
+    language = models.CharField(max_length=50, blank=True, null=True)  # Optional field for language
+    paid_users = models.ManyToManyField(user_Profile,related_name='paid_course', blank=True)  # Track paid users
+
 
     def __str__(self):
        return  f"{self.title}"

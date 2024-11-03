@@ -8,6 +8,12 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .import forms
 from .utils import send_email_notification
+import uuid
+import requests
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+ 
 
 
 # sending email when a course is created
@@ -155,12 +161,157 @@ def lessons(request):
 #getsubjects for aparticular corse
 def class_subjects(request,class_id):
     classes =get_object_or_404(Classes,id=class_id)
-    subjects_for_class =classes.with_subjects.all()
-    return render(request,'class_subjects.html',
-    {
-        'subjects_for_class':subjects_for_class
+    has_paid = classes.paid_users.filter(id=request.user.id).exists()
+    if has_paid or request.user == classes.created_by:
+        subjects_for_class =classes.with_subjects.all()
+        return render(request,'class_subjects.html',
+        {
+            'subjects_for_class':subjects_for_class
+        
+        })
+    else:
+     # Redirect to payment page
+        messages.info(request, "You need to pay for this course to access its content.")
+        return redirect('course_payment_page', course_id = class_id) 
+
+
+
+
+# course payment page.
+@login_required
+@csrf_exempt
+def course_payment_page(request, course_id):
+    course = Classes.objects.get(id=course_id)
+    user_profile=request.user
+    course_id = course_id
+     
+    if request.method == "POST":
+        # Extract currency from the form
+        currency = request.POST.get('currency')
+        price = course.price
+        tx_ref = f"course_{course_id}_txref--{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        
+        # Flutterwave API request
+        
+        headers = {
+                'Authorization': f'Bearer {settings.FLUTTERWAVE_SECRET_KEY}',  # API Key from settings
+                'Content-Type': 'application/json',
+            }
+
+
+       
+        payload = {
+                "tx_ref":tx_ref,  # Transaction reference
+                "amount":float(price),  # Amount to be charged
+                "currency":currency,  # Currency
+                "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
+                "redirect_url": "https://b30d-41-210-155-243.ngrok-free.app/course_payment_success",  # Redirect URL after payment
+                "customer": {
+                    "email": user_profile.email,  # User's email for payment receipt
+                    "phonenumber": user_profile.contact,  # User's phone number
+                    "name": user_profile.username  # User's name
+                },
+                "customizations": {
+                    "title": "Learnli book Payment",  # Title of the payment
+                    "description": f"{user_profile.username.capitalize()} course payment",  # Description of the payment
+                    #"logo":book.display_image
+                }
+            }
+
+                    # Make the API request to Flutterwave
+
+        try:      
+                    
+                    response = requests.post("https://api.flutterwave.com/v3/payments", json=payload, headers=headers)
+
+                    # Check if the request was successful
+                    if response.status_code == 200:
+                        messages.success(request, 'payment successful!')
+                        # if a success, flatterwavw will return a json data structure containg the satatus, link and some other info.
+                        payment_link = response.json().get('data',{}).get('link')# collect the link to the flatterwave checkout page and store it into payment_link varriable
+                        
+                        return redirect(payment_link)  # Redirect to the payment page(the flatterwave checkout page)
+                        
+                    else:
+                        # Log the error and render an error page with the message from Flutterwave
+                        messages.error(request, 'payment failed!')
+                        error_message = response.json().get('message')
+                        return render(request, 'payment_error.html', {'error': error_message})
+
+        except Exception as e:
+                    # Handle exceptions such as network issues
+                    return render(request, 'payment_error.html', {'error': f"An error occurred: {str(e)}"})    
+    return render(request,'course_payment_page.html', {'course': course})        
+
+
+
+#course payment success hundling
+@login_required
+@csrf_exempt
+def course_payment_success(request): 
+    tx_ref = request.GET.get('tx_ref')
+    transaction_id = request.GET.get('transaction_id')
     
-    })
+    course_id, rest_of_tx_ref = extract_course_and_rest_of_tx_ref_from_tx_ref(tx_ref)
+  
+    # Verify the payment
+    
+    flutterwave_url = f"https://api.flutterwave.com/v3/transactions/{transaction_id}/verify"
+    headers = {
+        "Authorization": f"Bearer {settings.FLUTTERWAVE_SECRET_KEY}",
+    }
+
+    try:
+            # Call the Flutterwave API to verify the transaction
+            response = requests.get(flutterwave_url, headers=headers)
+            print(' this the response status code:',response.status_code)
+            response.raise_for_status()  # Check if request was successful
+            payment_data = response.json()
+
+            # Check if transaction was successful
+            if payment_data.get('status') == 'success':# and payment_data.get('payment_data', {}).get('status') == 'successful':
+                # Ensure the user is authenticated before updating profile
+                if request.user.is_authenticated:
+                    user_profile = request.user
+                     # Record the payment
+                    course = Classes.objects.get(id = course_id)
+                    # Create payment record
+                    #Book_Payment.objects.create(user=user_profile, book=book, transaction_id=transaction_id)
+                    # Add user to paid_users for the book
+                    course.paid_users.add(user_profile)
+
+                    messages.success(request, "Payment successful! You now have access to the course.")
+                    return redirect('class_subjects',course.id)
+                    
+                else:
+                    messages.error(request, "User is not authenticated.")
+                    return redirect('login')
+            else:
+                # Handle unsuccessful transaction
+                messages.error(request, "Payment verification failed. Please try again.")
+                return redirect('home')
+    except requests.exceptions.RequestException as e:
+            # Handle request exceptions (network issues, invalid response, etc.)
+            print(f"Error during transaction verification: {e}")
+            messages.error(request, "Error verifying payment. Please try again.")
+            return redirect('home')
+
+# extract the book id and user id rom tx_ref number
+def extract_course_and_rest_of_tx_ref_from_tx_ref(tx_ref):
+    # Assuming tx_ref format is 'book_{book_id}_user_{user_id}'
+     _,course_id, rest_of_tx_ref= tx_ref.split('_',2)
+     return int(course_id), str(rest_of_tx_ref)
+
+
+
+
+
+
+
+
+
+
+
 # get lessons for aparticular subject
 def subject_lessons(request,subject_id):
     subjects =get_object_or_404(Subjects,id=subject_id)

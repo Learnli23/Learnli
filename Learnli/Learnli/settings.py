@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_email',
-    'two_factor',
-    'two_factor.plugins.phonenumber',
+     'two_factor',
+     'two_factor.plugins.phonenumber',
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'ckeditor',
     'ckeditor_uploader',
+    'djangoflutterwave',
+    'crispy_forms',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -64,9 +67,78 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
     'django_otp.middleware.OTPMiddleware',
+    'Learnli.middleware.CheckSubscriptionMiddleware',
+
+
+    
+   
 ]
+
+ 
+
+# Gmail's SMTP server CONFIGURATION
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'learnli759@gmail.com'  # Replace with your email
+EMAIL_HOST_PASSWORD = '@learnli5895'  # Replace with your email passwor..........
+DEFAULT_FROM_EMAIL = 'webmaster@example.com'
+
+
+
+
+# Flutterwave configuration
+ 
+#FLWSECK_TESTe38b7f33b30d
+FLUTTERWAVE_PUBLIC_KEY = os.getenv('FLUTTERWAVE_PUBLIC_KEY')
+FLUTTERWAVE_SECRET_KEY = os.getenv('FLUTTERWAVE_SECRET_KEY')
+# Flutterwave Secret Key
+FLUTTERWAVE_SECRET_KEY = 'FLWSECK_TEST-3167d251d49a00bccb920091765b7994-X'
+FLUTTERWAVE_PUBLIC_KEY = "FLWPUBK_TEST-e100344f252a9bc2bfda7319c8a3f200-X"
+
+# Twilio SMS Configuration (Optional)
+TWILIO_ACCOUNT_SID = 'your_twilio_account_sid'
+TWILIO_AUTH_TOKEN = 'your_twilio_auth_token'
+TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
+
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TASK_SERIALIZER = 'json'
+
+
+
+
+# Crispy forms configuration
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+'''
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 3600  # 1 hour
+'''
+
+
+# Session settings
+
+
+#csrf_token configuration to adid ngrok
+CSRF_TRUSTED_ORIGINS =['https://b30d-41-210-155-243.ngrok-free.app']
+
+
+
+# Timezone settings
+USE_TZ = True
+TIME_ZONE = 'Africa/Kampala'
+
+
 
 SITE_ID = 1
 
@@ -156,15 +228,14 @@ CKEDITOR_CONFIGS = {
             'mathJaxLib': 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML',
         },
     }
-# Gmail's SMTP server CONFIGURATION
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'learnli759@gmail.com'  # Replace with your email
-EMAIL_HOST_PASSWORD = '@learnli5895'  # Replace with your email passwor..........
-DEFAULT_FROM_EMAIL = 'webmaster@example.com'
 
 
-LOGIN_URL = 'two_factor:login'
+
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL ='/'
+
+
+#LOGIN_URL = 'login'  # The URL name for the login view
+LOGOUT_URL = 'logout'  # The URL name for the logout view
+LOGIN_REDIRECT_URL = '/'  # The default URL to redirect to after login
+#LOGOUT_REDIRECT_URL = '/'  # The URL to redirect to after logout

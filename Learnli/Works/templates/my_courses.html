@@ -1,67 +1,131 @@
 {% extends 'base.html' %} 
 {% block content %}
 
-<title>My Courses</title>
-<style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 10px;
-        padding: 10px;
-    }
-    .grid-item {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: center;
-    }
-    .grid-item img {
-        max-width: 100%;
-        height: auto;
-    }
-</style>
-<h4>my courses</h4>
-<div class="grid-container">
-    {% for course in my_courses %}
-    {% if course.created_by  in request.user.follows.all and request.user in course.Enroll.all or request.user == course.created_by %}
-  <div class="grid-item">
+ <!-------------------------->
+ 
+    <!-- Heading and Filter Section -->
+    <div class="course-header">
+        <h1>LearnLi Courses</h1>
+        <p>Toggle list view mode to see more course details</p>
+        <div class="filters">
+            <input type="text" id="searchBar" onkeyup="filterCourses()" placeholder="Search by course name, creator, language, or field...">
+            <select id="fieldFilter" onchange="filterCourses()">
+                <option value="">Field of Study</option>
+                <option value="Science">Science</option>
+                <option value="Math">Math</option>
+                <option value="Literature">Literature</option>
+                <!-- Add other fields as necessary -->
+            </select>
+            <select id="languageFilter" onchange="filterCourses()">
+                <option value="">Language</option>
+                <option value="English">English</option>
+                <option value="French">French</option>
+                <option value="spanish">spanish</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Swahili">Swahili</option>
+                <option value="Luganda">Luganda</option>
+                <!-- Add other languages as necessary -->
+            </select>
+            <div class="view-toggle">
+                <button onclick="toggleView('grid')" class="toggle-btn active"><i class="fas fa-th"></i> Grid</button>
+                <button onclick="toggleView('list')" class="toggle-btn"><i class="fas fa-list"></i> List</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Listing Section -->
+   
+    <div class="course-container grid-view" id="courseContainer">
      
-     
-    <a href="{% url 'enroll' course.id%}"><h2 class="card-title" style="color:darkblue; font-size:medium;"><strong style="color: black;"></strong>{{course.title}}</h2></a>
-    <strong style="color:darkred;font-size: small; font-style:italic;">tap image or title for details!</strong>
-    {% if course.image %}
-    <a  href="{% url 'enroll' course.id%}" ><img src="{{course.image.url }}"  alt ="" width="450" height="300" class="d-inline-block align-text-top" ></a> 
-    {% endif %}
-    <p class="card-text"><strong style="color:black;">Created on:</strong>{{course.created_on}}</a></p>
-    <p class="card-text"><strong style="color:black;">Duration:</strong>{{course.Duration}}</a></p>
-    <p class="card-text"><strong style="color:black;"></strong>{{course.level}}</a></p>
-    <p><a href="{% url 'profile' course.created_by.id %} ">BY:{{course.created_by}}</a></p>
-    
-    <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="{% url 'enroll' course.id%}">Details</a></button>
-        <button class="btn btn-outline-primary"><a href="{% url 'class_subjects' course.id %} ">
-            <strong style="color:black ;">Course Units</strong></a>
-           </button>
-           {% if request.user == course.created_by %}
-                   
-           <button class="btn btn-outline-secondary"><a href=" {% url 'edit_class' course.id %}"><strong 
-           style="color:black;">Edit Course</strong></a>
-           </button>
-          {% endif %}
+      {% for course in my_courses %}
+      {% if course.created_by  in request.user.follows.all and request.user in course.Enroll.all or request.user == course.created_by %}
+        <!-- Sample Course Card -->
+        
+        <div class="course-card" data-title="Course Title" data-creator="Creator Name" data-language="English" data-field="Science">
+          <a href="{% url 'enroll' course.id%}" class="course-title">{{course.title}}</a>
+          <div class="course-image">
+              <a  href="{% url 'enroll' course.id%}"><img src="{{course.image.url }}"> </a>
+            </div>
+            <div class="course-details">
+              <a href="{% url 'profile' course.created_by.id %} " style="font-size: small;">Created by:{{ course.created_by }}</a>
+                <p class="course-enrollment">{{ course.Enroll.all.count }}:have Enrolled</p>
+                <p class="course-price">price:{{ course.price }}</p>
+                <p class="course-language">Language:{{ course.language }}</p>
+                <p class="course-date">Uploaded on:{{ course.created_on }}</p>
+                <p class="course-level">category:{{ course.category }}</p>
+                <p class="course-level">Level:{{ course.level }}</p>
+                <p class="course-level">Duration:{{ course.Duration}}</p>
+                <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="{% url 'enroll' course.id%}">Details</a></button>
+         
+                {% if request.user == course.created_by %}
+                        
+                <button class="btn btn-outline-secondary"><a href=" {% url 'edit_class' course.id %}"><strong 
+                style="color:black;">Edit Course</strong></a>
+                </button>
+                {% endif %}
+                <button class="description-btn" onclick="toggleDescription(this)">View Description</button>
+                <div class="course-description">
+                    <p>{{course.description|truncatewords:10 |safe | linebreaks}} <a href="{% url 'enroll' course.id%}">Read more...</a></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <!-- More course cards here... -->
+    </div>
 
-          <div>
-                 
-             
-            <strong style="color:darkred ; font-size: small;">{{ course.Enroll.all.count }}:have Enrolled</strong>
-            
-    
-          </div>
+
+    <script>
+        // Toggle between grid and list views
+        function toggleView(view) {
+            const courseContainer = document.getElementById('courseContainer');
+            const buttons = document.querySelectorAll('.toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (view === 'grid') {
+                courseContainer.classList.add('grid-view');
+                courseContainer.classList.remove('list-view');
+                document.querySelector('.toggle-btn:nth-child(1)').classList.add('active');
+            } else {
+                courseContainer.classList.add('list-view');
+                courseContainer.classList.remove('grid-view');
+                document.querySelector('.toggle-btn:nth-child(2)').classList.add('active');
+            }
+        }
+
+        // Filter courses by search query and dropdowns
+        function filterCourses() {
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const field = document.getElementById('fieldFilter').value.toLowerCase();
+            const language = document.getElementById('languageFilter').value.toLowerCase();
+            const courses = document.querySelectorAll('.course-card');
+            courses.forEach(course => {
+                const title = course.dataset.title.toLowerCase();
+                const creator = course.dataset.creator.toLowerCase();
+                const courseField = course.dataset.field.toLowerCase();
+                const courseLanguage = course.dataset.language.toLowerCase();
+                if ((title.includes(query) || creator.includes(query)) &&
+                    (field === '' || courseField.includes(field)) &&
+                    (language === '' || courseLanguage.includes(language))) {
+                    course.style.display = '';
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle description display without expanding card dimensions
+        function toggleDescription(button) {
+            const description = button.nextElementSibling;
+            description.classList.toggle('show');
+            button.textContent = description.classList.contains('show') ? "Hide Description" : "View Description";
+        }
+    </script>
+ 
 
 
-   </div>
-     
-     {% endif %}
-     {% endfor %}
 
- </div>
+
+
 
 
 {% endblock %}

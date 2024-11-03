@@ -24,4 +24,7 @@ urlpatterns=[
     path('delete_class/<klass_id>',views.delete_class, name='delete_class'),
     path('delete_subject/<subject_id>',views.delete_subject, name='delete_subject'),
     path('delete_lesson/<lesson_id>',views.delete_lesson, name='delete_lesson'),
+    #course payment
+    path('course/<int:course_id>/course_payment_page/', views.course_payment_page, name='course_payment_page'),
+    path('course_payment_success', views.course_payment_success, name='course_payment_success'),
     ]

@@ -1,0 +1,12 @@
+<p style="color:black; font-size:medium ;">Kindly pay for {{ book.title }}  bookk to access its full content</p>
+<form method="post">
+    {% csrf_token %}
+    <label for="currency">Choose currency:</label>
+    <select id="currency" name="currency">
+        <option value="UGX">UGX</option>
+        <option value="USD">USD</option>
+        <option value="KES">KES</option>
+        <!-- Add more currencies as needed -->
+    </select>
+    <button type="submit">Proceed to Payment</button>
+</form>

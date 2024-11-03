@@ -32,7 +32,8 @@ urlpatterns = [
     path('', include('my_library.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include(tf_urls)),
-    #path('',include('django.contrib.auth.urls')),
+    
+   # path('',include('django.contrib.auth.urls')),
     #path('',include('two_factor.urls','two_factor')),
 ]
 

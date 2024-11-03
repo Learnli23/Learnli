@@ -1,60 +1,147 @@
 {% extends "base.html" %}
 {% block content %}
 
+  <!-------------------------->
+  
+      <!-- Heading and Filter Section -->
+      <div class="course-header">
+        <h1>LearnLi Uploaded books</h1>
+        <p>Toggle list view mode to see more course details</p>
+        <div class="filters">
+            <input type="text" id="searchBar" onkeyup="filterCourses()" placeholder="Search by course name, creator, language, or field...">
+            <select id="fieldFilter" onchange="filterCourses()">
+                <option value="">Field of Study</option>
+                <option value="Science">Science</option>
+                <option value="Math">Math</option>
+                <option value="Literature">Literature</option>
+                <!-- Add other fields as necessary -->
+            </select>
+            <select id="languageFilter" onchange="filterCourses()">
+                <option value="">Language</option>
+                <option value="English">English</option>
+                <option value="French">French</option>
+                <option value="spanish">spanish</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Swahili">Swahili</option>
+                <option value="Luganda">Luganda</option>
+                <!-- Add other languages as necessary -->
+            </select>
+            <div class="view-toggle">
+                <button onclick="toggleView('grid')" class="toggle-btn active"><i class="fas fa-th"></i> Grid</button>
+                <button onclick="toggleView('list')" class="toggle-btn"><i class="fas fa-list"></i> List</button>
+            </div>
+        </div>
+    </div>
 
-
-
-<title>Uploaded books</title>
-<style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 10px;
-        padding: 10px;
-    }
-    .grid-item {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: center;
-    }
-    .grid-item img {
-        max-width: 100%;
-        height: auto;
-    }
-</style>
-
-
-<h2 style="color:darkred ;">Uploaded books</h2>
-<div class="grid-container">
-
- {% for content in contents %}
-{% if content.author == request.user  or  content.author in request.user.follows.all %}     
-    
- <div class="grid-item">
-        <a href="{% url 'content_detail' content.id %}"><h2 style="text-align:center">{{content.title}}</h2></a>
-                
-        {% if content.display_image %}
-                <a href="{% url 'content_detail' content.id %}"> <img src="{{ content.display_image.url }}" width="450" height="300" class="d-inline-block align-text-top" alt=" "> </a>
-         {% endif %}       
-                <strong> Author:</strong style="color:darkblue;">{{content.author}}</strong><br/>
-                <strong>Type:</strong><strong style="color:darkblue; font-size:smaller;">{{content.content_type}}</strong><br/>
-                <strong>upload date:</strong><strong style="color:darkred;font-size:smaller;">{{content.upload_date}}</strong><br/>
-                
-                <strong data-bs-toggle="collapse" data-bs-target="#{{content.id}}" style="color:darkred;">Description(tap me!)</strong>
-                <div id="{{content.id}}" class="collapse hide">
-                <div class="container mt-3">
-                {{content.description |safe |linebreaks}}
-                </div>
+    <!-- Course Listing Section -->
    
+    <div class="course-container grid-view" id="courseContainer">
+     
+      
+        <!-- Sample Course Card -->
+        {% for content in contents %}
+        {% if content.author == request.user  or  content.author in request.user.follows.all %} 
+        
+        <div class="course-card" data-title="Course Title" data-creator="Creator Name" data-language="English" data-field="Science">
+          <a href="{% url 'content_detail' content.id %}" class="course-title">{{content.title}}</a>
+         
+          {% if content.display_image %}
+          <div class="course-image">
+              <a  href="{% url 'content_detail' content.id %}"><img src="{{content.display_image.url }}"> </a>
+            </div>
+          {% endif%}  
+            <div class="course-details">
+              <a href="{% url 'profile' content.author.id %} " style="font-size: small;">Created by:{{ content.author}}</a>
+                <p class="course-enrollment">Type:{{content.content_type}}</p>
+                <p class="course-price">price:{{ course.price }}</p>
+                <p class="course-language">Language:{{ course.language }}</p>
+                <p class="course-date">Uploaded on:{{content.upload_date}}</p>
+                <p class="course-level">category:{{ course.category }}</p>
+                <p class="course-level">Level:{{ course.level }}</p>
+                <p class="course-level">Duration:{{ course.Duration}}</p>
+                <!--
+                <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="">Details</a></button>
+                 -->
+               <!--{% if request.user == course.created_by %}--> 
+                <!--       
+                <button class="btn btn-outline-secondary"><a href=" {% url 'edit_class' course.id %}"><strong 
+                style="color:black;">Edit Course</strong></a>
+                </button>
+                {% endif %}
+                --> 
+                <button class="description-btn" onclick="toggleDescription(this)">View Description</button>
+                <div class="course-description">
+                    <p>{{content.description|truncatewords:10 |safe | linebreaks}} <a href="{% url 'content_detail' content.id %}">Read more...</a></p>
                 </div>
- </div>
-    
-    {% endif %}
-    {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        
+       
+        <!-- More course cards here... -->
+    </div>
 
-</div>
 
- 
+    <script>
+        // Toggle between grid and list views
+        function toggleView(view) {
+            const courseContainer = document.getElementById('courseContainer');
+            const buttons = document.querySelectorAll('.toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (view === 'grid') {
+                courseContainer.classList.add('grid-view');
+                courseContainer.classList.remove('list-view');
+                document.querySelector('.toggle-btn:nth-child(1)').classList.add('active');
+            } else {
+                courseContainer.classList.add('list-view');
+                courseContainer.classList.remove('grid-view');
+                document.querySelector('.toggle-btn:nth-child(2)').classList.add('active');
+            }
+        }
+
+        // Filter courses by search query and dropdowns
+        function filterCourses() {
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const field = document.getElementById('fieldFilter').value.toLowerCase();
+            const language = document.getElementById('languageFilter').value.toLowerCase();
+            const courses = document.querySelectorAll('.course-card');
+            courses.forEach(course => {
+                const title = course.dataset.title.toLowerCase();
+                const creator = course.dataset.creator.toLowerCase();
+                const courseField = course.dataset.field.toLowerCase();
+                const courseLanguage = course.dataset.language.toLowerCase();
+                if ((title.includes(query) || creator.includes(query)) &&
+                    (field === '' || courseField.includes(field)) &&
+                    (language === '' || courseLanguage.includes(language))) {
+                    course.style.display = '';
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle description display without expanding card dimensions
+        function toggleDescription(button) {
+            const description = button.nextElementSibling;
+            description.classList.toggle('show');
+            button.textContent = description.classList.contains('show') ? "Hide Description" : "View Description";
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -30,6 +30,33 @@ def add_event(request):
         form = CalendarEventForm()
     return render(request, 'add_event.html', {'form': form})
 
+# edut event
+@login_required
+def edit_event(request,  event_id):
+    event = CalendarEvent.objects.get(pk = event_id)
+    form = CalendarEventForm( request.POST or None, request.FILES or None, instance= event)
+    if form.is_valid():
+           form.save()
+           messages.success(request,('Event edited!'))
+           return redirect('calendar')
+    
+
+    return render(request, 'edit_event.html', {
+        "event": event,
+        'form':form,
+    })
+
+
+
+
+@login_required
+def delete_event(request, event_id):
+        event = CalendarEvent.objects.get(pk = event_id)
+        event.delete()
+        messages.success(request,('Event deleted!!'))
+        return redirect('calendar')        
+
+
 
 # contact message view
 def contact_message(request):

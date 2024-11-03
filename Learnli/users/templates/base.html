@@ -16,6 +16,1119 @@
 
     {% include 'narvbar.html'%}
 <!--stylng -->
+  <!---->
+
+<!--blog styling-->
+
+<style>
+  /* Blog Card Container */
+  .blog-card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header: Profile Picture, User Info */
+  .blog-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .profile-picture {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .user-info {
+    flex-grow: 1;
+  }
+  
+  .user-name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .date-created {
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  .follow-info {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  /* Blog Content */
+  .blog-title {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .blog-preview {
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  
+  .read-more {
+    color: #1e90ff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* Blog Media */
+  .blog-media {
+    margin: 15px 0;
+    position: relative;
+  }
+  
+  .blog-image, .blog-video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Blog Actions: Comments, Likes, Dislikes */
+  .blog-actions {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #777;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+  }
+  
+  .comments-count, .likes-count, .dislikes-count {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Full Blog Link Button */
+  .full-blog-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1e90ff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .full-blog-link:hover {
+    background-color: #1c7ecf;
+  }
+  <style/>
+       
+
+
+
+
+
+<!--profile library styling-->
+<style>
+  
+  
+  /* Basic resets */
+  * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+  }
+  
+  body {
+      background-color: #f5f8fb;
+      color: #333;
+  }
+  
+  /* Header and filter bar */
+  .course-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #35445d;
+      color: #fff;
+      text-align: center;
+  }
+  
+  .course-header h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+  }
+  
+  .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+  }
+  
+  #searchBar, #fieldFilter, #languageFilter {
+      padding: 10px;
+      width: 200px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+  }
+  
+  .view-toggle {
+      display: flex;
+  }
+  
+  .toggle-btn {
+      background: #556178;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+  }
+  
+  .toggle-btn.active {
+      background: #3b455d;
+  }
+  
+  /* Course card grid and list view */
+  .course-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+  }
+  
+  .course-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      width: 280px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      position: relative;
+  }
+  
+  .course-card:hover {
+      transform: scale(1.05);
+  }
+  
+  .grid-view .course-card {
+      width: 400px;
+      height:500px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+  }
+  
+  
+  .grid-view .course-image {
+      
+    padding:20px;
+  }
+  
+  
+  
+  .list-view .course-card {
+      display: flex;
+      width: 100%;
+      max-width: 800px;
+      padding: 10px;
+  }
+  
+  .course-image img {
+      width: 90%;
+      height: auto;
+      text-align: center;
+       
+  }
+  
+  .list-view .course-image {
+      width:50%;
+      padding: 20px;
+       
+  }
+  
+  
+  .list-view .course-title {
+      
+      text-align: center;
+      position:absolute;
+      right:500px;
+      top:2px;
+  }
+  
+  
+  .course-details {
+      padding: 15px;
+  }
+  
+  .course-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #3b455d;
+  }
+  
+  .course-creator, .course-enrollment, .course-price, .course-language, .course-date, .course-level {
+      color: #59647d;
+      font-size: 0.9rem;
+  }
+  
+  .description-btn {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #35445d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+  }
+  
+  .description-btn:hover {
+      background: #556178;
+  }
+  
+  /* Collapsible description */
+  .course-description {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      font-size: 0.9rem;
+      color: #555;
+  }
+  
+  .course-description.show {
+      max-height: 200px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+      .filters {
+          flex-direction: column;
+          align-items: center;
+      }
+     
+      #searchBar, #fieldFilter, #languageFilter {
+          width: 100%;
+      }
+  }
+  
+  
+  <style/>
+  
+
+
+
+
+<!--books list styling-->
+    <!--styler 1-->
+
+    <style>
+      .grid-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 10px;
+          flex-wrap: wrap;
+          padding: 20px;
+          justify-content: center;
+      }
+      .grid-item {
+          border: 1px solid #ccc;
+          padding: 10px;
+          text-align: center;
+  
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          padding: 20px;
+          justify-content: center;
+      }
+      .grid-item img {
+          max-width: 100%;
+          height: auto;
+          transform: scale(1.05);
+      }
+  </style>
+  
+  
+  
+      <style>
+      
+      
+      /* Basic resets */
+      * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+      }
+      
+      body {
+          background-color: #f4f6f8;
+          color: #333;
+      }
+      
+      /* Header and search bar */
+      .library-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px;
+          background-color: #3a3f58;
+          color: #fff;
+      }
+      
+      #searchBar {
+          padding: 10px;
+          width: 60%;
+          border-radius: 5px;
+          border: none;
+          outline: none;
+      }
+      
+      .view-toggle {
+          display: flex;
+      }
+      
+      .toggle-btn {
+          background: #555b76;
+          color: #fff;
+          border: none;
+          padding: 10px 15px;
+          margin-left: 5px;
+          border-radius: 5px;
+          cursor: pointer;
+          outline: none;
+      }
+      
+      .toggle-btn.active {
+          background: #6a718e;
+      }
+      
+      /* Book card grid and list view */
+      .library-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          padding: 20px;
+          justify-content: center;
+      }
+      
+      .book-card {
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width:20%;
+          overflow: hidden;
+          transition: transform 0.2s ease;
+          position: relative;
+      }
+      
+      .book-card:hover {
+          transform: scale(1.05);
+      }
+      
+      .grid-view .book-card {
+          width: 240px;
+      }
+      
+      .list-view .book-card {
+          display: flex;
+          width: 100%;
+          max-width: 600px;
+          padding: 10px;
+      }
+      
+      .book-image img {
+          width:90%;
+          height: auto;
+          transition: transform 0.3s ease;
+          align-items: center;
+      }
+      
+      .book-image img:hover {
+          transform: scale(1.2);
+      }
+      
+      .list-view .book-image {
+          width: 40%;
+          padding: 10px;
+      }
+      
+      .book-details {
+          padding: 15px;
+      }
+      
+      .book-title {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color:darkblue;
+      }
+      
+      .book-price, .book-language {
+          color: #6a718e;
+          font-size: 0.9rem;
+      }
+  
+      .book-author {
+          color:darkblue;
+          font-size: 0.9rem;
+      }
+  
+  
+      .description-btn {
+          margin-top: 10px;
+          padding: 8px 12px;
+          background: #3a3f58;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          outline: none;
+      }
+      
+      .description-btn:hover {
+          background: #6a718e;
+      }
+      
+      /* Collapsible description */
+      .book-description {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+          font-size: 0.9rem;
+          color: #555;
+      }
+      
+      .book-description.show {
+          max-height: 200px;
+      }
+      
+      /* Responsive design */
+      @media (max-width: 768px) {
+          .library-header {
+              flex-direction: column;
+          }
+         
+          #searchBar {
+              width: 100%;
+              margin-bottom: 15px;
+          }
+      }
+      
+      
+      <style/>
+  
+
+
+
+
+
+
+
+
+
+
+<!-- content list styling-->
+
+
+<style>
+
+
+  /* Basic resets */
+  * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+  }
+  
+  body {
+      background-color: #f5f8fb;
+      color: #333;
+  }
+  
+  /* Header and filter bar */
+  .course-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #35445d;
+      color: #fff;
+      text-align: center;
+  }
+  
+  .course-header h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+  }
+  
+  .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+  }
+  
+  #searchBar, #fieldFilter, #languageFilter {
+      padding: 10px;
+      width: 200px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+  }
+  
+  .view-toggle {
+      display: flex;
+  }
+  
+  .toggle-btn {
+      background: #556178;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+  }
+  
+  .toggle-btn.active {
+      background: #3b455d;
+  }
+  
+  /* Course card grid and list view */
+  .course-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+  }
+  
+  .course-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      position: relative;
+  }
+  
+  .course-card:hover {
+      transform: scale(1.05);
+  }
+  
+  .grid-view .course-card {
+      width: 400px;
+      height:500px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+  }
+  
+  
+  .grid-view .course-image {
+      
+    padding:20px;
+  }
+  
+  
+  
+  .list-view .course-card {
+      display: flex;
+      width: 100%;
+      max-width: 800px;
+      padding: 10px;
+  }
+  
+  .course-image img {
+      width: 90%;
+      height: auto;
+      text-align: center;
+       
+  }
+  
+  .list-view .course-image {
+      width:50%;
+      padding: 20px;
+       
+  }
+  
+  
+  .list-view .course-title {
+      
+      text-align: center;
+      position:absolute;
+      right:500px;
+      top:2px;
+  }
+  
+  
+  .course-details {
+      padding: 15px;
+  }
+  
+  .course-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #3b455d;
+  }
+  
+  .course-creator, .course-enrollment, .course-price, .course-language, .course-date, .course-level {
+      color: #59647d;
+      font-size: 0.9rem;
+  }
+  
+  .description-btn {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #35445d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+  }
+  
+  .description-btn:hover {
+      background: #556178;
+  }
+  
+  /* Collapsible description */
+  .course-description {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      font-size: 0.9rem;
+      color: #555;
+  }
+  
+  .course-description.show {
+      max-height: 200px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+      .filters {
+          flex-direction: column;
+          align-items: center;
+      }
+     
+      #searchBar, #fieldFilter, #languageFilter {
+          width: 100%;
+      }
+  }
+  
+  
+  <style/>
+
+<!---- content details  -->
+<style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .book-card {
+      width: 90%;
+      max-width: 800px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin: 20px;
+    }
+
+    /* Book Image and Title */
+    .book-header {
+      position: relative;
+    }
+    .book-header img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      filter: brightness(0.85);
+      padding: 20px;
+    }
+    .book-title {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
+      font-size: 2em;
+      color: #ffffff;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+      font-weight: bold;
+    }
+
+    /* Book Information */
+    .book-info {
+      padding: 20px;
+      color: #333;
+    }
+    .book-info p {
+      margin: 8px 0;
+      font-size: 1em;
+      color: #555;
+    }
+    .book-meta {
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    /* Action Buttons */
+    .btn-container {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      padding: 0 20px 20px 20px;
+    }
+    .btn {
+      flex: 1;
+      padding: 8px;
+      font-size: 0.9em;
+      text-align: center;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      color: #333;
+      background-color: transparent;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-download:hover {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+    .btn-video-download:hover {
+      background-color: #6c757d;
+      color: #ffffff;
+    }
+    .btn-edit:hover {
+      background-color: #ffc107;
+      color: #ffffff;
+    }
+    .btn-delete:hover {
+      background-color: #dc3545;
+      color: #ffffff;
+    }
+
+    /* Description Collapsible */
+    .description-section {
+      margin-top: 20px;
+      padding: 20px;
+    }
+    .description-header {
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 10px;
+      background-color: #e9ecef;
+      color: #333;
+      border-radius: 5px;
+    }
+    .description-content {
+      display: none;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    /* Video Section */
+    .video-section {
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 300px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+  </style>
+
+
+
+<!-- blog_card -->
+<style>
+  /* Blog Card Container */
+  .blog-card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header: Profile Picture, User Info */
+  .blog-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .profile-picture {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .user-info {
+    flex-grow: 1;
+  }
+  
+  .user-name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .date-created {
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  .follow-info {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  /* Blog Content */
+  .blog-title {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .blog-preview {
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  
+  .read-more {
+    color: #1e90ff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* Blog Media */
+  .blog-media {
+    margin: 15px 0;
+    position: relative;
+  }
+  
+  .blog-image, .blog-video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Blog Actions: Comments, Likes, Dislikes */
+  .blog-actions {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #777;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+  }
+  
+  .comments-count, .likes-count, .dislikes-count {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Full Blog Link Button */
+  .full-blog-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1e90ff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .full-blog-link:hover {
+    background-color: #1c7ecf;
+  }
+  <style/>
+
+  <!--profile card -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .profile-card {
+      width: 100%;
+      max-width: 400px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .profile-card img.profile-picture {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3A8DDF;
+      margin-bottom: 10px;
+    }
+
+    .profile-card h2 {
+      font-size: 1.5em;
+      margin: 10px 0 5px;
+      color: #333;
+    }
+
+    .profile-card p {
+      color: #666;
+      margin: 5px 0;
+    }
+
+    .button-group {
+      margin-top: 15px;
+    }
+
+    .button-group a,
+    .button-group button {
+      display: inline-block;
+      background-color: #3A8DDF;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      margin: 5px 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .button-group a:hover,
+    .button-group button:hover {
+      background-color: #2d6ebd;
+    }
+
+    .collapse-section {
+      margin-top: 10px;
+    }
+
+    .collapse-button {
+      background-color: #f0f0f0;
+      color: #3A8DDF;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .collapse-content {
+      display: none;
+      padding: 10px;
+      border: 1px solid #f0f0f0;
+      background-color: #fafafa;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .stat p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .subscription-status {
+      font-weight: bold;
+      color: #3A8DDF;
+      margin-top: 15px;
+    }
+  </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const carousel = document.querySelector(".carousel");
+      const cards = document.querySelectorAll(".carousel-card");
+  
+      // Clone each card and append it to create an infinite loop effect
+      cards.forEach((card) => {
+          const clone = card.cloneNode(true);
+          carousel.appendChild(clone);
+      });
+  });
+  </script>
+
+
+
+
+
 
     <style>
       .card {

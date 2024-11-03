@@ -16,15 +16,20 @@ urlpatterns = [
     # handling authentication login and logout
     path('login_user',views.login_user,name='login'),
     path('logout_user',views.logout_user,name='logout'),
+    path('subscribe', views.subscription_page, name='subscription_page'),  # Subscription page
+    path('payment_success',views.payment_success, name='payment_success'),  # Payment success page
+    
     
 
-    # handling user profiles
+    # handling user       
      path('profiles',views.profiles,name='profiles'),
      path("students",views.students, name='students'),
      path("teachers",views.teachers, name='teachers'),
      path("institutions",views.institutions, name='institutions'),
      path('profile/<int:pk>',views.profile, name='profile'),
      path("update_profile",views.update_profile, name='update_profile'),
+
+   
     
       # Password reset views
        #path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

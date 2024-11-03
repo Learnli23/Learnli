@@ -10,4 +10,6 @@ urlpatterns =[
     path('contact-message/', views.contact_message, name='contact_message'),
     path('calendar/', views.calendar_view, name='calendar'),
     path('calendar/add/', views.add_event, name='add_event'),
+    path('delete_event/<event_id>',views.delete_event, name='delete_event'),
+    path('edit_event/<event_id>',views.edit_event, name='edit_event'),
 ]

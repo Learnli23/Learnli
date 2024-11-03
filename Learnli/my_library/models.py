@@ -22,8 +22,10 @@ class Content(models.Model):
     video = models.FileField(upload_to='content/',blank=True)
     Audeo = models.FileField(upload_to='content/',blank=True)
     paper_file = models.FileField(upload_to='content/',blank=True)
-    #price = models.DecimalField(max_digits=6, decimal_places=2)
     upload_date = models.DateTimeField(auto_now_add=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)  #field for price
+    language = models.CharField(max_length=50, blank=True, null=True)  # Optional field for language
+    paid_users = models.ManyToManyField(user_Profile,related_name='paid_content', blank=True)  # Track paid users
 
     def __str__(self):
         return self.title
@@ -49,9 +51,25 @@ class Ebook(models.Model):
     display_image = models.ImageField(upload_to = 'display_images/',null=True)
     date_updated = models.DateField(auto_now=True)
     ISBN = models.CharField(max_length=2000,blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)  #field for price
+    language = models.CharField(max_length=50, blank=True, null=True)  # Optional field for language
+    pages = models.PositiveIntegerField(blank=True, null=True)  # Optional field for pages
+    paid_users = models.ManyToManyField(user_Profile,related_name='paid_books', blank=True)  # Track paid users
 
     def __str__(self):
         return self.title
+
+
+class Book_Payment(models.Model):
+    user = models.ForeignKey(user_Profile,on_delete=models.CASCADE)
+    book = models.ForeignKey(Ebook, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    transaction_id = models.CharField(max_length=100, unique=True)  # To store Flutterwave transaction ID
+
+    def __str__(self):
+        return f"{self.user.username} - {self.book.title}"
+
+
 
 
 # book reviews

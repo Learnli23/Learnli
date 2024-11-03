@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h4>My upcoming events</h4>
+    <p style="font-size: medium;"><strong>My upcoming events</strong></p>
     <a href="{% url 'add_event' %}">Add Event</a>
     <ul>
         
@@ -10,13 +10,18 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Date</th>
+                <th>Editing</th>
+                <th>Deleteing</th>
+                
             </tr>
         {% for event in events %}
             <tr>
                 <td>{{ event.title }}</td>
                 <td>{{ event.description }}</td>
-                <td><strong style="color: brown;">{{ event.event_date }}</strong></td>
-                
+                <td><strong style="color:black;">{{ event.event_date }}</strong></td>
+                <td><a href="{% url 'edit_event' event.id %}">Edit</a></td>
+                <td><a style="color:darkred;" href="{% url 'delete_event' event.id %}">Delete</a></td>
+
             </tr>
             {% empty %}
             <li>No upcoming events</li>

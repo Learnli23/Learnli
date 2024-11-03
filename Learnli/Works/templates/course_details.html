@@ -5,7 +5,7 @@
     <div class="row g-0">
 
         <div class="col-md-4">
-          {% if course.image %}
+        {% if course.image %}
         <img src="{{course.image.url }}"  alt ="" width="225" height="300" class="d-inline-block align-text-top" >
        {% endif %}
         <br/><br/>
@@ -39,13 +39,9 @@
           <p class="card-text"><a href="{% url 'profile' course.created_by.id %} ">BY:{{course.created_by}}</a></p>
         </div>
     
-          <br/>
-         
-           
-
-            
+      
             <button class="btn btn-outline-primary"><a href="{% url 'class_subjects' course.id %} ">
-              <strong style="color:black ;">Course Units</strong></a>
+              <strong style="color:black ; font-size: small;">Course Units</strong></a>
             </button>
 
             {%if request.user == course.created_by%}

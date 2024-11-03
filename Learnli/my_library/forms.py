@@ -23,7 +23,7 @@ class CommentForm(forms.ModelForm):
 class EbookForm(forms.ModelForm):
     class Meta:
         model = Ebook
-        fields = ['title', 'description', 'display_image','ISBN']
+        fields = ['title', 'description', 'display_image','ISBN','price','pages','language']
         Widget = {
             'title':CKEditorWidget(), 'description':CKEditorWidget(), 'display_image':CKEditorWidget(),'ISBN':CKEditorWidget()
         }

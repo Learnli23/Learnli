@@ -19,4 +19,11 @@ urlpatterns = [
     path('book/<int:book_pk>/add-section/', views.add_section, name='add_section'),
     path('section/<int:section_pk>/add-sub_section/', views.add_sub_section, name='add_sub_section'),
     path('section/<int:pk>/', views.section_details, name='section_details'),
+    #book payments
+    path('book/<int:book_id>/book_payment_page/', views.book_payment_page, name='book_payment_page'),
+    path('book_payment_success', views.book_payment_success, name='book_payment_success'),
+    #content payment
+    path('content/<int:content_id>/content_payment_page/', views.content_payment_page, name='content_payment_page'),
+    path('content_payment_success', views.content_payment_success, name='content_payment_success'),
+   
 ]
