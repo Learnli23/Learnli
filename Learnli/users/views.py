@@ -48,7 +48,7 @@ def user_profile(request, user_id):
 #  views here
 
 def home(request):
-    # Fetch counts
+    # Fetch countsF
     book_count = Ebook.objects.count
     course_count = Classes.objects.count
     user_count = user_Profile.objects.count
@@ -487,7 +487,7 @@ def subscription_page(request):
                 "amount":amount,  # Amount to be charged
                 "currency": currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda,mobilemoneykenya, ussd,banktransfer",
-                "redirect_url": "  https://b30d-41-210-155-243.ngrok-free.app/payment_success",  # Redirect URL after payment
+                "redirect_url": " http://54.198.251.116:8000/payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
