@@ -205,7 +205,7 @@ def course_payment_page(request, course_id):
                 "amount":float(price),  # Amount to be charged
                 "currency":currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
-                "redirect_url": "https://b30d-41-210-155-243.ngrok-free.app/course_payment_success",  # Redirect URL after payment
+                "redirect_url": "http://54.198.251.116:8000/course_payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
