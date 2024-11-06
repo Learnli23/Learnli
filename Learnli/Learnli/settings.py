@@ -130,7 +130,7 @@ SESSION_COOKIE_AGE = 3600  # 1 hour
 
 
 #csrf_token configuration to adid ngrok
-CSRF_TRUSTED_ORIGINS =['http://54.198.251.116:8000']
+CSRF_TRUSTED_ORIGINS =['http://54.198.251.116']
 
 
 
