@@ -111,7 +111,7 @@ def content_payment_page(request, content_id):
                 "amount":float(price),  # Amount to be charged
                 "currency":currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
-                "redirect_url": "http://54.198.251.116:8000/content_payment_success",  # Redirect URL after payment
+                "redirect_url": "http://54.198.251.116/content_payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
