@@ -18,9 +18,11 @@
       <h4>Lessons</h4>
       <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." class="form-control" title="Type in a category">
       <ul id="myMenu" class="lesson-list">
-        <li><a href="#" onclick="loadVideo(0)">Lesson 1: Introduction</a></li>
-        <li><a href="#" onclick="loadVideo(1)">Lesson 2: Basic Concepts</a></li>
-        <li><a href="#" onclick="loadVideo(2)">Lesson 3: Advanced Techniques</a></li>
+         {% for lesson in lessons %}
+        {% if lesson.taught_by  in request.user.follows.all or  lesson.taught_by == request.user %}
+        <li><a href="#" onclick="loadVideo({{ lesson.id }})">{{ lesson.title }}</a></li>
+        {% endif %}
+        {% endfor %}
       </ul>
     </div>
 
