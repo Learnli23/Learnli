@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lesson Video Player</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
 
@@ -15,40 +16,53 @@
       <h4>Lessons</h4>
       <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." class="form-control" title="Type in a category">
       <ul id="myMenu" class="lesson-list">
-        <li><a href="#">Lesson 1: Introduction</a></li>
-        <li><a href="#">Lesson 2: Basic Concepts</a></li>
-        <li><a href="#">Lesson 3: Advanced Techniques</a></li>
+        <li><a href="#" onclick="loadVideo(0)">Lesson 1: Introduction</a></li>
+        <li><a href="#" onclick="loadVideo(1)">Lesson 2: Basic Concepts</a></li>
+        <li><a href="#" onclick="loadVideo(2)">Lesson 3: Advanced Techniques</a></li>
       </ul>
     </div>
 
     <!-- Main Content for Video Player and Lesson Details -->
     <div class="col-md-9">
       <div class="video-container">
-        <div class="video-header">
-          <h2>Lesson Title</h2>
-          <p><strong>Uploaded on:</strong> 2024-10-14</p>
-          <p><strong>Instructor:</strong> John Doe</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h2 id="lesson-title">Lesson Title</h2>
+            <p><strong>Uploaded on:</strong> 2024-10-14</p>
+            <p><strong>Instructor:</strong> John Doe</p>
+          </div>
+          <!-- Next and Previous Buttons -->
+          <div>
+            <button onclick="prevVideo()" class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button onclick="nextVideo()" class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-right"></i> Next</button>
+          </div>
         </div>
         
         <!-- Video Player -->
-        <div class="video-player">
+        <div class="video-player mt-2">
           <video id="videoPlayer" controls width="100%" height="400">
-            <source src="sample-video.mp4" type="video/mp4">
+            <source id="videoSource" src="sample-video1.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
 
         <!-- Video Controls (Download and Navigation Buttons) -->
-        <div class="video-controls">
-          <button class="btn btn-outline-primary">Back to Courses</button>
-          <button class="btn btn-outline-secondary">Download Notes</button>
-          <button class="btn btn-outline-secondary">Download Video</button>
-        </div>
-
-        <!-- Lesson Management Options for Instructors -->
-        <div class="lesson-management">
-          <button class="btn btn-outline-secondary">Edit Lesson</button>
-          <button class="btn btn-outline-danger">Delete Lesson</button>
+        <div class="video-controls d-flex justify-content-between mt-3">
+          <button class="btn btn-sm btn-outline-primary">
+            <i class="fas fa-arrow-left"></i> Back to Courses
+          </button>
+          <button class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-download"></i> Notes
+          </button>
+          <button class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-download"></i> Video
+          </button>
+          <button class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
         </div>
       </div>
     </div>
@@ -56,6 +70,44 @@
 </div>
 
 <script>
+// Video data array (can be connected to backend dynamically)
+const videos = [
+  { title: "Lesson 1: Introduction", src: "sample-video1.mp4" },
+  { title: "Lesson 2: Basic Concepts", src: "sample-video2.mp4" },
+  { title: "Lesson 3: Advanced Techniques", src: "sample-video3.mp4" }
+];
+
+let currentVideoIndex = 0;
+
+// Function to load video based on index
+function loadVideo(index) {
+  currentVideoIndex = index;
+  const video = videos[currentVideoIndex];
+  document.getElementById("videoSource").src = video.src;
+  document.getElementById("videoPlayer").load();
+  document.getElementById("lesson-title").innerText = video.title;
+
+  // Highlight the current lesson in the sidebar
+  const lessonItems = document.querySelectorAll("#myMenu li a");
+  lessonItems.forEach((item, idx) => {
+    item.classList.toggle("active-lesson", idx === currentVideoIndex);
+  });
+}
+
+// Load the next video
+function nextVideo() {
+  if (currentVideoIndex < videos.length - 1) {
+    loadVideo(currentVideoIndex + 1);
+  }
+}
+
+// Load the previous video
+function prevVideo() {
+  if (currentVideoIndex > 0) {
+    loadVideo(currentVideoIndex - 1);
+  }
+}
+
 // Search functionality for the sidebar lessons list
 function myFunction() {
   var input, filter, ul, li, a, i;
@@ -104,8 +156,9 @@ function myFunction() {
   text-decoration: none;
 }
 
-.lesson-list a:hover {
+.lesson-list a:hover, .lesson-list a.active-lesson {
   text-decoration: underline;
+  font-weight: bold;
 }
 
 .video-container {
@@ -126,18 +179,14 @@ function myFunction() {
 
 .video-controls {
   display: flex;
+  justify-content: flex-start;
   gap: 10px;
 }
 
-.lesson-management {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.video-controls .btn, .lesson-management .btn {
-  border-radius: 20px;
+.video-controls .btn {
   font-weight: bold;
+  border-radius: 20px;
+  padding: 5px 10px;
 }
 </style>
 
