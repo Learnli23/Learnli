@@ -16,7 +16,83 @@
 
     {% include 'narvbar.html'%}
 <!--stylng -->
-  <!---->
+  <!--  about page-->
+     <style>
+    /* General styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+    .container {
+      padding: 40px 20px;
+    }
+    .section-heading {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #333;
+      margin-top: 30px;
+      padding-bottom: 5px;
+    }
+    .section-content {
+      padding-top: 20px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 20px;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .icon-box {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #f0f8ff;
+    }
+    .icon-box i {
+      color: #007bff;
+    }
+    .text-muted {
+      font-size: 0.9rem;
+      color: #888;
+    }
+    .team-member {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .team-member img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .team-member img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .scrolling-cards {
+      display: flex;
+      overflow-x: auto;
+      padding: 10px 0;
+      gap: 10px;
+    }
+    .scrolling-cards .card {
+      min-width: 250px;
+    }
+  </style>
 
 <!--blog styling-->
 
