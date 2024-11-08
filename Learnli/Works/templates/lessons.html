@@ -1,83 +1,111 @@
-  {% extends 'base.html' %}
-
+ {% extends 'base.html' %} 
 {% block content %}
 
-<div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar Menu -->
-    <div class="col-md-3 sidebar">
-      <h4>Lessons</h4>
-      <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." class="form-control" title="Type in a category">
-      <ul id="myMenu" class="lesson-list">
-        {% for lesson in lessons %}
-          {% if lesson.taught_by in request.user.follows.all or lesson.taught_by == request.user %}
-            <li>
-              <a href="{% url 'view_lesson' lesson.id %}">{{ lesson.title }}</a>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
 
-    <!-- Main Content for Video Player and Lesson Details -->
-    <div class="col-md-9">
-      {% if selected_lesson %}
-      <div class="video-container">
-        <div class="video-header">
-          <h2>{{ selected_lesson.title }}</h2>
-          <p><strong>Uploaded on:</strong> {{ selected_lesson.created_on }}</p>
-          <p><strong>Instructor:</strong> {{ selected_lesson.taught_by }}</p>
-        </div>
-        
-        <!-- Video Player -->
-        {% if selected_lesson.video %}
-        <div class="video-player">
-          <video id="videoPlayer" controls>
-            <source src="{{ selected_lesson.video.url }}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
 
-        <!-- Video Controls (Download and Navigation Buttons) -->
-        <div class="video-controls">
-          <button class="btn btn-outline-primary"><a href="{% url 'classes' %}">Back to Courses</a></button>
 
-          {% if selected_lesson.notes %}
-          <button class="btn btn-outline-secondary">
-            <a href="{{ selected_lesson.notes.url }}" download>Download Notes</a>
-          </button>
-          {% endif %}
+<h2>Search lesson</h2>
 
-          <button class="btn btn-outline-secondary">
-            <a href="{{ selected_lesson.video.url }}" download>Download Video</a>
-          </button>
-        </div>
-
-        <!-- Lesson Management Options for Instructors -->
-        {% if request.user == selected_lesson.taught_by %}
-        <div class="lesson-management">
-          <button class="btn btn-outline-secondary">
-            <a href="{% url 'edit_lesson' selected_lesson.id %}">Edit Lesson</a>
-          </button>
-          <button class="btn btn-outline-danger">
-            <a href="{% url 'delete_lesson' selected_lesson.id %}">Delete Lesson</a>
-          </button>
-        </div>
-        {% endif %}
-        
-        {% else %}
-        <p>No video available for this lesson.</p>
-        {% endif %}
-      </div>
-      {% else %}
-      <p>Select a lesson from the sidebar to view its details.</p>
+<div class="row">
+  <!--lft-->
+  <div class="left" style="background-color:#bbb;">
+    <h2>Menu</h2>
+    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+    <ul id="myMenu">
+      {% for lesson in lessons %}
+      {% if lesson.taught_by  in request.user.follows.all or  lesson.taught_by == request.user %}
+        <!--nam-->
+      <li><a href="">{{ lesson }}</a></li>
       {% endif %}
-    </div>
+      {% endfor %}
+ 
+    </ul>
+  </div>
+
+
+ <!--ght-->
+  <div class="right" style="background-color:#ddd;">
+  {% for lesson in lessons %}
+  {% if lesson.taught_by  in request.user.follows.all or  lesson.taught_by == request.user %}
+
+    <div class="card mb-3" style="max-width: 740px;">
+      <div class="row g-0">
+
+          <div class="col-md-4">
+            {% if lesson.display_image  %}
+          <img src="{{lesson.display_image.url }}"  alt ="" width="225" height="300" class="d-inline-block align-text-top" >
+        {% endif %} 
+        </div>
+          
+          <div class="col-md-8">
+          <div class="card-body"> 
+            <h2 class="card-title" style="color:maroon;"><strong style="color: black;"></strong>{{lesson.title}}</h2>
+            <p class="card-text"><strong style="color:black; font-size:medium;">uploded on:{{lesson.created_on}}</strong></a></p>
+            <p class="card-text"><strong style="color:black;">Taught by:</strong>{{lesson.taught_by}}</a></p>
+
+            {% if lesson.video  %}
+            <div class="video-card">
+              <h2>{{ video.title }}</h2>
+              <p>{{ video.description }}</p>
+              <video width="400" height="300" controls>
+                <source src=" {{lesson.video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+             
+               
+              </video>
+              <card class=" ">
+                  <button class="btn btn-outline-secondary" style="border:black;">
+                    <a href=" {{lesson.video.url}} " download>Download video </a>
+                  </button>
+
+                  <button class="btn btn-outline-success" style="border:black;">
+                    <a href=" {{lesson.video.url}} ">new window</a>
+                  </button>
+
+                   
+                    <a href="{{lesson.notes.url}}" download>Download notes</a>
+                   
+
+                </card>
+             
+             </div>
+             {% endif %}
+
+          
+            <button class="btn btn-outline-primary" style="border:black;"> 
+              <a href="{% url 'classes' %} ">Back to Courses</a>
+            </button>
+           
+          {%if request.user == lesson.taught_by%}
+
+          <button class="btn btn-outline-secondary" style="border:black;">
+            <a href="{% url 'edit_lesson' lesson.id %}">Edit lessons</a>
+          </button>
+           
+          {% endif %}
+
+
+          {%if request.user == lesson.taught_by%}
+          <button class="btn btn-outline-danger" style="border:black;">
+            <a href="{% url 'delete_lesson' lesson.id  %}">Delete lessons</a>
+          </button>
+           
+          {% endif %}
+              
+          </div>
+          </div>
+      </div>
+      </div>
+
+
+    {% endif %}
+
+  {% endfor %}
+ 
   </div>
 </div>
 
 <script>
-// Search functionality for the sidebar lessons list
 function myFunction() {
   var input, filter, ul, li, a, i;
   input = document.getElementById("mySearch");
@@ -95,71 +123,4 @@ function myFunction() {
 }
 </script>
 
-<style>
-/* Styling for the page layout */
-.container-fluid {
-  padding: 20px;
-}
-
-.sidebar {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-right: 1px solid #ddd;
-}
-
-.sidebar h4 {
-  font-weight: bold;
-}
-
-.lesson-list {
-  list-style: none;
-  padding: 0;
-}
-
-.lesson-list li {
-  margin: 10px 0;
-}
-
-.lesson-list a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.lesson-list a:hover {
-  text-decoration: underline;
-}
-
-.video-container {
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.video-header h2 {
-  color: #333;
-  font-size: 24px;
-}
-
-.video-player {
-  margin: 20px 0;
-}
-
-.video-controls {
-  display: flex;
-  gap: 10px;
-}
-
-.lesson-management {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.video-controls .btn, .lesson-management .btn {
-  border-radius: 20px;
-  font-weight: bold;
-}
-</style>
-
-{% endblock %} "
+{% endblock %}
