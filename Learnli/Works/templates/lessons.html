@@ -1,126 +1,187 @@
  {% extends 'base.html' %} 
 {% block content %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Video Player</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
 
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-md-3 sidebar">
+      <h4>Lessons</h4>
+      <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." class="form-control mb-3" title="Type in a category">
+      <ul id="myMenu" class="lesson-list">
+        {% for lesson in lessons %}
+        <li><a href="#" onclick="loadVideo({{ lesson.id }})">{{ lesson.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
 
-
-<h2>Search lesson</h2>
-
-<div class="row">
-  <!--lft-->
-  <div class="left" style="background-color:#bbb;">
-    <h2>Menu</h2>
-    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-    <ul id="myMenu">
-      {% for lesson in lessons %}
-      {% if lesson.taught_by  in request.user.follows.all or  lesson.taught_by == request.user %}
-        <!--nam-->
-      <li><a href="">{{ lesson }}</a></li>
-      {% endif %}
-      {% endfor %}
- 
-    </ul>
-  </div>
-
-
- <!--ght-->
-  <div class="right" style="background-color:#ddd;">
-  {% for lesson in lessons %}
-  {% if lesson.taught_by  in request.user.follows.all or  lesson.taught_by == request.user %}
-
-    <div class="card mb-3" style="max-width: 740px;">
-      <div class="row g-0">
-
-          <div class="col-md-4">
-            {% if lesson.display_image  %}
-          <img src="{{lesson.display_image.url }}"  alt ="" width="225" height="300" class="d-inline-block align-text-top" >
-        {% endif %} 
+    <!-- Main Content for Video Player and Lesson Details -->
+    <div class="col-md-9">
+      <div class="video-container p-4 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h2 id="lesson-title">Lesson Title</h2>
+            <p><strong>Uploaded on:</strong> <span id="lesson-created-on"></span></p>
+            <p><strong>Instructor:</strong> <span id="lesson-instructor"></span></p>
+          </div>
+          <!-- Next and Previous Buttons in the same line -->
+          <div class="d-flex">
+            <button onclick="prevVideo()" class="btn btn-outline-secondary btn-oval mx-1"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button onclick="nextVideo()" class="btn btn-outline-secondary btn-oval mx-1">Next <i class="fas fa-arrow-right"></i></button>
+          </div>
         </div>
-          
-          <div class="col-md-8">
-          <div class="card-body"> 
-            <h2 class="card-title" style="color:maroon;"><strong style="color: black;"></strong>{{lesson.title}}</h2>
-            <p class="card-text"><strong style="color:black; font-size:medium;">uploded on:{{lesson.created_on}}</strong></a></p>
-            <p class="card-text"><strong style="color:black;">Taught by:</strong>{{lesson.taught_by}}</a></p>
 
-            {% if lesson.video  %}
-            <div class="video-card">
-              <h2>{{ video.title }}</h2>
-              <p>{{ video.description }}</p>
-              <video width="400" height="300" controls>
-                <source src=" {{lesson.video.url }}" type="video/mp4">
-                Your browser does not support the video tag.
-             
-               
-              </video>
-              <card class=" ">
-                  <button class="btn btn-outline-secondary" style="border:black;">
-                    <a href=" {{lesson.video.url}} " download>Download video </a>
-                  </button>
+        <!-- Video Player -->
+        <div class="video-player mb-3">
+          <video id="videoPlayer" controls width="100%" height="400">
+            <source id="videoSource" src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
 
-                  <button class="btn btn-outline-success" style="border:black;">
-                    <a href=" {{lesson.video.url}} ">new window</a>
-                  </button>
-
-                   
-                    <a href="{{lesson.notes.url}}" download>Download notes</a>
-                   
-
-                </card>
-             
-             </div>
-             {% endif %}
-
-          
-            <button class="btn btn-outline-primary" style="border:black;"> 
-              <a href="{% url 'classes' %} ">Back to Courses</a>
-            </button>
-           
-          {%if request.user == lesson.taught_by%}
-
-          <button class="btn btn-outline-secondary" style="border:black;">
-            <a href="{% url 'edit_lesson' lesson.id %}">Edit lessons</a>
-          </button>
-           
-          {% endif %}
-
-
-          {%if request.user == lesson.taught_by%}
-          <button class="btn btn-outline-danger" style="border:black;">
-            <a href="{% url 'delete_lesson' lesson.id  %}">Delete lessons</a>
-          </button>
-           
-          {% endif %}
-              
-          </div>
-          </div>
+        <!-- Video Controls (Download and Navigation Buttons) -->
+        <div class="d-flex justify-content-between mt-3">
+          <button class="btn btn-outline-primary btn-oval flex-fill mx-1"><i class="fas fa-arrow-left"></i> Back to Courses</button>
+          <button id="download-notes" class="btn btn-outline-secondary btn-oval flex-fill mx-1"><i class="fas fa-download"></i> Notes</button>
+          <button id="download-video" class="btn btn-outline-secondary btn-oval flex-fill mx-1"><i class="fas fa-download"></i> Video</button>
+          <button id="edit-lesson" class="btn btn-outline-secondary btn-oval flex-fill mx-1"><i class="fas fa-edit"></i> Edit</button>
+          <button id="delete-lesson" class="btn btn-outline-danger btn-oval flex-fill mx-1"><i class="fas fa-trash-alt"></i> Delete</button>
+        </div>
       </div>
-      </div>
-
-
-    {% endif %}
-
-  {% endfor %}
- 
+    </div>
   </div>
 </div>
 
 <script>
+// Video data will be fetched dynamically from Django
+const lessons = [
+  {% for lesson in lessons %}
+  { 
+    id: {{ lesson.id }},
+    title: "{{ lesson.title }}",
+    video: "{{ lesson.video.url }}",
+    createdOn: "{{ lesson.created_on }}",
+    instructor: "{{ lesson.taught_by }}",
+    notes: "{{ lesson.notes.url }}",
+  },
+  {% endfor %}
+];
+
+let currentVideoIndex = 0;
+
+function loadVideo(index) {
+  currentVideoIndex = index;
+  const lesson = lessons[currentVideoIndex];
+  
+  // Load video content
+  document.getElementById("videoSource").src = lesson.video;
+  document.getElementById("videoPlayer").load();
+  
+  // Load lesson title and metadata
+  document.getElementById("lesson-title").innerText = lesson.title;
+  document.getElementById("lesson-created-on").innerText = lesson.createdOn;
+  document.getElementById("lesson-instructor").innerText = lesson.instructor;
+
+  // Set download links for Notes and Video
+  document.getElementById("download-notes").setAttribute('href', lesson.notes);
+  document.getElementById("download-video").setAttribute('href', lesson.video);
+  
+  // Highlight the current lesson in the sidebar
+  const lessonItems = document.querySelectorAll("#myMenu li a");
+  lessonItems.forEach((item, idx) => {
+    item.classList.toggle("active-lesson", idx === currentVideoIndex);
+  });
+}
+
+function nextVideo() {
+  if (currentVideoIndex < lessons.length - 1) {
+    loadVideo(currentVideoIndex + 1);
+  }
+}
+
+function prevVideo() {
+  if (currentVideoIndex > 0) {
+    loadVideo(currentVideoIndex - 1);
+  }
+}
+
 function myFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("mySearch");
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("myMenu");
-  li = ul.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
+  var input = document.getElementById("mySearch");
+  var filter = input.value.toUpperCase();
+  var ul = document.getElementById("myMenu");
+  var li = ul.getElementsByTagName("li");
+
+  for (var i = 0; i < li.length; i++) {
+    var a = li[i].getElementsByTagName("a")[0];
+    li[i].style.display = a.innerHTML.toUpperCase().indexOf(filter) > -1 ? "" : "none";
   }
 }
 </script>
 
-{% endblock %}
+<style>
+/* Styling adjustments */
+.sidebar {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar h4 {
+  font-weight: bold;
+}
+
+.lesson-list {
+  list-style: none;
+  padding: 0;
+}
+
+.lesson-list li {
+  margin: 10px 0;
+}
+
+.lesson-list a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.lesson-list a:hover, .lesson-list a.active-lesson {
+  font-weight: bold;
+}
+
+.video-container {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.btn-oval {
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 5px 15px;
+  text-align: center;
+}
+
+.d-flex.justify-content-between .btn-oval {
+  display: flex;
+  justify-content: space-around;
+}
+</style>
+
+</body>
+</html>
+
+
+
+
+
+
