@@ -17,10 +17,10 @@
     <!-- Sidebar Menu -->
     <div class="col-md-3 sidebar">
       <h4>Lessons</h4>
-      <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." class="form-control mb-3" title="Type in a category">
+      <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." class="form-control mb-3">
       <ul id="myMenu" class="lesson-list">
         {% for lesson in lessons %}
-        <li><a href="#" onclick="loadVideo({{ lesson.id }})">{{ lesson.title }}</a></li>
+          <li><a href="#" onclick="loadVideo({{ forloop.counter0 }})">{{ lesson.title }}</a></li>
         {% endfor %}
       </ul>
     </div>
@@ -30,50 +30,59 @@
       <div class="video-container p-4 bg-white shadow-sm rounded">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <div>
-            <h2 id="lesson-title">Lesson Title</h2>
-            <p><strong>Uploaded on:</strong> <span id="lesson-created-on"></span></p>
-            <p><strong>Instructor:</strong> <span id="lesson-instructor"></span></p>
+            <h2 id="lesson-title">{{ lessons.0.title }}</h2>
+            <p><strong>Uploaded on:</strong> {{ lessons.0.created_on }}</p>
+            <p><strong>Instructor:</strong> {{ lessons.0.taught_by }}</p>
           </div>
-          <!-- Next and Previous Buttons in the same line -->
+          <!-- Next and Previous Buttons -->
           <div class="d-flex">
-            <button onclick="prevVideo()" class="btn btn-outline-secondary btn-oval mx-1"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button onclick="nextVideo()" class="btn btn-outline-secondary btn-oval mx-1">Next <i class="fas fa-arrow-right"></i></button>
+            <button onclick="prevVideo()" class="btn btn-outline-secondary btn-oval mx-1">
+              <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button onclick="nextVideo()" class="btn btn-outline-secondary btn-oval mx-1">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
           </div>
         </div>
 
         <!-- Video Player -->
         <div class="video-player mb-3">
           <video id="videoPlayer" controls width="100%" height="400">
-            <source id="videoSource" src="" type="video/mp4">
+            <source id="videoSource" src="{{ lessons.0.video.url }}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
 
-        <!-- Video Controls (Download and Navigation Buttons) -->
+        <!-- Video Controls (Download, Edit, Delete) -->
         <div class="d-flex justify-content-between mt-3">
-          <button class="btn btn-outline-primary btn-oval flex-fill mx-1"><i class="fas fa-arrow-left"></i> Back to Courses</button>
-          <button id="download-notes" class="btn btn-outline-secondary btn-oval flex-fill mx-1"><i class="fas fa-download"></i> Notes</button>
-          <button id="download-video" class="btn btn-outline-secondary btn-oval flex-fill mx-1"><i class="fas fa-download"></i> Video</button>
-          <button id="edit-lesson" class="btn btn-outline-secondary btn-oval flex-fill mx-1"><i class="fas fa-edit"></i> Edit</button>
-          <button id="delete-lesson" class="btn btn-outline-danger btn-oval flex-fill mx-1"><i class="fas fa-trash-alt"></i> Delete</button>
+          <button class="btn btn-outline-primary btn-oval flex-fill mx-1">
+            <i class="fas fa-arrow-left"></i> Back to Courses
+          </button>
+          <a href="{{ lessons.0.notes.url }}" download class="btn btn-outline-secondary btn-oval flex-fill mx-1">
+            <i class="fas fa-download"></i> Notes
+          </a>
+          <a href="{{ lessons.0.video.url }}" download class="btn btn-outline-secondary btn-oval flex-fill mx-1">
+            <i class="fas fa-download"></i> Video
+          </a>
+          <a href="{% url 'edit_lesson' lessons.0.id %}" class="btn btn-outline-secondary btn-oval flex-fill mx-1">
+            <i class="fas fa-edit"></i> Edit
+          </a>
+          <a href="{% url 'delete_lesson' lessons.0.id %}" class="btn btn-outline-danger btn-oval flex-fill mx-1"
+             onclick="return confirm('Are you sure you want to delete this lesson?');">
+            <i class="fas fa-trash-alt"></i> Delete
+          </a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- JavaScript Section -->
 <script>
-// Video data will be fetched dynamically from Django
-const lessons = [
+// Video data array populated dynamically
+const videos = [
   {% for lesson in lessons %}
-  { 
-    id: {{ lesson.id }},
-    title: "{{ lesson.title }}",
-    video: "{{ lesson.video.url }}",
-    createdOn: "{{ lesson.created_on }}",
-    instructor: "{{ lesson.taught_by }}",
-    notes: "{{ lesson.notes.url }}",
-  },
+    { title: "{{ lesson.title }}", src: "{{ lesson.video.url }}", notes: "{{ lesson.notes.url }}", id: "{{ lesson.id }}", created_on: "{{ lesson.created_on }}", taught_by: "{{ lesson.taught_by }}" },
   {% endfor %}
 ];
 
@@ -81,30 +90,26 @@ let currentVideoIndex = 0;
 
 function loadVideo(index) {
   currentVideoIndex = index;
-  const lesson = lessons[currentVideoIndex];
-  
-  // Load video content
-  document.getElementById("videoSource").src = lesson.video;
+  const video = videos[currentVideoIndex];
+  document.getElementById("videoSource").src = video.src;
   document.getElementById("videoPlayer").load();
+  document.getElementById("lesson-title").innerText = video.title;
   
-  // Load lesson title and metadata
-  document.getElementById("lesson-title").innerText = lesson.title;
-  document.getElementById("lesson-created-on").innerText = lesson.createdOn;
-  document.getElementById("lesson-instructor").innerText = lesson.instructor;
+  // Update other fields for each lesson dynamically
+  document.getElementById("lesson-date").innerText = video.created_on;
+  document.getElementById("lesson-instructor").innerText = video.taught_by;
+  document.getElementById("download-notes").href = video.notes;
+  document.getElementById("edit-button").href = `{% url 'edit_lesson' 0 %}`.replace('0', video.id);
+  document.getElementById("delete-button").href = `{% url 'delete_lesson' 0 %}`.replace('0', video.id);
 
-  // Set download links for Notes and Video
-  document.getElementById("download-notes").setAttribute('href', lesson.notes);
-  document.getElementById("download-video").setAttribute('href', lesson.video);
-  
-  // Highlight the current lesson in the sidebar
-  const lessonItems = document.querySelectorAll("#myMenu li a");
-  lessonItems.forEach((item, idx) => {
+  // Highlight selected lesson
+  document.querySelectorAll("#myMenu li a").forEach((item, idx) => {
     item.classList.toggle("active-lesson", idx === currentVideoIndex);
   });
 }
 
 function nextVideo() {
-  if (currentVideoIndex < lessons.length - 1) {
+  if (currentVideoIndex < videos.length - 1) {
     loadVideo(currentVideoIndex + 1);
   }
 }
@@ -116,69 +121,21 @@ function prevVideo() {
 }
 
 function myFunction() {
-  var input = document.getElementById("mySearch");
-  var filter = input.value.toUpperCase();
-  var ul = document.getElementById("myMenu");
-  var li = ul.getElementsByTagName("li");
-
-  for (var i = 0; i < li.length; i++) {
-    var a = li[i].getElementsByTagName("a")[0];
-    li[i].style.display = a.innerHTML.toUpperCase().indexOf(filter) > -1 ? "" : "none";
-  }
+  var input = document.getElementById("mySearch").value.toUpperCase();
+  document.querySelectorAll("#myMenu li").forEach((li) => {
+    const a = li.querySelector("a");
+    li.style.display = a.innerText.toUpperCase().includes(input) ? "" : "none";
+  });
 }
 </script>
 
-<style>
-/* Styling adjustments */
-.sidebar {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-right: 1px solid #ddd;
-}
-
-.sidebar h4 {
-  font-weight: bold;
-}
-
-.lesson-list {
-  list-style: none;
-  padding: 0;
-}
-
-.lesson-list li {
-  margin: 10px 0;
-}
-
-.lesson-list a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.lesson-list a:hover, .lesson-list a.active-lesson {
-  font-weight: bold;
-}
-
-.video-container {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.btn-oval {
-  font-weight: bold;
-  border-radius: 30px;
-  padding: 5px 15px;
-  text-align: center;
-}
-
-.d-flex.justify-content-between .btn-oval {
-  display: flex;
-  justify-content: space-around;
-}
-</style>
-
 </body>
 </html>
+
+
+
+
+
 {% endblock %}
 
 
