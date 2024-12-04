@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <strong style="font-size: small;">Content report for</strong>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Report</button>
+  </form>
+  
+{% endblock %}
