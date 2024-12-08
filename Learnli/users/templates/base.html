@@ -25,7 +25,102 @@
 
     {% include 'narvbar.html'%}
 <!--stylng -->
-  <!--  about page-->
+  <!--  exam card -->
+  <style>
+    /* Exam Paper Card Styling */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+  
+    .exam-card {
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      width: 100%;
+      max-width: 700px;
+      padding: 20px;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .exam-header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  
+    .exam-header h1 {
+      font-size: 1.5em;
+      margin: 0;
+      color: #333;
+    }
+  
+    .exam-header h2 {
+      font-size: 1.2em;
+      color: #555;
+      margin-top: 5px;
+      font-weight: 400;
+    }
+  
+    .exam-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+      color: #777;
+      margin-bottom: 15px;
+    }
+  
+    .exam-instructions {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+      margin: 15px 0;
+      font-size: 0.95em;
+      color: #333;
+    }
+  
+    .exam-body {
+      padding-top: 10px;
+      font-size: 1em;
+      color: #444;
+      line-height: 1.6;
+    }
+  
+    .exam-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+    }
+  
+    .author {
+      font-size: 0.9em;
+      color: #555;
+    }
+  
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+   
+     
+    
+  
+   
+  </style>
+
+
+
      <style>
     /* General styling */
     body {

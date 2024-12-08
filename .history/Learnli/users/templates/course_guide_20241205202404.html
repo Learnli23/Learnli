@@ -1,0 +1,211 @@
+ 
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnLi Policies</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <h1>LearnLi Policies</h1>
+      <p>Your guide to using LearnLi responsibly and effectively.</p>
+    </header>
+  
+    <header>
+        <h1>LearnLi Policies</h1>
+        <p>Your guide to using LearnLi responsibly and effectively.</p>
+      </header>
+
+    <main>
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" id="policySearch" placeholder="Search policies...">
+      </div>
+  
+      <!-- Policy Sections -->
+      <section class="policies">
+        <!-- User Policies -->
+        <div class="policy-category">
+          <h2 class="category-title">User Policies</h2>
+          <div class="policy-item">
+            <button class="policy-toggle">Terms of Service</button>
+            <div class="policy-content">
+              <p>These terms govern the use of the LearnLi platform...</p>
+            </div>
+          </div>
+          <div class="policy-item">
+            <button class="policy-toggle">Privacy Policy</button>
+            <div class="policy-content">
+              <p>LearnLi collects and uses data in accordance with...</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Content Policies -->
+        <div class="policy-category">
+          <h2 class="category-title">Content Policies</h2>
+          <div class="policy-item">
+            <button class="policy-toggle">Content Creation Guidelines</button>
+            <div class="policy-content">
+              <p>Ensure that uploaded content adheres to community standards...</p>
+            </div>
+          </div>
+          <div class="policy-item">
+            <button class="policy-toggle">Copyright and Intellectual Property</button>
+            <div class="policy-content">
+              <p>LearnLi respects intellectual property rights...</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Payment Policies -->
+        <div class="policy-category">
+          <h2 class="category-title">Payment and Refund Policies</h2>
+          <div class="policy-item">
+            <button class="policy-toggle">Subscription and Billing Terms</button>
+            <div class="policy-content">
+              <p>Users can subscribe to LearnLi plans with flexible billing...</p>
+            </div>
+          </div>
+          <div class="policy-item">
+            <button class="policy-toggle">Refund Policy</button>
+            <div class="policy-content">
+              <p>Refunds are provided under certain conditions as outlined...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+    <footer>
+      <p>© 2024 LearnLi. All rights reserved.</p>
+    </footer>
+  
+    <script>
+      // Toggle Policy Content
+      document.querySelectorAll('.policy-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+          const content = button.nextElementSibling;
+          const isVisible = content.style.display === 'block';
+          content.style.display = isVisible ? 'none' : 'block';
+          button.textContent = isVisible ? button.textContent.replace('Hide', 'Show') : button.textContent.replace('Show', 'Hide');
+        });
+      });
+  
+      // Search Functionality
+      const searchInput = document.getElementById('policySearch');
+      searchInput.addEventListener('input', function () {
+        const query = searchInput.value.toLowerCase();
+        const policies = document.querySelectorAll('.policy-item');
+  
+        policies.forEach(policy => {
+          const text = policy.textContent.toLowerCase();
+          policy.style.display = text.includes(query) ? 'block' : 'none';
+        });
+      });
+    </script>
+  </body>
+  </html>
+  
+  
+  <style>
+  /* General Styles */
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  header {
+    text-align: center;
+    background: #2c3e50;
+    color: #fff;
+    padding: 20px 10px;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  
+  header p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+  }
+  
+  .search-container {
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  #policySearch {
+    padding: 10px;
+    width: 80%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Policy Section */
+  .policies {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .policy-category {
+    margin-bottom: 20px;
+  }
+  
+  .category-title {
+    font-size: 1.5rem;
+    color: #34495e;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .policy-item {
+    margin-bottom: 10px;
+  }
+  
+  .policy-toggle {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    background: #f3f3f3;
+    border: none;
+    border-radius: 3px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .policy-toggle:hover {
+    background: #ddd;
+  }
+  
+  .policy-content {
+    display: none;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-top: 5px;
+  }
+  
+  footer {
+    text-align: center;
+    background: #2c3e50;
+    color: #fff;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  <style/>

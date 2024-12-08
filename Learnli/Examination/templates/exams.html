@@ -1,82 +1,77 @@
 {% extends 'base.html'%}
 
 {%  block content  %}
+
+<div class="container mt-3" style="text-align:end;">
+
+  <button type="button" class="btn btn-primary">
+    
+    Exams available<span class="badge bg-danger">{{exams.count}}</span>
+   
+  </button>
+
+</div>
+<br/>
    
 
-    <div class="container mt-3" style="text-align:end;">
 
-      <button type="button" class="btn btn-primary">
-        
-        Exams available<span class="badge bg-danger">{{exams.count}}</span>
-       
-      </button>
-
-    </div>
-
-
-    <br/>
-
-
-
-       
 {% for exam  in exams %}
 {% if exam.created_by in  request.user.follows.all or request.user == exam.created_by %}
+  <div class="exam-card">
+    <!-- Exam Header -->
+    <div class="exam-header">
+      <h1>{{ exam.Cours_name }}</h1>
+      <h2>{{ exam.Examination_name }}</h2>
+      <h2><strong>semester:</strong>{{ exam.semester }}</h2>
+    </div>
+
+    <!-- Exam Information -->
+    <div class="exam-info">
+      <div><strong>Date:</strong>{{ exam.Date }}</div>
+      <div><strong>Duration:</strong>{{ exam.Duration }} Hours</div>
+    </div>
+
+    <!-- Exam Instructions -->
+    <div class="exam-instructions">
+      <h3>Instructions:</h3>
+      <p>{{ exam.instructins | safe }}</p>
+    </div>
+
+    <!-- Exam Body -->
+    <div class="exam-body">
+      <h3>Questions:</h3>
+      <p>
+        {{ exam.Question | safe |linebreaks }}  
+      </p>
+    </div>
+
+    <!-- Exam Footer -->
+    <div class="exam-footer">
+      <div class="author"><strong>Author:</strong>{{ exam.created_by }}</div>
+      <div class="buttons">
+        <button class="btn btn-outline-success"><a href="{% url 'answer' exam.id %} "><strong 
+          style="color:black;">start answering</strong></a>
+        </button>
+
+
+        {%  if request.user == exam.created_by %}
+        <button class="btn btn-outline-danger"><a href="{% url 'delete_exam' exam.id %} "><strong 
+          style="color:black;">Delete exam</strong></a>
+        </button>
+
+        <button class="btn btn-outline-success"><a href="{% url 'edit_exam' exam.id %} "><strong 
+          style="color:black;">Edited exam</strong></a>
+        </button>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
 
  
 
-    <div class="right" style="background-color:#ddd;"> 
-
-        <div class="col-md-8">
-            <div class="card-body"> 
-                <h5 class="card-title" style="text-align:center;"><strong  style="color:rgb(7, 7, 7);">{{ exam.Cours_name }}</strong></h5>
-                <p class="card-text" style="text-align:center;"><strong style="color:black;"></strong>{{ exam.Examination_name }}</a></p>
-                <p class="card-text"  style="text-align:center;"><strong style="color:black;"></strong>Semester:{{ exam.semester }}</a></p>
-                <p class="card-text" ><strong style="color:black ;"></strong>{{ exam.Date }}</a></p>
-               
-                <p class="card-text"><strong style="color:black ;">{{ exam.Duration }} Hours</strong></a></p>
-                <br/>
-                <p class="card-text"><strong style="color:black ;">instructins:<br/></strong>{{ exam.instructins | safe }}</p>
-                
-                
-                <br/>
-                <p class="card-text"><strong style="color:black ;">Questions<br/></strong>{{ exam.Question | safe |linebreaks }}</a></p>
-
-                <br/><br/><br/><br/>
-                
-                <p class="card-text"><strong style="color:black ;">created by:</strong>{{ exam.created_by }}</a></p>
-
-
-                   
-
-
-                <br/><br/> 
-
-                  <button class="btn btn-outline-success"><a href="{% url 'answer' exam.id %} "><strong 
-                    style="color:black;">start answering</strong></a>
-                  </button>
-
-
-                  {%  if request.user == exam.created_by %}
-                  <button class="btn btn-outline-danger"><a href="{% url 'delete_exam' exam.id %} "><strong 
-                    style="color:black;">Delete exam</strong></a>
-                  </button>
-
-                  <button class="btn btn-outline-success"><a href="{% url 'edit_exam' exam.id %} "><strong 
-                    style="color:black;">Edited exam</strong></a>
-                  </button>
-
-                  {% endif %}
-                   
-                  
-            </div>
-        </div>
-    </div> 
-    <br/><br/><br/><br/>
-
-  
-     
-{% endif %} 
-{% endfor %} 
 
     
   

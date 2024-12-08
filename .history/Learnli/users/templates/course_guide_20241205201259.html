@@ -1,0 +1,323 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Paper Card</title>
+ 
+  <style>
+    /* Exam Paper Card Styling */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .exam-card {
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      width: 100%;
+      max-width: 700px;
+      padding: 20px;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exam-header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .exam-header h1 {
+      font-size: 1.5em;
+      margin: 0;
+      color: #333;
+    }
+
+    .exam-header h2 {
+      font-size: 1.2em;
+      color: #555;
+      margin-top: 5px;
+      font-weight: 400;
+    }
+
+    .exam-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+      color: #777;
+      margin-bottom: 15px;
+    }
+
+    .exam-instructions {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+      margin: 15px 0;
+      font-size: 0.95em;
+      color: #333;
+    }
+
+    .exam-body {
+      padding-top: 10px;
+      font-size: 1em;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .exam-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+    }
+
+    .author {
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 0.9em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button.start {
+      background: #28a745;
+      color: #fff;
+    }
+
+    .button.start:hover {
+      background: #218838;
+    }
+
+    .button.edit {
+      background: #007bff;
+      color: #fff;
+    }
+
+    .button.edit:hover {
+      background: #0069d9;
+    }
+
+    .button.delete {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .button.delete:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="exam-card">
+    <!-- Exam Header -->
+    <div class="exam-header">
+      <h1>Final Examination Paper</h1>
+      <h2>Subject: Biology</h2>
+    </div>
+
+    <!-- Exam Information -->
+    <div class="exam-info">
+      <div><strong>Date:</strong> 2024-11-07</div>
+      <div><strong>Duration:</strong> 2 Hours</div>
+    </div>
+
+    <!-- Exam Instructions -->
+    <div class="exam-instructions">
+      <h3>Instructions:</h3>
+      <p>1. Read all questions carefully before answering.<br>
+         2. Write neatly and legibly.<br>
+         3. Do not use any unauthorized materials or devices.</p>
+    </div>
+
+    <!-- Exam Body -->
+    <div class="exam-body">
+      <p><strong>Question 1:</strong> Describe the structure and function of a cell membrane.<br>
+         <strong>Question 2:</strong> Explain the process of photosynthesis and its importance to plants.<br>
+         <strong>Question 3:</strong> Discuss the differences between mitosis and meiosis.<br>
+         <strong>Question 4:</strong> Define and explain the concept of genetic inheritance.</p>
+    </div>
+
+    <!-- Exam Footer -->
+    <div class="exam-footer">
+      <div class="author"><strong>Author:</strong> Dr. John Doe</div>
+      <div class="buttons">
+        <button class="button start" onclick="startExam()">Start Answering</button>
+        <button class="button edit" onclick="editExam()">Edit</button>
+        <button class="button delete" onclick="deleteExam()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function startExam() {
+      alert("Starting the exam...");
+      // Redirect to the exam answering page
+    }
+
+    function editExam() {
+      alert("Editing the exam...");
+      // Redirect to the exam edit page
+    }
+
+    function deleteExam() {
+      if (confirm("Are you sure you want to delete this exam?")) {
+        alert("Exam deleted.");
+        // Perform deletion logic here
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<pre>
+
+    LearnLi Course Content Moderation Guidelines and Policies
+    Version: 1.0
+    Effective Date: [Insert Date]
+    
+    Introduction
+    LearnLi, as an academic platform, upholds the highest standards of content integrity, educational value, and compliance with international academic and online publishing regulations. To maintain the trust of our users and ensure a safe, inclusive, and enriching learning environment, a robust content moderation system is vital. This document outlines the policies, guidelines, and procedures for moderating course content, specifying what content is deemed flaggable, inappropriate, and grounds for removal. It also defines when flagged content should be approved, rejected, or escalated to reviewers.
+    
+    The goal is to ensure clarity for moderators while preserving the integrity of content creators and protecting user rights.
+    
+    Guiding Principles
+    Educational Integrity: Content should align with educational purposes and learning objectives.
+    Inclusivity and Respect: Content must respect all users regardless of race, religion, gender, or background.
+    Compliance with Laws: Courses must adhere to international laws regarding copyright, intellectual property, and privacy.
+    Transparency: Moderation decisions should be clear, consistent, and justifiable.
+    Escalation for Ambiguities: Moderators must escalate cases where violations are unclear or borderline.
+    Flaggable and Inappropriate Content
+    Categories of Flaggable Content
+    Content uploaded on LearnLi may be flagged for the following reasons:
+    
+    Harmful or Offensive Content:
+    
+    Hate speech, discriminatory language, or targeted harassment.
+    Graphic violence, explicit sexual content, or glorification of harm.
+    Academic Violations:
+    
+    Plagiarized materials or uncredited work.
+    Inaccurate or falsified educational content.
+    Content that promotes academic dishonesty, such as cheating guides.
+    Misinformation:
+    
+    Courses spreading unverified or false information in critical fields (e.g., health, finance, legal topics).
+    Intellectual Property Infringement:
+    
+    Unauthorized use of copyrighted materials.
+    Misleading Content:
+    
+    Titles, descriptions, or visuals that misrepresent the course content.
+    Technical Violations:
+    
+    Broken files, unreadable formats, or incomplete uploads.
+    Degrees of Inappropriateness
+    The degree of a violation determines whether flagged content is approved, rejected, or escalated:
+    
+    Low Degree (Minor Issues):
+    
+    Typos, minor factual errors, or slightly outdated references.
+    Does not compromise educational value or user trust.
+    Action: Approve the flag but request updates or corrections.
+    Moderate Degree (Borderline Inappropriate):
+    
+    Potentially offensive but contextually relevant (e.g., historical analysis of controversial topics).
+    Ambiguities in intellectual property claims.
+    Action: Escalate to a reviewer.
+    High Degree (Severe Violations):
+    
+    Explicitly harmful, offensive, or illegal content.
+    Plagiarized work or blatant misinformation.
+    Action: Reject the content and remove it immediately.
+    Procedures for Moderation Actions
+    Approval of Flagged Content
+    
+    When to Approve:
+    The flagged content does not meet any defined flaggable criteria.
+    The flag stems from a misunderstanding or over-sensitivity without clear grounds for violation.
+    Steps:
+    Approve the content with an explanation to the flagging user.
+    Mark the case as resolved.
+    Rejection of Flagged Content
+    
+    When to Reject:
+    Content clearly violates flaggable criteria at a moderate or high degree.
+    Steps:
+    Notify the content creator of the rejection with a detailed explanation.
+    Allow the creator to appeal within [set time, e.g., 7 days].
+    Escalation to Reviewer
+    
+    When to Escalate:
+    The moderator cannot confidently determine the severity or appropriateness.
+    Content falls in a grey area requiring expert judgment.
+    Steps:
+    Escalate the case with detailed notes and supporting evidence.
+    Notify the flagger and the creator of the escalation.
+    Case Assignments and Procedures
+    To ensure an efficient and transparent workflow, cases are categorized and assigned based on content type and violation severity:
+    
+    Content Type Assigned Moderator Team Action Timeline
+    Courses Academic Experts + Content Reviewers 48 hours
+    Blogs Content Writers + Legal Moderators 24 hours
+    Lessons Academic Experts 48 hours
+    Course Units Content Reviewers + IT Moderators 48 hours
+    Uploaded Books Legal Moderators + Academic Experts 72 hours
+    eBooks Legal Moderators + Content Reviewers 72 hours
+    Escalation Protocol
+    Case Documentation: Moderators must provide:
+    
+    Screenshots of flagged content.
+    Detailed descriptions of the violation.
+    Links to relevant policies or guidelines.
+    Reviewer Panel: Composed of senior moderators, academic experts, and legal advisors.
+    
+    Resolution: The reviewer panel decides to:
+    
+    Approve the flagged content.
+    Reject the flagged content with explanations.
+    Forward to LearnLi’s legal team for external arbitration in severe cases.
+    Moderator Conduct and Compliance
+    Moderators must adhere to LearnLi’s Confidentiality Agreement to protect user data and privacy.
+    All actions must comply with relevant laws, including GDPR, CCPA, and copyright laws.
+    Moderators are trained periodically to stay updated on content policies and legal standards.
+    This document serves as the standard guideline for LearnLi content moderation. Regular reviews will ensure alignment with evolving educational and legal standards.
+
+
+</pre>
+
+
+
+</div>

@@ -1,28 +1,24 @@
 {% extends 'base.html'%}
 {% block content %}
-    
 
-<div class="col-md-6 offset-md-3">
-    <h2>Register for Exam </h2>
+ 
+    <p><strong>Register for Exam</strong></p>
     
     <div>
 
         {% if user.is_authenticated %}
         <br/><br/>
         {% if submitted %}
-        you have sucessfuly registered for the exam 
+        your  have registerted successfullly 
         {% else %}
             
         <P>
         
-            <form  method="POST" action="" class="form-control"  enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            
-            {{form.as_p}}
-                
-                <input type="submit"  value="Create" class="btn btn-success"/>
-            
-            </form>
+                {{ form.as_p }}
+                <button type="submit">Register</button>
+              </form>
         
         </p>
         
@@ -36,5 +32,6 @@
     </div>
  
 
-</div>
-{% endblock %}
+
+
+{% endblock %}  

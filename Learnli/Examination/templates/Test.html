@@ -1,29 +1,25 @@
 {% extends 'base.html'%}
 {% block content %}
-    
 
-
-    <h2>create Test</h2>
+ 
+    <p><strong>Create Test</strong></p>
     
     <div>
 
         {% if user.is_authenticated %}
         <br/><br/>
         {% if submitted %}
-        your  Test has been created 
+        your test ceated successfullly 
         {% else %}
             
         <P>
         
-            <form  method="POST" action="" class="form-control"  enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            
-            {{form.as_p}}
-            {{ form.media }}
-                
-                <input type="submit"  value="Create" class="btn btn-success"/>
-            
-            </form>
+                {{ form.as_p }}
+                {{ form.media }}
+                <button type="submit">create</button>
+              </form>
         
         </p>
         
@@ -37,5 +33,6 @@
     </div>
  
 
- 
-{% endblock %}
+
+
+{% endblock %}   
