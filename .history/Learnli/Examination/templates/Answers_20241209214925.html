@@ -1,0 +1,144 @@
+
+{% extends 'base.html'%}
+
+{%  block content  %}
+
+
+
+{% extends 'base.html'%}
+
+{%  block content  %}
+
+ 
+
+
+<div class="container mt-3" style="text-align:end;">
+   
+    <button type="button" class="btn btn-primary">
+      Answers available<span class="badge bg-danger">{{answers.count}}</span>
+    </button>
+    
+  </div>
+  
+  <br/>
+    
+    {% for answer in answers %}
+    {% if request.user == answer.Answered_to  or  request.user == answer.Answered_by %}
+    <div class="right" style="background-color:#ddd;"> 
+    <div class="exam-card"> 
+      <!-- Exam Header -->
+      <div class="exam-header">
+        <h1>{{answer.Cours_name }}</h1>
+        <h2>{{ answer.Examination_name }}</h2>
+        <h2><strong>semester:</strong>{{test_answer.semester }}</h2>
+      </div>
+  
+      <!-- Exam Information -->
+      <div class="exam-info">
+        <div><strong>Date:</strong>{{ test_answer.Date }}</div>
+        <div><strong>Subitted on:</strong>{{ test_answer.submitted_at}}</div>
+      </div>
+
+      <p style="font-size: small;"> Answered to: {{ test_answer.Answered_to }}</p>
+      <p style="font-size: small;"> Answered by: {{ test_answer.Answered_by }}</p>
+  
+      <!-- Exam Instructions -->
+      <div class="exam-instructions">
+        <p style="font-size: small;">Answers:</p>
+        <p>{{ test_answer.text | safe |linebreaks}}</p>
+      </div>
+  
+     
+  
+      <!-- Exam Footer -->
+      <div class="exam-footer">
+        <div class="author"><strong>Submitted by:</strong>{{ test_answer.Answered_by }}</div>
+        <div class="buttons">
+            {% if request.user == test_answer.Answered_to %}
+
+            <button class="btn btn-outline-success"><a href=" {% url 'test_answer_response' test_answer.id %} "><strong 
+                style="color:black;">Send response</strong></a>
+            </button>
+            {% endif %}
+             
+
+            {% if request.user == test_answer.Answered_by %}
+            <button class="btn btn-outline-primary"><a href="{% url 'test_answer_responses' %}"><strong 
+                style="color:black;">See response</strong></a>
+            </button>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-3" style="text-align:end;">
+   
+    <button type="button" class="btn btn-primary">
+      Answers available<span class="badge bg-danger">{{answers.count}}</span>
+    </button>
+    
+  </div>
+  
+  <br/>
+    
+    {% for answer in answers %}
+    {% if request.user == answer.Answered_to  or  request.user == answer.Answered_by %}
+            <div class="right" style="background-color:#ddd;"> 
+
+                <div class="col-md-8">
+                    <div class="card-body"> 
+                        <h5 class="card-title" style="text-align:center;"><strong  style="color:rgb(7, 7, 7);">{{ answer.Cours_name }}</strong></h5>
+                        <p class="card-text" style="text-align:center;"><strong style="color:black;"></strong>{{ answer.Examination_name }}</a></p>
+                        <p class="card-text"  style="text-align:center;"><strong style="color:black;"></strong>Semester:{{ answer.semester }}</a></p>
+                        <p class="card-text" ><strong style="color:black ;"></strong>{{ answer.Date }}</a></p>
+                        <br/><br/>
+                        <p class="card-text"><strong style="color:black ;">Answeredby:</strong>{{ answer.Answered_by }}</a></p>
+                        <p class="card-text"><strong style="color:black ;">Answeredto:</strong>{{ answer.Answered_to }}</a></p>
+                     
+                        <br/>
+                        <p class="card-text"><strong style="color:black ;">Course name:</strong>{{ answer.Cours_name}}</a></p>
+
+                        <br/>
+                        <p class="card-text"><strong style="color:black ;">Answers<br/></strong>{{ answer.text | safe |linebreaks}}</a></p>
+
+                        <br/><br/><br/><br/>
+                        
+
+
+                        <br/><br/> 
+                        {% if request.user == answer.Answered_to %}
+
+                        <button class="btn btn-outline-success"><a href=" {% url 'exam_answer_response' answer.id %}"><strong 
+                            style="color:black;">Send response</strong></a>
+                        </button>
+                        {% endif %}
+
+                        
+                        {% if request.user == answer.Answered_by %}
+
+                        <button class="btn btn-outline-primary"><a href="{% url 'exam_answer_responses' %} "><strong 
+                            style="color:black;">See response</strong></a>
+                        </button>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div> 
+            <br/><br/><br/><br/>
+    {% endif %}
+    {% endfor %}
+{% endblock %}

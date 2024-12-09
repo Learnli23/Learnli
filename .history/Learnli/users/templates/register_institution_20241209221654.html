@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+ 
+{% extends 'base.html'%}
+{% block content %}
+
+ 
+    <p><strong>Create a message</strong></p>
+    
+    <div>
+
+        {% if user.is_authenticated %}
+        <br/><br/>
+        {% if submitted %}
+        your message sent 
+        {% else %}
+            
+        <P>
+        
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.media }}
+                <button type="submit">send</button>
+              </form>
+              <br/>
+              <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+              </label>
+        
+              <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        
+        </p>
+        
+{% end block %}        

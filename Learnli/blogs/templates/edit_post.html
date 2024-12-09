@@ -1,29 +1,25 @@
 {% extends 'base.html'%}
 {% block content %}
-    
 
-<div class="col-md-6 offset-md-3">
-    <h2>Edit a Exam</h2>
+ 
+    <p><strong>Edit a blog post</strong></p>
     
     <div>
 
         {% if user.is_authenticated %}
         <br/><br/>
         {% if submitted %}
-        your post  has been edited 
+        your blog has been edited successfully
         {% else %}
             
         <P>
         
-            <form  method="POST" action="" class="form-control"  enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            
-            {{form.as_p}}
-            {{ form.media }}
-                
-                <input type="submit"  value="Create" class="btn btn-success"/>
-            
-            </form>
+                {{ form.as_p }}
+                {{ form.media }}
+                <button type="submit">update</button>
+              </form>
         
         </p>
         
@@ -37,5 +33,6 @@
     </div>
  
 
-</div>
-{% endblock %}
+
+
+{% endblock %}   

@@ -1,31 +1,25 @@
-{% extends 'base.html' %}
-{% load static %}
-
-
+{% extends 'base.html'%}
 {% block content %}
+
  
- 
-    <h2>create a blog</h2>
+    <p><strong>Create a blog post</strong></p>
     
-    
+    <div>
 
         {% if user.is_authenticated %}
         <br/><br/>
         {% if submitted %}
-        your  blog has been created 
+        your blog has been created successfully
         {% else %}
             
         <P>
         
-            <form  method="POST" action="" class="form-control"  enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            
-            {{form.as_p}}
-            {{form.media}}
-                
-                <input type="submit"  value="Create" class="btn btn-success"/>
-            
-            </form>
+                {{ form.as_p }}
+                {{ form.media }}
+                <button type="submit">create</button>
+              </form>
         
         </p>
         
@@ -33,17 +27,12 @@
         {%else%}
         <h1>You need to be loged in to access this page</h1>
         <a href="{% url 'log in' %}">log in</a>
-        {% endif %}
+        
+        {%endif%}
 
-
-
-
-
-{% endblock %} 
-
+    </div>
  
 
 
 
-
- 
+{% endblock %}   

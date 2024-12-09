@@ -1,0 +1,74 @@
+
+{% extends 'base.html'%}
+
+{%  block content  %}
+
+
+
+
+<div class="container mt-3" style="text-align:end;">
+   
+  <button type="button" class="btn btn-primary">
+    Responses available<span class="badge bg-danger">{{test_answer_responses.count}}</span>
+  </button>
+  
+</div>
+
+<br/>
+
+  
+{% for test_answer_response  in test_answer_responses %}
+{% if request.user == test_answer_response.response_by or request.user == test_answer_response.response_to %}
+
+    
+    <div class="exam-card"> 
+      <!-- Exam Header -->
+      <div class="exam-header">
+        <h1>{{test_answer_responses.Subject_name }}</h1>
+        <h2><strong>semester:</strong>{{test_answer_responses.semester }}</h2>
+      </div>
+  
+      <!-- Exam Information -->
+      <div class="exam-info">
+        <div><strong>Date:</strong>{{ test_answer_responses.submitted_at }}</div>
+        <div><strong>Subitted on:</strong>{{ test_answer_responses.submitted_at}}</div>
+      </div>
+
+      <p style="font-size: small;"> Response to: {{ test_answer_responses.response_to }}</p>
+      <p style="font-size: small;"> Response by: {{ test_answer_responses.response_by }}</p>
+  
+      <!-- Exam Instructions -->
+      <div class="exam-instructions">
+        <p class="card-text"><strong style="color:darkred;">Scores<br/></strong>{{ test_answer_response.marks}}%</a></p>
+        <p>{{ test_answer_response.General_comment | safe|linebreaks}}</p>
+      </div>
+  
+   
+      
+      <!-- Exam Footer -->
+      <div class="exam-footer">
+        <div class="author"><strong>Responded by:</strong>{{ test_answer_responses.Answered_by }}</div>
+        <div class="buttons">
+          {% if request.user == test_answer_response.response_by %}
+
+          <button class="btn btn-outline-primary"><a href="{% url 'edit_test_answer_response'  test_answer_response.id %} "><strong 
+              style="color:black;">Edit response</strong></a>
+          </button>
+
+          <button class="btn btn-outline-danger"><a href=" {% url 'delete_test_answer_response'  test_answer_response.id %}  "><strong 
+            style="color:black;">Delete response</strong></a>
+        </button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}
+
+ 
+
+
+ 
+ 

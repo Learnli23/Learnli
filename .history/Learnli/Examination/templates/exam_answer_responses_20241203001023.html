@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+
+{%  block content  %}
+
+<div class="container mt-3" style="text-align:end;">
+   
+    <button type="button" class="btn btn-primary">
+      Responses available<span class="badge bg-danger">{{exam_answer_responses.count}}</span>
+    </button>
+    
+  </div>
+  
+  <br/>
+
+    
+{% for exam_answer_response  in exam_answer_responses %}
+{% if request.user == exam_answer_response.responseby or request.user == exam_answer_response.responseto %}
+
+            <div class="right" style="background-color:#ddd;"> 
+
+                <div class="col-md-8">
+                    <div class="card-body"> 
+                        <h5 class="card-title" style="text-align:center;"><strong  style="color:rgb(7, 7, 7);">{{ exam_answer_response.Course }}</strong></h5>
+ 
+                        <p class="card-text"  style="text-align:center;"><strong style="color:black;"></strong>Semester:{{exam_answer_response.semester }}</a></p>
+                        <p class="card-text" ><strong style="color:black ;"></strong>{{ exam_answer.submitted_at }}</a></p>
+                        <br/><br/>
+                        <p class="card-text"><strong style="color:black ;">Response from:</strong>{{ exam_answer_response.responseby }}</a></p>
+                        <p class="card-text"><strong style="color:black ;">Response to:</strong>{{ exam_answer_response.responseto }}</a></p>
+                     
+                        <br/>
+                        <p class="card-text"><strong style="color:darkred;">Scores<br/></strong>{{ exam_answer_response.scores}}%</a></p>
+                        <p class="card-text"><strong style="color:black ;">Response<br/></strong>{{ exam_answer_response.Generalcomment| safe | linebreaks}}</a></p>
+                        <br/>
+                        <p class="card-text"><strong style="color:black ;">submitted at:</strong>{{ exam_answer_response.submittedat}}</a></p>
+
+                        <br/><br/><br/><br/>
+
+                        {% if request.user == exam_answer_response.responseby %}
+
+                        <button class="btn btn-outline-primary"><a href="{%   url 'edit_exam_answer_response' exam_answer_response.id %}"><strong 
+                            style="color:black;">Edit response</strong></a>
+                        </button>
+
+                        <button class="btn btn-outline-danger"><a href="{%   url 'delete_exam_answer_response' exam_answer_response.id %}"><strong 
+                          style="color:black;">Delete response</strong></a>
+                      </button>
+                        {% endif %}
+                        
+                        
+                    </div>
+                </div>
+            </div> 
+            <br/><br/><br/><br/>
+    {%  endif %}
+    {% endfor %}
+
+
+
+
+    
+    
+        
+
+
+
+{% endblock %}

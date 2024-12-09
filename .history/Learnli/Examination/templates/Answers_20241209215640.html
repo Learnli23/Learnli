@@ -1,0 +1,75 @@
+
+{% extends 'base.html'%}
+
+{%  block content  %}
+
+
+ 
+ 
+
+
+<div class="container mt-3" style="text-align:end;">
+   
+    <button type="button" class="btn btn-primary">
+      Answers available<span class="badge bg-danger">{{answers.count}}</span>
+    </button>
+    
+  </div>
+  
+  <br/>
+    
+    {% for answer in answers %}
+    {% if request.user == answer.Answered_to  or  request.user == answer.Answered_by %}
+ 
+    <div class="exam-card"> 
+      <!-- Exam Header -->
+      <div class="exam-header">
+        <h1>{{answer.Cours_name }}</h1>
+        <h2>{{ answer.Examination_name }}</h2>
+        <h2><strong>semester:</strong>{{answer.semester }}</h2>
+      </div>
+  
+      <!-- Exam Information -->
+      <div class="exam-info">
+        <div><strong>Date:</strong>{{ answer.Date }}</div>
+        <div><strong>Subitted on:</strong>{{ test_answer.submitted_at}}</div>
+      </div>
+
+      <p style="font-size: small;"> Answered to: {{ answer.Answered_to }}</p>
+      <p style="font-size: small;"> Answered by: {{ answer.Answered_by }}</p>
+
+       
+  
+      <!-- Exam Instructions -->
+      <div class="exam-instructions">
+        <p style="font-size: small;">Answers:</p>
+        <p>{{ answer.text | safe |linebreaks}}</p>
+      </div>
+  
+     
+  
+      <!-- Exam Footer -->
+      <div class="exam-footer">
+        <div class="author"><strong>Submitted by:</strong>{{ test_answer.Answered_by }}</div>
+        {% if request.user == answer.Answered_to %}
+
+        <button class="btn btn-outline-success"><a href=" {% url 'exam_answer_response' answer.id %}"><strong 
+            style="color:black;">Send response</strong></a>
+        </button>
+        {% endif %}
+
+        
+        {% if request.user == answer.Answered_by %}
+
+        <button class="btn btn-outline-primary"><a href="{% url 'exam_answer_responses' %} "><strong 
+            style="color:black;">See response</strong></a>
+        </button>
+        {% endif %}
+        </div>
+      
+    
+    {% endif %}
+    {% endfor %}
+
+
+{% endblock %}

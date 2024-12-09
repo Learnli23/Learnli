@@ -1,225 +1,564 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LearnLi Policies</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header>
-    <h1_>LearnLi Policies</h1_>
-    
-
-
-    <br/>
-    <p_>Your guide to using LearnLi responsibly and effectively.</p>
-
-        <div class="navbar-brand">
-         
-            <a href="{% url 'home' %}"> <span class="logo-oval">Learn<span class="brand-highlight">Li</span></span> </a>
-         
-       
-        
-        </div>
-  </header>
-
-</head>
-
-<body>
-    <div class="container">
-        <h1>Learnli Policies</h1>
-        
-        
-        
-               
-                
-               
-<main>
-        <section id="terms-of-service">
-            <h2>1. Terms of Service (ToS)</h2>
-            <p>These Terms of Service ("ToS") govern the use of the LearnLi platform. By registering or using LearnLi, users agree to abide by these terms, which are subject to periodic updates.</p>
-            <h3>User Responsibilities</h3>
-            <ul>
-                <li><strong>Account Security:</strong> Users are responsible for maintaining the confidentiality of their login credentials. Sharing login information is prohibited.</li>
-                <li><strong>Content Compliance:</strong> All content uploaded must be original or appropriately licensed. Users must ensure their content complies with applicable intellectual property and other relevant laws.</li>
-                <li><strong>Behavior:</strong> Users must engage in respectful, non-discriminatory interactions and comply with platform guidelines for communication.</li>
-            </ul>
-            <h3>Payment Terms and Subscription Details</h3>
-            <ul>
-                <li>Subscriptions are available in 1-month, 3-month, 6-month, or 12-month periods, with different rates based on user status.</li>
-                <li>LearnLi deducts a 10% commission on course and eBook sales, with the remaining revenue distributed to content creators after payment processing fees.</li>
-                <li>Refunds are available under specific conditions, such as faulty content or billing errors. Subscription-based services are non-refundable after usage.</li>
-            </ul>
-            <h3>Prohibited Activities</h3>
-            <ul>
-                <li>Sharing or distributing account credentials.</li>
-                <li>Uploading content not owned or licensed by the user.</li>
-                <li>Engaging in spamming, system overloads, or other malicious activities.</li>
-            </ul>
-            <h3>Dispute Resolution</h3>
-            <ul>
-                <li><strong>Mediation:</strong> Users should first attempt to resolve disputes through mediation before seeking legal action.</li>
-                <li><strong>Legal Jurisdiction:</strong> Any unresolved disputes will be settled under the jurisdiction defined in the governing law section.</li>
-            </ul>
-        </section>
-
-        <section id="privacy-policy">
-            <h2>2. Privacy Policy</h2>
-            <p>LearnLi is committed to safeguarding user privacy and ensuring compliance with data protection laws such as GDPR, CCPA, and others.</p>
-            <h3>User Consent</h3>
-            <ul>
-                <li>By using LearnLi, users consent to the collection, use, and sharing of their personal data in accordance with this Privacy Policy.</li>
-                <li>Users can withdraw their consent at any time through account settings or by contacting support.</li>
-            </ul>
-            <h3>Data Collection, Use, and Protection</h3>
-            <ul>
-                <li>LearnLi collects data such as user identity (name, email), financial data for transactions, and activity logs to improve user experience.</li>
-                <li>Data is protected through encryption both in transit and at rest.</li>
-                <li>User data is shared only with trusted third-party providers (e.g., payment processors) necessary to perform services.</li>
-            </ul>
-            <h3>User Rights</h3>
-            <ul>
-                <li><strong>Access and Portability:</strong> Users can request access to their personal data and obtain a copy.</li>
-                <li><strong>Data Deletion:</strong> Users have the right to request deletion of their data unless retention is required for legal obligations.</li>
-            </ul>
-        </section>
-
-        <section id="anti-plagiarism">
-            <h2>3. Anti-Plagiarism Policy</h2>
-            <p>LearnLi upholds the integrity of academic content on the platform by ensuring all uploaded material is original or properly licensed.</p>
-            <h3>Original Content Standards</h3>
-            <ul>
-                <li>All uploaded content must either be created by the user or licensed for use on LearnLi.</li>
-                <li>Proper citations must be provided for any third-party materials incorporated into course content.</li>
-            </ul>
-            <h3>Plagiarism Detection and Handling</h3>
-            <ul>
-                <li>LearnLi uses plagiarism detection software to verify the originality of submitted content.</li>
-                <li>Content found to be plagiarized will be removed, and users may face account suspension or termination based on severity.</li>
-            </ul>
-        </section>
-
-        <!-- Additional sections for other policies (IP, Refund, Accessibility, etc.) will follow the same structure as above -->
-
-    </main>           
-               
  
+    <style>
+       body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+        }
 
-         
-        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background-color: #ffffff;
+            border-right: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h3 {
+            background-color: #001f3f;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        /* Search Bar - Popup Style */
+        .search-bar {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+        }
+        .search-button {
+            padding: 8px 15px;
+            font-size: 14px;
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .search-button:hover {
+            background-color: #bbb;
+        }
+        .search-input {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        .sidebar.show-search .search-input {
+            display: block;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .sidebar ul li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            font-size: 16px;
+            color: #555;
+            transition: all 0.2s;
+        }
+        .sidebar ul li:hover, .sidebar ul li.active {
+            background-color: #001f3f;
+            color: white;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .header {
+            background-color: #001f3f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background-color: #ffffff;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+        .content h2 {
+            color: #222;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 2px solid #001f3f;
+            padding-bottom: 5px;
+        }
+        .content p {
+            line-height: 1.8;
+            font-size: 16px;
+            color: #555;
+        }
+        .footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+ 
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Policy Menu</h3>
+        <div class="search-bar">
+            <button class="search-button" onclick="toggleSearch()">Search</button>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search policies..." oninput="filterPolicies()">
+        </div>
+        <ul id="policy-list">
+            <!-- Policy list will be dynamically populated -->
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>LearnLi Policies</h1>
+            <a href="{% url 'home' %}" style = "text-decoration:none; text-align:end; color:white;"><strong >HOME</strong></a>
+        </div>
+        <div class="content" id="policy-content">
+            <h2>Welcome to LearnLi Policies</h2>
+            <p>Select a policy from the menu to view its details. All our policies are designed to provide a safe, inclusive, and professional experience for our users.</p>
+        </div>
         <div class="footer">
-            &copy; 2025 Learnli. All rights reserved.
+            <p>&copy; <span id="currentYear"></span> LearnLi, All Rights Reserved. | <a href="#">Privacy Policy</a></p>
         </div>
     </div>
 
+    <script>
+        // Set current year in footer
+        const currentYear = new Date().getFullYear();
+        document.getElementById('currentYear').innerText = currentYear;
 
+        // Policy data
+        const policies = [
+    {
+        id: 1,
+        title: "Terms of Service",
+        content: `
+            <h2>Introduction</h2>
+            <p>These Terms of Service ("ToS") govern the use of the LearnLi platform. By registering or using LearnLi, users agree to abide by these terms, which are subject to periodic updates.</p>
+           
+            <h3>User Responsibilities</h3>
+            <ul>
+                <li><strong>Account Security:</strong> Users are responsible for maintaining the confidentiality of their login credentials. Sharing login information is strictly prohibited.</li>
+                <li><strong>Content Compliance:</strong> All content uploaded must be original or appropriately licensed. Users must ensure their content complies with applicable intellectual property laws and other regulations.</li>
+                <li><strong>Respectful Behavior:</strong> Users must engage in respectful, non-discriminatory interactions and adhere to platform communication guidelines.</li>
+            </ul>
+           
+            <h3>Payment Terms and Subscription Details</h3>
+            <ul>
+                <li><strong>Subscription Plans:</strong> LearnLi offers subscriptions for students and institutions in 1-month, 3-month, 6-month, or 12-month periods, with rates varying based on user status.</li>
+                <li><strong>Revenue Sharing:</strong> LearnLi deducts a 10% commission on course and eBook sales. After payment processing fees, the remaining revenue is distributed to content creators.</li>
+                <li><strong>Refund Policy:</strong> Refunds are available under specific conditions, such as faulty content or billing errors. Subscription-based services are non-refundable once used.</li>
+            </ul>
+           
+            <h3>Prohibited Activities</h3>
+            <ul>
+                <li><strong>Account Sharing:</strong> Sharing or distributing account credentials is prohibited.</li>
+                <li><strong>Unauthorized Content Distribution:</strong> Uploading content not owned or licensed by the user is prohibited.</li>
+                <li><strong>Platform Misuse:</strong> Activities such as spamming, overloading the system, or other malicious actions are strictly prohibited.</li>
+            </ul>
+           
+            <h3>Dispute Resolution</h3>
+            <ul>
+                <li><strong>Mediation:</strong> Users are encouraged to resolve disputes through mediation before considering legal actions.</li>
+                <li><strong>Legal Jurisdiction:</strong> Any unresolved disputes will be settled under the jurisdiction defined in the governing law section of this agreement.</li>
+            </ul>
+        `
+    },
+   
+   
+    { id: 2, title: "Privacy Policy",     content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi is committed to safeguarding user privacy and ensuring compliance with data protection laws, including GDPR, CCPA, and others.</p>
+       
+        <h3>User Consent</h3>
+        <ul>
+            <li><strong>Data Collection:</strong> By using LearnLi, users consent to the collection, use, and sharing of their personal data in accordance with this Privacy Policy.</li>
+            <li><strong>Right to Withdraw:</strong> Users can withdraw their consent at any time through account settings or by contacting support.</li>
+        </ul>
+       
+        <h3>Data Collection, Use, and Protection</h3>
+        <ul>
+            <li><strong>Personal Data:</strong> LearnLi collects data such as user identity (e.g., name, email), financial data for transactions, and activity logs to enhance user experience.</li>
+            <li><strong>Data Encryption:</strong> Strong encryption methods are employed to protect personal data during transit and while at rest.</li>
+            <li><strong>Data Sharing:</strong> User data is shared only with trusted third-party providers, such as payment processors, necessary to perform services.</li>
+        </ul>
+       
+        <h3>User Rights</h3>
+        <ul>
+            <li><strong>Access and Portability:</strong> Users have the right to request access to their personal data and obtain a copy in a portable format.</li>
+            <li><strong>Data Deletion:</strong> Users can request the deletion of their data unless retention is necessary for legal obligations.</li>
+        </ul>
+    ` },
+   
+    { id: 3, title: "Anti-Plagiarism Policy", content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi upholds the integrity of academic content on the platform by ensuring all uploaded material is original or properly licensed.</p>
+       
+        <h3>Original Content Standards</h3>
+        <ul>
+            <li><strong>Ownership:</strong> All uploaded content must either be created by the user or licensed for use on LearnLi.</li>
+            <li><strong>Attribution:</strong> Proper citations must be provided for any third-party materials incorporated into course content.</li>
+        </ul>
+       
+        <h3>Plagiarism Detection and Handling</h3>
+        <ul>
+            <li><strong>Detection Tools:</strong> LearnLi employs plagiarism detection software to verify the originality of submitted content.</li>
+            <li><strong>Consequences:</strong> Any content found to be plagiarized will be removed, and users may face account suspension or termination depending on the severity of the violation.</li>
+        </ul>
+    ` },
+   
+   
+    { id: 4, title: "Intellectual Property Policy",  content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi respects the intellectual property rights of users and third parties, ensuring compliance with copyright and trademark laws.</p>
+       
+        <h3>Ownership</h3>
+        <ul>
+            <li><strong>Instructors and Institutions:</strong> Retain ownership of their content. LearnLi only receives a non-exclusive license to use and distribute the content on the platform.</li>
+            <li><strong>Trademark:</strong> LearnLi’s name, logo, and branding elements are trademarks protected by law.</li>
+        </ul>
+       
+        <h3>Platform Rights</h3>
+        <ul>
+            <li><strong>Content Modification:</strong> LearnLi reserves the right to modify, remove, or restrict access to content that violates platform policies.</li>
+        </ul>
+       
+        <h3>Copyright Protection</h3>
+        <ul>
+            <li><strong>Third-Party Infringement:</strong> Users must not upload content that infringes on the intellectual property rights of third parties.</li>
+        </ul>
+    ` },
+   
+   
+   
+    { id: 5, title: "Refund Policy", content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi has a transparent policy for refunds and cancellations that applies to both subscriptions and content purchases.</p>
+       
+        <h3>Refund Conditions</h3>
+        <ul>
+            <li><strong>Subscriptions:</strong> Refunds are only available within a specified period after purchase, provided no content has been accessed.</li>
+            <li><strong>Content Purchases:</strong> Refunds will be processed if the content is faulty, misleading, or does not match the description.</li>
+        </ul>
+       
+        <h3>Cancellation Process</h3>
+        <ul>
+            <li><strong>Subscription Cancellations:</strong> Users may cancel their subscriptions at any time before the next billing cycle begins.</li>
+            <li><strong>Refund Requests:</strong> Requests must be submitted through the platform’s support portal for processing.</li>
+        </ul>
+    ` },
+   
+    { id: 6, title: "Content Moderation Policy", content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi strives to maintain high-quality educational content on its platform, ensuring that it is free from harmful, offensive, or inappropriate material.</p>
+       
+        <h3>Content Review</h3>
+        <ul>
+            <li><strong>Pre-Upload Screening:</strong> All content uploaded to LearnLi undergoes a review process for quality and adherence to platform guidelines.</li>
+            <li><strong>Post-Upload Monitoring:</strong> Continuous monitoring is conducted to ensure that no harmful or inappropriate content becomes accessible on the platform.</li>
+        </ul>
+       
+        <h3>Actions on Violations</h3>
+        <ul>
+            <li><strong>Content Removal:</strong> Any content found to violate platform policies will be immediately removed.</li>
+            <li><strong>User Warnings:</strong> Users who repeatedly violate content policies may receive warnings or face suspension from the platform.</li>
+        </ul>
+    ` },
+          { id: 7, title: "Employment and Partnership Contracts Policy",content: `
+       
+        <h3>Introduction</h3>
+        <p>This policy outlines the terms of employment and partnerships for content creators (instructors and partner institutions) and their relationship with LearnLi.</p>
+       
+        <h3>Roles and Responsibilities</h3>
+        <ul>
+            <li><strong>Instructors:</strong> Must create content, update materials, interact with students, and ensure content quality.</li>
+            <li><strong>Partner Institutions:</strong> Contribute content, ensure licensing compliance, and cooperate with LearnLi on joint promotional activities.</li>
+        </ul>
+       
+        <h3>Ownership and Licensing</h3>
+        <ul>
+            <li><strong>Content Ownership:</strong> Instructors and partner institutions retain full ownership of their content but grant LearnLi a non-exclusive license to use and distribute it on the platform.</li>
+            <li><strong>Platform Use Rights:</strong> LearnLi reserves the right to remove or modify content that violates platform policies.</li>
+        </ul>
+       
+        <h3>Compensation Structure</h3>
+        <ul>
+            <li><strong>Revenue Sharing:</strong> Content creators receive 90% of the revenue from content sales after deduction of platform fees and payment processor fees.</li>
+        </ul>
+    ` },
+          { id: 8, title: "Anti-Discrimination and Harassment Policy",    content: `
+     
+       
+        <h3>Introduction</h3>
+        <p>LearnLi is committed to providing a safe and inclusive environment for all users, free from discrimination and harassment.</p>
+       
+        <h3>Prohibited Behavior</h3>
+        <ul>
+            <li><strong>Harassment:</strong> Any form of harassment, whether verbal, written, or physical, is prohibited on the platform.</li>
+            <li><strong>Discrimination:</strong> Users must not engage in discriminatory practices based on race, gender, religion, sexual orientation, or any other protected class.</li>
+        </ul>
+    ` },
+          { id: 9, title: "Accessibility Policy",  content: `
+       
+       
+        <h3>Introduction</h3>
+        <p>LearnLi is dedicated to ensuring the platform is accessible to all users, including those with disabilities.</p>
+       
+        <h3>Platform Accessibility</h3>
+        <ul>
+            <li><strong>Compliance with WCAG:</strong> LearnLi is committed to meeting WCAG (Web Content Accessibility Guidelines) 2.1 to ensure the platform is usable by individuals with disabilities.</li>
+            <li><strong>Alternative Formats:</strong> Where applicable, LearnLi offers alternative formats (e.g., captions, audio descriptions) for course materials.</li>
+        </ul>
+    ` },
+          { id: 10, title: "Data Retention and Deletion Policy",content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi ensures that user data is retained for as long as necessary for legitimate business purposes and legal compliance.</p>
+       
+        <h3>Data Retention</h3>
+        <ul>
+            <li><strong>Retention Period:</strong> Personal data will be retained only as long as necessary to fulfill the purposes it was collected for, or as required by law.</li>
+        </ul>
+       
+        <h3>Data Deletion</h3>
+        <ul>
+            <li><strong>User Rights:</strong> Users can request the deletion of their personal data at any time, subject to applicable legal exceptions.</li>
+            <li><strong>Automatic Deletion:</strong> LearnLi may delete inactive accounts after a set period, in accordance with platform usage policies.</li>
+        </ul>
+    ` },
+          { id: 11, title: "Platform Security Policy", content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi ensures the security of user data and platform operations through rigorous security protocols.</p>
+       
+        <h3>Data Encryption</h3>
+        <ul>
+            <li><strong>Secure Data Transmission:</strong> All data transmitted across LearnLi is encrypted using industry-standard SSL/TLS protocols.</li>
+            <li><strong>Data Storage Security:</strong> LearnLi employs robust encryption for data stored on its servers.</li>
+        </ul>
+       
+        <h3>Access Control</h3>
+        <ul>
+            <li><strong>User Authentication:</strong> Strong authentication mechanisms (including multi-factor authentication) are in place to prevent unauthorized access.</li>
+        </ul>
+    ` },
+          { id: 12, title: "Customer Support and Service Policy", content: `
+       
+       
+        <h3>Introduction</h3>
+        <p>LearnLi is committed to providing prompt and effective support to its users.</p>
+       
+        <h3>Support Channels</h3>
+        <ul>
+            <li><strong>Available Support:</strong> Support is available through email, live chat, and an integrated help desk system.</li>
+            <li><strong>Response Time:</strong> LearnLi commits to responding to all support inquiries within 48 hours.</li>
+        </ul>
+       
+        <h3>Escalation Process</h3>
+        <ul>
+            <li><strong>Issue Resolution:</strong> If issues cannot be resolved at first contact, users will be escalated to higher-tier support personnel for resolution.</li>
+        </ul>
+    `},
+          { id: 13, title: "Non-Compete and Confidentiality Policy", content: `
+         
+       
+        <h3>Introduction</h3>
+        <p>LearnLi ensures that instructors, institutions, and other stakeholders are prohibited from engaging in activities that could undermine the platform’s business interests.</p>
+       
+        <h3>Non-Compete Clauses</h3>
+        <ul>
+            <li><strong>Competitive Restrictions:</strong> Instructors and institutions may not use LearnLi’s proprietary tools and resources to develop competing platforms within a specified time frame after ceasing their partnership.</li>
+        </ul>
+       
+        <h3>Confidentiality</h3>
+        <ul>
+            <li><strong>Protected Information:</strong> All confidential business and platform information must be kept private by users, partners, and contractors.</li>
+        </ul>
+    `
+ },
+          { id: 14, title: "Marketing and Advertising Policy",    content: `
+         
+       
+        <h3>Introduction</h3>
+        <p>LearnLi adheres to ethical and transparent marketing practices to promote content and the platform.</p>
+       
+        <h3>Ethical Advertising</h3>
+        <ul>
+            <li><strong>Ad Content:</strong> All advertisements related to the platform must be accurate, non-deceptive, and adhere to advertising laws.</li>
+        </ul>
+       
+        <h3>Affiliate Marketing</h3>
+        <ul>
+            <li><strong>Affiliation Rules:</strong> Any affiliate marketing campaigns must disclose affiliate relationships and adhere to FTC guidelines.</li>
+        </ul>
+    ` },
+          { id: 15, title: "Community Engagement Policy",content: `
+         
+       
+        <h3>Introduction</h3>
+        <p>LearnLi promotes positive community engagement, fostering collaboration and interaction among users.</p>
+       
+        <h3>Community Guidelines</h3>
+        <ul>
+            <li><strong>Respectful Interaction:</strong> Users must engage respectfully within the platform's forums, comment sections, and discussions.</li>
+            <li><strong>Collaboration:</strong> Users are encouraged to collaborate, share feedback, and contribute to the platform’s improvement.</li>
+        </ul>
+    ` },
+          { id: 16, title: "Tax Compliance Policy",content: `
+       
+       
+        <h3>Introduction</h3>
+        <p>LearnLi adheres to tax regulations applicable in all jurisdictions in which it operates, ensuring compliance with local tax laws.</p>
+       
+        <h3>Tax Withholding</h3>
+        <ul>
+            <li><strong>Platform Fees:</strong> Tax is applied to platform fees where required by law.</li>
+        </ul>
+       
+        <h3>Content Creator Tax Reporting</h3>
+        <ul>
+            <li><strong>Tax Obligations:</strong> Content creators are responsible for reporting their income and complying with tax regulations in their respective countries.</li>
+        </ul>
+    ` },
+          { id: 17, title: "Platform Use for Educational Purposes Policy", content: `
+       
+       
+        <h3>Introduction</h3>
+        <p>LearnLi is designed to be an educational platform, and content must adhere to academic standards.</p>
+       
+        <h3>Educational Content</h3>
+        <ul>
+            <li><strong>Quality Standards:</strong> Content must meet LearnLi's academic quality standards, ensuring it’s appropriate for educational purposes.</li>
+        </ul>
+    ` },
+          { id: 18, title: "Collaboration and Partnership Policy", content: `
+       
+       
+        <h3>Introduction</h3>
+        <p>LearnLi encourages collaborations with institutions and organizations to enhance its content offerings.</p>
+       
+        <h3>Partnership Guidelines</h3>
+        <ul>
+            <li><strong>Content Sharing:</strong> Partner institutions may share or upload educational materials, following intellectual property and licensing guidelines.</li>
+        </ul>
+    ` },
+          { id: 19, title: "System Downtime and Maintenance Policy",  content: `
+       
+       
+        <h3>Introduction</h3>
+        <p>LearnLi aims to ensure minimal downtime and disruption, providing users with a reliable platform.</p>
+       
+        <h3>Maintenance Notices</h3>
+        <ul>
+            <li><strong>Scheduled Maintenance:</strong> LearnLi will notify users of any scheduled maintenance and downtime in advance.</li>
+            <li><strong>Emergency Downtime:</strong> In the event of unexpected downtime, LearnLi will work to restore services promptly.</li>
+        </ul>
+    ` },
+          { id: 20, title: "User Feedback and Improvement Policy",content: `
+       
+        <h3>Introduction</h3>
+        <p>LearnLi values user feedback and uses it to continually improve the platform.</p>
+       
+        <h3>Feedback Collection</h3>
+        <ul>
+            <li><strong>Surveys and Reviews:</strong> LearnLi will regularly seek feedback through surveys, reviews, and direct communication with users.</li>
+        </ul>
+       
+        <h3>Platform Improvement</h3>
+        <ul>
+            <li><strong>Updates:</strong> LearnLi will implement updates and improvements based on user feedback to enhance platform usability.</li>
+        </ul>
+    ` }
+          // Add remaining policies here...
+];
+
+
+        // Populate policy list
+        const policyListElement = document.getElementById("policy-list");
+        policies.forEach(policy => {
+            const li = document.createElement("li");
+            li.textContent = policy.title;
+            li.onclick = () => showPolicy(policy.id);
+            li.dataset.id = policy.id;
+            policyListElement.appendChild(li);
+        });
+
+        // Display selected policy
+        function showPolicy(policyId) {
+            const selectedPolicy = policies.find(policy => policy.id === policyId);
+            const contentDiv = document.getElementById("policy-content");
+            const allMenuItems = document.querySelectorAll(".sidebar ul li");
+            allMenuItems.forEach(item => item.classList.remove("active")); // Remove active from all
+            document.querySelector(`.sidebar ul li[data-id="${policyId}"]`).classList.add("active"); // Highlight selected
+            if (selectedPolicy) {
+                contentDiv.innerHTML = `<h2>${selectedPolicy.title}</h2><p>${selectedPolicy.content}</p>`;
+            } else {
+                contentDiv.innerHTML = `<h2>Policy Not Found</h2>`;
+            }
+        }
+
+        // Filter policies
+        function filterPolicies() {
+            const searchValue = document.getElementById("searchInput").value.toLowerCase();
+            const allMenuItems = document.querySelectorAll(".sidebar ul li");
+            allMenuItems.forEach(item => {
+                const policyTitle = item.textContent.toLowerCase();
+                item.style.display = policyTitle.includes(searchValue) ? "" : "none";
+            });
+        }
+
+        // Toggle search bar visibility
+        function toggleSearch() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('show-search');
+        }
+    </script>
  
-</body>
-</html>
-      
-
-       
-   
-<style>
-    header {
-text-align: center;
-background: #2c3e50;
-color: #fff;
-padding: 20px 10px;
-}
-
-header h1_ {
-margin: 0;
-font-size: 2rem;
-}
-
-header p_ {
-margin: 5px 0 0;
-font-size: 1rem;
-}
-    /* Global Styles */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 0;
-        color: #333;
-    }
-
-    .container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 20px 30px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1, h2, h3 {
-        color: #2c3e50;
-        margin-bottom: 10px;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    p {
-        line-height: 1.8;
-        text-align: justify;
-        margin-bottom: 15px;
-    }
-
-   
-
-    header {
-text-align: center;
-background: #2c3e50;
-color: #fff;
-padding: 20px 10px;
-}
-
-header h1 {
-margin: 0;
-font-size: 2rem;
-}
-
-header p {
-margin: 5px 0 0;
-font-size: 1rem;
-}
-   
-    .footer {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 0.9em;
-        color: #777;
-    }
-       
-   .logo-oval {
-      padding: 10px 20px;
-      border: 2px solid #4CAF50;
-      border-radius: 50px; /* Creates the oval shape */
-      font-weight: bold;
-      color: #4CAF50;
-      font-size: 24px;
-      display: inline-block;
-      background-color: #ffffff; /* Optional: Set background color */
-      transition: all 0.3s;
-      
-      
-  }
-  
-  .logo-oval .brand-highlight {
-      color: #333333;
-  }
-  
-  .logo-oval:hover {
-      background-color: #4CAF50;
-      color: #ffffff;
-      border-color: #4CAF50;
-  }
-  
-</style>
+    
