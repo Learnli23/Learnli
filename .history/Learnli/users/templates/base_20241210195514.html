@@ -1743,7 +1743,12 @@
 </div>
 
  <!--footer-->
-
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>LearnLi Footer</title>
      <style>
          body {
              margin: 0;
@@ -1762,7 +1767,7 @@
  
          /* Footer styles */
          .footer {
-             background-color: rgb(2, 11, 19);
+             background-color: #000;
              color: white;
              display: flex;
              flex-direction: column;
@@ -1885,7 +1890,14 @@
      </style>
      <!-- Add Font Awesome for social media and contact icons -->
      <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  
+ </head>
+ <body>
+     <!-- Main Content -->
+     <div class="content">
+         <h1>Welcome to LearnLi</h1>
+         <p>Explore courses, eBooks, and much more. This is a placeholder for the main content of the page.</p>
+         <p>Scroll down to see the footer at the bottom of the page.</p>
+     </div>
  
      <!-- Footer -->
      <footer class="footer">
@@ -1971,14 +1983,28 @@
      <script>
          document.getElementById('current-year').textContent = new Date().getFullYear();
      </script>
- 
+ </body>
+ </html>
 
 
 
  
 
-     
- 
+     <!-- Footer-->
+        <footer style="background-color: rgb(2, 11, 19);"class="py-5" >
+          <div style="text-align: left;"><a href="{% url 'about' %}">About Learnli</a></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; LearnLi 2024</p></div><br/>
+            <div class="container"><p class="m-0 text-center text-white">Tel:+256-789-563-963 </p></div><br/>
+            <div class="container"><p class="m-0 text-center text-white">Email: <a href="mailto:learnli759@gmail.com">learnli759@gmail.com</a></p></div><br/>
+            <div class="container"><p class="m-0 text-center text-white">Location: kanjokya street kamwokya kampala uganda</p></div><br/>
+            <div class="container"><p class="m-0 text-center text-white" ><a href="{% url 'copyright' %}" >Read our copyright policy</a></p></div>
+            <div class="container"><p class="m-0 text-center text-white" ><a href="{% url 'FAQs' %}" >Frequently asked questions(FQAs)</a></p></div>
+            <div class="container"><p class="m-0 text-center text-white"><a href="#"style="color:blue;">Scroll up</a></p></div><br/>
+       </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+  
+</html>
 
 
 

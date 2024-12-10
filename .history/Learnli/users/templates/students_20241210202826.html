@@ -15,10 +15,10 @@
 
         /* Header Section */
         .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
             text-align: center;
+            padding: 20px;
         }
 
         .header h1 {
@@ -33,7 +33,7 @@
 
         /* User List Section */
         .user-list {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
@@ -47,7 +47,6 @@
             margin-bottom: 15px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            max-width: 800px;
         }
 
         .user-card:hover {
@@ -128,8 +127,8 @@
  
     <!-- Header -->
     <div class="header">
-        <h1 style="font-size: medium;">LearnLi students</h1>
-        <p>Discover our amazing students community</p>
+        <h1>LearnLi Users</h1>
+        <p>Discover our amazing user community</p>
     </div>
     {% if students %}
 
@@ -141,29 +140,29 @@
         <div class="user-card">
             <img src="{{student.profile_image.url }}" alt="User Image">
             <div class="user-info">
-                <h3 style="font-size: medium;"><strong>{{student.username}}</strong></h3>
-                <p style="font-size: small;">Student| Last updated: {{ student.date_modified }}</p>
-                <p style="font-size: small;">email:<a href="">{{student.email}}</p>
+                <h3>{{student.username}}</h3>
+                <p>Student| Last updated: {{ student.date_modified }}</p>
+                <p>email:<a href="">{{student.email}}</p>
                 <div class="contact-info">
-                    <a  style="font-size: small;"  href="mailto:johndoe@example.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a  style="font-size: small;"  href="tel:+1234567890"><i class="fas fa-phone"></i> Call:{{ student.contact }}</a>
+                    <a href="mailto:johndoe@example.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="tel:+1234567890"><i class="fas fa-phone"></i> Call</a>
                 </div>
             </div>
             <div class="user-actions">
-                <a  style="font-size: small;"    href="{% url 'profile' student.id %}">View Profile</a>
+                <a href="{% url 'profile' student.id %}"><button >View Profile</button></a>
                 <!--follow suggestions-->
               <form  method="post">
                 {% csrf_token %}
                 {% if student in user.follows.all  %} 
 
-                 <strong
-                   style="font-size: small ; color: darkblue;">following</strong>
+                <button class="btn btn-outline-success" name="follow" value="unfollow" type="submit"><strong
+                   style="font-size: small ;">following</strong>
 
-                
+                </button>
                 {% else %}
-                <strong style="font-size: small; color: darkblue ;">not following</strong> 
+                <button class="btn btn-outline-danger" name="follow"  value="follow" type="submit"><strong style="font-size: small;">not following</strong> 
 
-              
+                </button>
           {% endif %}
             
               </form>

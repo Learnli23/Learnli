@@ -135,10 +135,11 @@
                  }
              }
          </style>
-      
+     </head>
+     <body>
          <div class="inbox-container">
              <div class="inbox-header">
-                 <i class="fas fa-inbox"></i> {{ user }}'s Inbox
+                 <i class="fas fa-inbox"></i> LearnLi Inbox
              </div>
 
 
@@ -154,7 +155,7 @@
                          <div class="sender-recipient">
                              From: <strong>{{ message.sender.username }}</strong> To: <strong>{{ message.reciepient.username }}</strong>
                          </div></a>
-                         <div class="message-date">Sent on:{{ message.timestamp }}</div>
+                         <div class="message-date">Sent: {{subject.created_on}}</div>
                      </div>
                      <div class="message-body">
                         {{ message.content | safe | linebreaks }} 

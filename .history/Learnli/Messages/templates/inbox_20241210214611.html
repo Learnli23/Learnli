@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="container mt-3" style="text-align:start;">
+   
+    <button type="button" class="btn btn-primary">
+      Messages <span class="badge bg-danger">{{messages.count}}</span>
+    </button>
+    
+  </div>
+  
+     <br/>
+
+        
+    
+         <div class="inbox-container">
+             <div class="inbox-header">
+                 <i class="fas fa-inbox"></i> LearnLi Inbox
+             </div>
+
+
+
+  
+             <ul class="message-list">
+                 <!-- Message Item -->
+                 {% for message in messages %}
+                 {% if message.reciepient == user %}
+
+                 <li class="message-item">
+                     <div class="message-info">
+                         <div class="sender-recipient">
+                             From: <strong>{{ message.sender.username }}</strong> To: <strong>{{ message.reciepient.username }}</strong>
+                         </div></a>
+                         <div class="message-date">Sent: {{subject.created_on}}</div>
+                     </div>
+                     <div class="message-body">
+                        {{ message.content | safe | linebreaks }} 
+                     </div>
+                     <div class="message-buttons">
+                         <a href=" {% url  'compose' %} ">
+                            <button class="button reply">
+                                <i class="fas fa-reply"></i> Reply
+                            </button>
+                         </a>
+
+                         <a href="  {% url 'delete_message' message.id %} ">
+                         <button class="button delete">
+                             <i class="fas fa-trash"></i> Delete
+                         </button>
+                         </a>
+                     </div>
+                 </li>
+                 {% endif %}
+                 {% endfor %}
+             </ul>
+         </div>
+   
+{% endblock %}

@@ -144,8 +144,9 @@
           <h3 style="font-size: medium;"><strong>{{profile.username}}</strong></h3>
           <p style="font-size: small;">{% if profile.is_student %} student| {% endif %}
             {% if profile.is_teacher %} Teacher| Major: {{ profile.major }}| {% endif %}
-            {% if profile.is_institution %} Institution | Website:<strong>{{ profile.website}}</strong> {% endif %}
-            Last updated: {{profile.date_modified }}</p>
+            {% if profile.is_institution %} Institution | {% endif %}
+
+            | {% if profile.is_institution %} Website: <strong>{{institution.website}} {% endif %} </strong>|Last updated: {{profile.date_modified }}</p>
           <p style="font-size: small;">email:<a href="">{{profile.email}}</p>
           <div class="contact-info">
               <a  style="font-size: small;"  href="mailto:johndoe@example.com"><i class="fas fa-envelope"></i> Email</a>
@@ -173,8 +174,85 @@
       </div>
   </div>
 </div>
- 
+{% endif %}
 {% endfor %}
 {% endif %}
 
-{% endblock %}
+
+
+
+
+
+
+
+ 
+
+<div  class="card mb-3" style="max-width: 540px; background-color:black; padding: 15px;"> 
+  <p style="color:blue;">User Profiles</p>
+</div>
+
+
+{% if  profiles %}
+
+    {% for profile in  profiles %}
+     
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            
+          
+            <img  src="{{profile.profile_image.url }}"class="img-fluid rounded-start" alt="profile image">
+             
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              
+              <h5 class="card-title" style="color:darkblue ;">{{profile.username}}</h5>
+              <p class="card-text" style="color:crimson ;">profile:<a href="{% url 'profile' profile.id%}">@{{profile.username}}</a></p>
+              <p class="card-text" style="color:crimson ;">email:<a href="">{{profile.email}}</a></p>
+              
+              <div style="margin: 24px 0;">
+                <a href="#"><i class="fa fa-twitter"></i></a>  
+                <a href="#"><i class="fa fa-linkedin"></i></a>  
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </div>
+              
+              {% if profile.is_institution %}
+              <p class="card-text" style="color:crimson ;">website<a href="">{{profile.website}}</a></p>
+              {% endif %}
+              {% if profile.is_teacher %}
+              <p class="card-text" style="color:crimson ;">major<a href="">{{profile.major}}</a></p>
+              
+               
+              {% endif %}
+              <br/>
+              <p class="card-text"><small class="text-muted"> Last updated: {{ profile.date_modified }}</small></p>
+
+              
+               <!--follow suggestions-->
+               <form  method="post">
+                {% csrf_token %}
+          {% if profile in user.follows.all  %} 
+
+                <button class="btn btn-outline-success" name="follow" value="unfollow" type="submit">following<strong
+                   style="color:blue ;">{{profile.username}}</strong>
+
+                </button>
+                {% else %}
+                <button class="btn btn-outline-danger" name="follow" value="follow" type="submit">not following<strong style="color:blue ;">
+                  {{profile.username}}</strong> 
+
+                </button>
+                
+          {% endif %}
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      {% endfor %}
+      {% endif %}
+      
+      {% endblock %}

@@ -1,17 +1,23 @@
 {% extends 'base.html'%}
-{% block content %}
+{% block content %
 
 <div class="container mt-3" style="text-align:start;">
    
     <button type="button" class="btn btn-primary">
-      Messages <span class="badge bg-danger">{{messages.count}}</span>
+      Messages <span class="badge bg-danger">{{messages.count  }}</span>
     </button>
     
   </div>
   
      <br/>
 
-      
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>LearnLi Inbox</title>
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
          <style>
              /* General Styling */
              * {
@@ -135,10 +141,11 @@
                  }
              }
          </style>
-      
+     </head>
+     <body>
          <div class="inbox-container">
              <div class="inbox-header">
-                 <i class="fas fa-inbox"></i> {{ user }}'s Inbox
+                 <i class="fas fa-inbox"></i> LearnLi Inbox
              </div>
 
 
@@ -154,28 +161,62 @@
                          <div class="sender-recipient">
                              From: <strong>{{ message.sender.username }}</strong> To: <strong>{{ message.reciepient.username }}</strong>
                          </div></a>
-                         <div class="message-date">Sent on:{{ message.timestamp }}</div>
+                         <div class="message-date">Sent: {{subject.created_on}}</div>
                      </div>
                      <div class="message-body">
                         {{ message.content | safe | linebreaks }} 
                      </div>
                      <div class="message-buttons">
-                         <a href=" {% url  'compose' %} ">
+                         <a href="  {% url 'delete_message' message.id %} ">
+
                             <button class="button reply">
                                 <i class="fas fa-reply"></i> Reply
                             </button>
-                         </a>
 
-                         <a href="  {% url 'delete_message' message.id %} ">
+                         </a>
                          <button class="button delete">
                              <i class="fas fa-trash"></i> Delete
                          </button>
-                         </a>
                      </div>
                  </li>
-                 {% endif %}
-                 {% endfor %}
+                 <!-- Repeat for additional messages -->
              </ul>
          </div>
-   
+     </body>
+     </html>
+
+
+
+
+
+
+
+
+
+  
+<h1>inbox</h1>
+{% for message in messages %}
+    {% if message.reciepient == user %}
+        <div class="card mb-3" style="max-width: 640px;">
+            <div class="row g-0">
+        
+                <div class="col-md-8">
+                    <div class="card-body"> 
+                        <h5 class="card-title" style="color:red;"><strong style="color: black;">from:</strong>{{ message.sender.username }} </h5>
+                        <p class="card-text"><strong style="color:black;"></strong>{{subject.created_on}}</a>{{ message.content | safe | linebreaks }}</p>
+                        <br/>
+                        <p class="card-text"><strong style="color:black ;">sent on:</strong>{{ message.timestamp }}</a></p>
+                        <button class="btn btn-success"><a href="{% url 'compose' %} " ><strong 
+                            style="color:black;">reply message</strong></a>
+                        </button>
+                        <button class="btn btn-danger"><a href="{% url 'delete_message' message.id %} "><strong 
+                            style="color:black;">Delete message</strong></a>
+                        </button>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
 {% endblock %}

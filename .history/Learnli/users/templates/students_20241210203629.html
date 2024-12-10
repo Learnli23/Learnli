@@ -15,10 +15,10 @@
 
         /* Header Section */
         .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
             text-align: center;
+            padding: 20px;
         }
 
         .header h1 {
@@ -33,7 +33,7 @@
 
         /* User List Section */
         .user-list {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
@@ -47,7 +47,6 @@
             margin-bottom: 15px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            max-width: 800px;
         }
 
         .user-card:hover {
@@ -128,8 +127,8 @@
  
     <!-- Header -->
     <div class="header">
-        <h1 style="font-size: medium;">LearnLi students</h1>
-        <p>Discover our amazing students community</p>
+        <h1>LearnLi Users</h1>
+        <p>Discover our amazing user community</p>
     </div>
     {% if students %}
 
@@ -141,7 +140,7 @@
         <div class="user-card">
             <img src="{{student.profile_image.url }}" alt="User Image">
             <div class="user-info">
-                <h3 style="font-size: medium;"><strong>{{student.username}}</strong></h3>
+                <h3>{{student.username}}</h3>
                 <p style="font-size: small;">Student| Last updated: {{ student.date_modified }}</p>
                 <p style="font-size: small;">email:<a href="">{{student.email}}</p>
                 <div class="contact-info">

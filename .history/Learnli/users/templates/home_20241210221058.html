@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnli Home</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script> <!-- CountUp.js for number animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script> <!-- Typed.js for typing effect -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> <!-- Lottie for logo animation -->
+</head>
+<body>
+<div style="text-align:end; color:darkred;"><a href="{% url 'logout' %}">logout</a></div>
+<div style="text-align:left;"><a href="{% url 'about' %}">About Learnli</a></div>    
+
+ 
+
+
+<!-- Place this in your static folder under static/your_app/images/animated-logo.svg -->
+<svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="45" stroke="blue" stroke-width="10" fill="transparent">
+        <animate attributeName="r" values="45;40;45" dur="1.5s" repeatCount="indefinite"/>
+        <animate attributeName="stroke" values="blue;purple;blue" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="black" color>
+       Your Learnli
+        <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+    </text>
+</svg>
+
+ 
+<!-- Logo Animation -->
+<div class="logo-animation">
+    
+    <lottie-player src="path_to_your_logo_animation.json" background="transparent" speed="1" style="width: 300px; height: 300px;" autoplay></lottie-player>
+</div>
+
+<!-- Animated Writings -->
+<div class="animated-text">
+    <span id="typed"></span>
+</div>
+
+<!-- Counting Animation -->
+<div class="counts-container">
+    <div class="count-item">
+        <srtong style="font-size: small;">Books Created</strong>
+        
+         <div id="book-count" class="count-number">{{ book_count }}</div>
+    </div>
+    <div class="count-item">
+      <srtong style="font-size: small;">Courses Created</strong>
+        
+        <div id="course-count" class="count-number">{{ course_count }}</div>
+    </div>
+    <div class="count-item">
+       <srtong style="font-size: small;">Registered Users</strong>
+        <div id="user-count" class="count-number">{{ user_count }}</div>
+    </div>
+    <div class="count-item">
+        <srtong style="font-size: small;">Teachers</strong>
+        <div id="teacher-count" class="count-number">{{ teacher_count }}</div>
+    </div>
+    <div class="count-item">
+       <srtong style="font-size: small;">Institutions</strong>
+        <div id="institution-count" class="count-number">{{ institution_count }}</div>
+    </div>
+    <div class="count-item">
+       <srtong style="font-size: small;">Students</strong>
+        <div id="student-count" class="count-number">{{ student_count }}</div>
+    </div>
+</div>
+
+<script>
+// Typed.js for Animated Writings
+const typed = new Typed('#typed', {
+    strings: ['Welcome to Learnli', 'Unlock Your Learning Potential', 'Explore Courses, eBooks, and More!'],
+    typeSpeed: 50,
+    backSpeed: 30,
+    loop: true
+});
+
+// CountUp.js for Counting Animation
+document.addEventListener('DOMContentLoaded', () => {
+    const options = { duration: 2, separator: ',' };
+    new CountUp('book-count', {{ book_count }}, options).start();
+    new CountUp('course-count', {{ course_count }}, options).start();
+    new CountUp('user-count', {{ user_count }}, options).start();
+    new CountUp('teacher-count', {{ teacher_count }}, options).start();
+    new CountUp('institution-count', {{ institution_count }}, options).start();
+    new CountUp('student-count', {{ student_count }}, options).start();
+});
+</script>
+
+<!-- JavaScript for Animations -->
+<script>
+    // Counter Animation
+    let students = 5000, teachers = 500, ebooks = 3000;
+    let studentsCount = document.getElementById('studentsCount');
+    let teachersCount = document.getElementById('teachersCount');
+    let ebooksCount = document.getElementById('ebooksCount');
+    let duration = 2000;
+
+    function animateCounter(target, endValue) {
+        let startValue = 0;
+        let increment = Math.ceil(endValue / (duration / 50));
+        let interval = setInterval(() => {
+            startValue += increment;
+            if (startValue >= endValue) {
+                startValue = endValue;
+                clearInterval(interval);
+            }
+            target.textContent = startValue.toLocaleString();
+        }, 50);
+    }
+
+    animateCounter(studentsCount, students);
+    animateCounter(teachersCount, teachers);
+    animateCounter(ebooksCount, ebooks);
+
+    
+</script>
+
+
+
+
+
+</body>
+</html>
+
+<style>
+
+/* home.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.logo-animation {
+    margin-top: 50px;
+}
+
+.animated-text {
+    font-size: 24px;
+    margin: 20px auto;
+    color: #333;
+}
+
+.counts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.count-item {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    width: 150px;
+    text-align: center;
+}
+
+.count-number {
+    font-size: 40px;
+    font-weight: bold;
+    color: #ff5733;
+    margin-top: 10px;
+}
+
+</style>
+
+
+
+{% endblock %}
+
+
+

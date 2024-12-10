@@ -2,24 +2,28 @@
 {% block content %}
     
 
-<h2 style="font-size: small;">Edit event </h2>
+<div class="col-md-6 offset-md-3">
+    <h2>Edit a event</h2>
     
     <div>
 
         {% if user.is_authenticated %}
         <br/><br/>
         {% if submitted %}
-        your  event has been updated
+        your event  has been edited 
         {% else %}
             
         <P>
         
-            <form method="post" enctype="multipart/form-data">
+            <form  method="POST" action="" class="form-control"  enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                {{ form.media }}
-                <button type="submit">submit</button>
-              </form>
+            
+            {{form.as_p}}
+            {{ form.media }}
+                
+                <input type="submit"  value="update" class="btn btn-success"/>
+            
+            </form>
         
         </p>
         
@@ -31,4 +35,7 @@
         {%endif%}
 
     </div>
+ 
+
+</div>
 {% endblock %}

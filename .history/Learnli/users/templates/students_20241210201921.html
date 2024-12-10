@@ -15,10 +15,10 @@
 
         /* Header Section */
         .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
             text-align: center;
+            padding: 20px;
         }
 
         .header h1 {
@@ -33,7 +33,7 @@
 
         /* User List Section */
         .user-list {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
@@ -47,7 +47,6 @@
             margin-bottom: 15px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            max-width: 800px;
         }
 
         .user-card:hover {
@@ -128,8 +127,8 @@
  
     <!-- Header -->
     <div class="header">
-        <h1 style="font-size: medium;">LearnLi students</h1>
-        <p>Discover our amazing students community</p>
+        <h1>LearnLi Users</h1>
+        <p>Discover our amazing user community</p>
     </div>
     {% if students %}
 
@@ -141,42 +140,107 @@
         <div class="user-card">
             <img src="{{student.profile_image.url }}" alt="User Image">
             <div class="user-info">
-                <h3 style="font-size: medium;"><strong>{{student.username}}</strong></h3>
-                <p style="font-size: small;">Student| Last updated: {{ student.date_modified }}</p>
-                <p style="font-size: small;">email:<a href="">{{student.email}}</p>
+                <h3>{{student.username}}</h3>
+                <p>Teacher | Mathematics</p>
+                <p>email:<a href="">{{student.email}}</p>
                 <div class="contact-info">
-                    <a  style="font-size: small;"  href="mailto:johndoe@example.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a  style="font-size: small;"  href="tel:+1234567890"><i class="fas fa-phone"></i> Call:{{ student.contact }}</a>
+                    <a href="mailto:johndoe@example.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="tel:+1234567890"><i class="fas fa-phone"></i> Call</a>
                 </div>
             </div>
             <div class="user-actions">
-                <a  style="font-size: small;"    href="{% url 'profile' student.id %}">View Profile</a>
+                <a href="{% url 'profile' student.id %}"><button >View Profile</button></a>
                 <!--follow suggestions-->
               <form  method="post">
                 {% csrf_token %}
                 {% if student in user.follows.all  %} 
 
-                 <strong
-                   style="font-size: small ; color: darkblue;">following</strong>
+                <button class="btn btn-outline-success" name="follow" value="unfollow" type="submit">following<strong
+                   style="color:blue ;">{{student.username}}</strong>
 
-                
+                </button>
                 {% else %}
-                <strong style="font-size: small; color: darkblue ;">not following</strong> 
+                <button class="btn btn-outline-danger" name="follow"  value="follow" type="submit">notfollowing<strong style="color:blue ;">
+                  {{student.username}}</strong> 
 
-              
+                </button>
           {% endif %}
             
               </form>
             </div>
         </div>
+
+         
+
+        <!-- Add More Users Below -->
     </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
+
+    
+</body>
+</html>
 
 
 
 
  
+<div  class="card mb-3" style="max-width: 540px; background-color:black;padding: 10px;"> 
+  <p style="color:blue;">students profiles</p>
+</div>
+
+{% if students %}
+
+    {% for student in  students %}
+    {% if student.is_student %}
+    
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            
+          
+            <img src="{{student.profile_image.url }}"class="img-fluid rounded-start" alt="profile image">
+             
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              
+              <h5 class="card-title" style="color:darkblue;">{{student.username}}</h5>
+              <p class="card-text" style="color:crimson ;">Link:<a href="{% url 'profile' student.id %}">@{{student.username}}</a></p>
+              <p class="card-text" style="color:crimson ;">email:<a href="">{{student.email}}</a></p>
+              
+              <div style="margin: 24px 0;">
+                <a href="#"><i class="fa fa-twitter"></i></a>  
+                <a href="#"><i class="fa fa-linkedin"></i></a>  
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </div>
+              
+              <br/>
+              <p class="card-text"><small class="text-muted"> Last updated: {{ student.date_modified }}</small></p>
+              <br/>
+              <!--follow suggestions-->
+              <form  method="post">
+                {% csrf_token %}
+                {% if student in user.follows.all  %} 
+
+                <button class="btn btn-outline-success" name="follow" value="unfollow" type="submit">following<strong
+                   style="color:blue ;">{{student.username}}</strong>
+
+                </button>
+                {% else %}
+                <button class="btn btn-outline-danger" name="follow"  value="follow" type="submit">notfollowing<strong style="color:blue ;">
+                  {{student.username}}</strong> 
+
+                </button>
+          {% endif %}
+            
+              </form>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
       
       {% endblock %}

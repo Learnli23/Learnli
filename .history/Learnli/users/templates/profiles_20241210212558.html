@@ -3,6 +3,8 @@
 
 {% block content %}
 
+
+
 <style>
   body {
       font-family: Arial, sans-serif;
@@ -127,33 +129,36 @@
 
 <!-- Header -->
 <div class="header">
-  <h1 style="font-size: medium;">LearnLi Institutions</h1>
-  <p>Discover our amazing  institutions </p>
+  <h1 style="font-size: medium;">LearnLi community</h1>
+  <p>Discover our amazing  community  </p>
 </div>
-{% if  institutions %}
+{% if  profiles %}
 
-    {% for institution in  institutions %}
-    {% if institution.is_institution %}
+    {% for profile in  profiles %}
 <!-- User List -->
 <div class="user-list">
   <!-- Sample User Card -->
   <div class="user-card">
-      <img src="{{institution.profile_image.url }}" alt="User Image">
+      <img src="{{profile.profile_image.url }}" alt="User Image">
       <div class="user-info">
-          <h3 style="font-size: medium;"><strong>{{institution.username}}</strong></h3>
-          <p style="font-size: small;">Institution| Website: <strong>{{institution.website}} </strong>|Last updated: {{ institution.date_modified }}</p>
-          <p style="font-size: small;">email:<a href="">{{institution.email}}</p>
+          <h3 style="font-size: medium;"><strong>{{profile.username}}</strong></h3>
+          <p style="font-size: small;">{% if profile.is_student %} student| {% endif %}
+            {% if profile.is_teacher %} Teacher| Major: {{ profile.major }}| {% endif %}
+            {% if profile.is_institution %} Institution | {% endif %}
+
+            {% if profile.is_institution %} Website:{{ institution.website}} {% endif %} |Last updated: {{profile.date_modified }}</p>
+          <p style="font-size: small;">email:<a href="">{{profile.email}}</p>
           <div class="contact-info">
               <a  style="font-size: small;"  href="mailto:johndoe@example.com"><i class="fas fa-envelope"></i> Email</a>
-              <a  style="font-size: small;"  href="tel:+1234567890"><i class="fas fa-phone"></i> Call:{{ institution.contact }}</a>
+              <a  style="font-size: small;"  href="tel:+1234567890"><i class="fas fa-phone"></i> Call:{{ profile.contact }}</a>
           </div>
       </div>
       <div class="user-actions">
-          <a  style="font-size: small;"    href="{% url 'profile' institution.id %}">View Profile</a>
+          <a  style="font-size: small;"    href="{% url 'profile' profile.id %}">View Profile</a>
           <!--follow suggestions-->
         <form  method="post">
           {% csrf_token %}
-          {% if institution in user.follows.all  %} 
+          {% if profile in user.follows.all  %} 
 
            <strong
              style="font-size: small ; color: darkblue;">following</strong>
@@ -169,7 +174,7 @@
       </div>
   </div>
 </div>
-{% endif %}
+ 
 {% endfor %}
 {% endif %}
 
