@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-container" style="display:flex;">
+    <!-- Sidebar for Subsections -->
+    <aside class="sidebar">
+        <h3>Table of Contents</h3>
+        {% if sub_sections %}
+        <ul class="subsections">
+            {% for sub_section in sub_sections %}
+            <li>
+                <a href="javascript:void(0);" onclick="showSection('section-{{ sub_section.id }}')">{{ sub_section.title }}</a>
+            </li>
+            {% if forloop.last %}
+            {% if request.user == sub_section.subsection_author %}
+            <button class="btn btn-outline-success" style="border:black; text-align:left;">
+                <a href="{% url 'add_sub_section' section.pk %}"><strong style="color:darkred;">+subsection</strong></a>
+            </button>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+        {% for sub_section in sub_sections %}
+        <div id="section-{{ sub_section.id }}" class="section" style="display: none;">
+            <h5 style="text-align: center;">{{ sub_section.title }}</h5>
+            {% if sub_section.section_image %}
+            <img src="{{ sub_section.section_image.url }}" width="800" height="300" class="d-inline-block align-text-top" alt="">
+            {% endif %}
+            <br /><br />
+            {% if sub_section.section_video %}
+            <div class="video-card">
+                <video width="800" height="300" controls>
+                    <source src="{{ sub_section.section_video.url }}" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            {% endif %}
+
+            <div class="tools-bar">
+                <button onclick="changeFontSize('increase')">
+                    <p style="color:black;">A+</p>
+                </button>
+                <button onclick="changeFontSize('decrease')">
+                    <p style="color:black;">A-</p>
+                </button>
+                <button onclick="toggleDarkMode()">
+                    <p style="color:black;">Dark Mode</p>
+                </button>
+            </div>
+
+            <div class="content-body">
+                <p>{{ sub_section.content|safe }}</p>
+            </div>
+
+            <a href="#">back to top</a>
+        </div>
+        {% endfor %}
+    </main>
+</div>
+
+<script>
+    // Function to show the selected section
+    function showSection(sectionId) {
+        var sections = document.querySelectorAll('.section');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    // Function to change font size dynamically
+    function changeFontSize(action) {
+        const visibleSection = document.querySelector('.section[style*="display: block"]');
+        if (!visibleSection) return;
+        const contentBody = visibleSection.querySelector('.content-body');
+        if (!contentBody) return;
+        const style = window.getComputedStyle(contentBody, null).getPropertyValue('font-size');
+        const currentSize = parseFloat(style);
+        contentBody.style.fontSize = action === 'increase' ? (currentSize + 2) + 'px' : (currentSize - 2) + 'px';
+    }
+
+    // Function to toggle dark mode for the visible section
+    function toggleDarkMode() {
+        const visibleSection = document.querySelector('.section[style*="display: block"]');
+        if (!visibleSection) return;
+        const contentBody = visibleSection.querySelector('.content-body');
+        if (!contentBody) return;
+        contentBody.classList.toggle('dark-mode');
+    }
+
+    // Automatically display the first section on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.section');
+        if (sections.length > 0) {
+            showSection(sections[0].id);
+        }
+    });
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        background: #f9f9f9;
+    }
+
+    .page-container {
+        margin: 20px auto;
+        max-width: 1000px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar {
+        flex: 1;
+        max-width: 250px;
+        border-right: 1px solid #ddd;
+    }
+
+    .subsections {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .subsections li a {
+        text-decoration: none;
+        color: #555;
+        display: block;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+    .subsections li a:hover {
+        background-color: #eee;
+    }
+
+    .content {
+        flex-grow: 1;
+        padding: 20px;
+    }
+
+    .tools-bar button {
+        border: 1px solid #aaa;
+        background: none;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 5px;
+    }
+
+    .tools-bar button:hover {
+        background: #ddd;
+    }
+
+    .dark-mode {
+        background-color: #333;
+        color: #fff;
+    }
+</style>
+
+{% endblock %}
+
+
+
+

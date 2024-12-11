@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+ 
+ 
+ 
+    <p><strong>Edit your profile</strong></p>
+    
+    <div>
+
+       
+        <br/><br/>
+        {% if submitted %}
+        Profile updated successfully
+        {% else %}
+            
+        <P>
+        
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.media }}
+                <button type="submit">update</button>
+              </form>
+              <br/>
+        </p>
+        {% endif %}
+        
+{% endblock %}         

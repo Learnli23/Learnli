@@ -1,0 +1,421 @@
+{% load static %}
+
+
+    <!-- Navbar Container -->
+    <nav class="navbar">
+        <!-- Logo and Brand Name -->
+        <div class="navbar-brand">
+         
+            <a href="{% url 'home' %}"> <span class="logo-oval">Learn<span class="brand-highlight">Li</span></span> </a>
+            <br/>
+          {% if request.user.is_content_moderation_agent or is_content_moderation_reviewer %}  
+         <a href="{% url 'moderation_tool' %}">moderation tool</a>
+         {% endif %}
+        </div>
+       
+        <!-- Navbar Links for Desktop -->
+        <ul class="navbar-links">
+            <li class="nav-item">
+              {% if user.is_authenticated %}
+              <img class="profile-picture" src="{{ user.profile_image.url }}" alt="" >
+                 
+                <span class="user-name" style = "color:green;" >{{user}}</span>
+              {% endif %}  
+            </li>
+          <!-- showing posts and about if the user is loged in or out respectively--->  
+            {% if user.is_authenticated and user.subscription_active == True %}
+            <li><a href="{% url 'blog_list' %}" >Post</a></li>
+            {% else %}
+            <li><a href="{% url 'about' %}" >About</a></li>
+            {% endif %}
+         <!-- show user categories if user is logeg in-->   
+         {% if user.is_authenticated and user.subscription_active == True %}
+            <li class="nav_drop_drown"  style="color: #4CAF50;"><a >Users</a>
+                <ul class="dropdown">
+                    <li><a href="{% url 'students' %}" style="font-size: small;">Students</a></li>
+                    <li><a href="{% url 'teachers' %}" style="font-size: small;">Teachers</a></li>
+                    <li><a href="{% url 'institutions' %}" style="font-size: small;">Institutions</a></li>
+                    <li><a href="{% url 'profiles' %}" style="font-size: small;">All Users</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'profile' user.id %}" >My Profile</a></li>
+            {% endif %}
+          <!-- show the office ,study or depending on the user type--> 
+          {% if user.is_student and user.subscription_active == True %} 
+            <li><a>study</a>
+                <ul class="dropdown">
+                    <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
+                    <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
+                    <li><a href="{% url 'exams' %}" style="font-size: small;">Exams</a></li>
+                    <li><a href="{% url 'answers' %}" style="font-size: small;">Exams Answers</a></li>
+                    <li><a href="{% url 'exam_results' %}" style="font-size: small;">Exam Reults</a></li>
+                    <li><a href="{% url 'RegisterforExam' %}" style="font-size: small;">Register for Exam</a></li>
+                    <li><a href="{% url 'test_answers' %}" style="font-size: small;">Test Answers</a></li>
+                    <li><a href="{% url 'test_results' %}" style="font-size: small;">Test Reults</a></li>
+                </ul>
+            </li>
+          <!-- show the  communication elements for aloged in student-->  
+          <li><a>communication</a>
+            <ul class="dropdown">
+                <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
+                <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
+                <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
+                <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
+                <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
+                <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
+            </ul>
+        </li>    
+        <!--show library for the student if loged in-->  
+        <li><a>Library</a>
+          <ul class="dropdown">
+              <li><a href="{% url 'profile_library' user.id %}" style="font-size: small;">My Uploaded books</a></li>
+              <li><a href="{% url 'book_list' %}" style="font-size: small;">Ebooks</a></li>
+              <li><a href="{% url 'content_list' %} " style="font-size: small;">uploaded books</a></li>
+              <li><a href="{% url 'upload_content' %}" style="font-size: small;">upload book</a></li>
+            </ul>  
+      </li>  
+        {% endif %}
+
+        <!---- show office for teacher if loged in---> 
+        {% if user.is_teacher and user.subscription_active == True %} 
+        <li><a>office</a>
+          <ul class="dropdown">
+              <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
+              <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
+              <li><a href="{% url 'create_class' %}" style="font-size: small;">create course</a></li>
+              <li><a href="{% url 'subjects' %}" style="font-size: small;">course units</a></li>
+              <li><a href="{% url 'create_subject' %} " style="font-size: small;">create course unit</a></li>
+              <li><a href="{% url 'lessons' %}" style="font-size: small;">lessons</a></li>
+              <li><a href="{% url 'create_lesson' %}" style="font-size: small;">create lesson</a></li>
+              
+          </ul>
+      </li> 
+      <!--show teacher's library if loged in-->
+      <li><a>Library</a>
+        <ul class="dropdown">
+          <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My Ebooks </a></li>
+          <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
+          <li><a   href="{% url 'book_list' %}" style=" font-size: small;"> Ebooks </a></li>
+          <li><a   href="{% url 'content_list' %}"  style="  font-size: small;"> Uploaded books </a></li>
+          <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Upload Books </a></li>
+        </ul>
+      </li>
+      <!--show teacher's  Examinations if loged in-->
+      <li><a>Examinations</a>
+        <ul class="dropdown">
+          <li><a  href="{% url 'my_exams' %}" style=" font-size: small;">My Exams </a></li>
+              <li><a  href="{% url 'exams' %}" style=" font-size: small;">Exams </a></li>
+              <li><a   href="{% url 'exam' %}" style=" font-size: small;">creat Exam </a></li>
+              <li><a   href="{% url 'answers' %}"  style="font-size: small;">Exams Answers </a></li>
+              <li><a   href="{% url 'exam_results' %}" style="  font-size: small;">Exam Reults </a></li>
+              <li><a   href="{% url 'RegisterforExam' %}" style="  font-size: small;">Register for Exam </a></li>
+              <li><a   href="{% url 'examRegister' %}" style=" font-size: small;">candidates </a></li>
+              <li><a  href="{% url 'my_tests' %}" style=" font-size: small;">My tests </a></li>
+              <li><a  href="{% url 'tests' %}" style=" font-size: small;">Tests </a></li>
+              <li><a  href="{% url 'test' %}" style=" font-size: small;">creat test </a></li>
+              <li><a  href="{% url 'test_answers' %}" style=" font-size: small;">Test Answers </a></li>
+             <li><a  href="{% url 'test_results' %}" style=" font-size: small;">Test Reults </a></li>
+        </ul>
+      </li>
+       <!-- show the teacher's  communication elements if aloged -->  
+       <li><a>communication</a>
+        <ul class="dropdown">
+            <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
+            <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
+            <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
+            <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
+            <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
+            <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
+        </ul>
+    </li>      
+       {% endif %}
+       <!--show institution compass if loged in-->
+       {% if user.is_institution and user.subscription_active == True %}
+       <li><a>compass</a>
+        <ul class="dropdown">
+            <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
+            <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
+            <li><a href="{% url 'create_class' %}" style="font-size: small;">create course</a></li>
+            <li><a href="{% url 'subjects' %}" style="font-size: small;">course units</a></li>
+            <li><a href="{% url 'create_subject' %} " style="font-size: small;">create course unit</a></li>
+            <li><a href="{% url 'lessons' %}" style="font-size: small;">lessons</a></li>
+            <li><a href="{% url 'create_lesson' %}" style="font-size: small;">create lesson</a></li>
+            
+        </ul>
+    </li> 
+    <!--show inmstitution library if loged in-->
+    <li><a>Library</a>
+      <ul class="dropdown">
+        <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My Ebooks </a></li>
+        <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
+        <li><a   href="{% url 'book_list' %}" style=" font-size: small;"> Ebooks </a></li>
+        <li><a   href="{% url 'content_list' %}"  style="  font-size: small;"> Uploaded books </a></li>
+        <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Upload Books </a></li>
+      </ul>
+    </li>
+    <!--show  institution  Examinations if loged in-->
+    <li><a>Examinations</a>
+      <ul class="dropdown">
+        <li><a  href="{% url 'my_exams' %}" style=" font-size: small;">My Exams </a></li>
+            <li><a  href="{% url 'exams' %}" style=" font-size: small;">Exams </a></li>
+            <li><a   href="{% url 'exam' %}" style=" font-size: small;">creat Exam </a></li>
+            <li><a   href="{% url 'answers' %}"  style="font-size: small;">Exams Answers </a></li>
+            <li><a   href="{% url 'exam_results' %}" style="  font-size: small;">Exam Reults </a></li>
+            <li><a   href="{% url 'RegisterforExam' %}" style="  font-size: small;">Register for Exam </a></li>
+            <li><a   href="{% url 'examRegister' %}" style=" font-size: small;">candidates </a></li>
+            <li><a  href="{% url 'tests' %}" style=" font-size: small;">Tests </a></li>
+            <li><a  href="{% url 'my_tests' %}" style=" font-size: small;">My tests </a></li>
+            <li><a  href="{% url 'test' %}" style=" font-size: small;">creat test </a></li>
+            <li><a  href="{% url 'test_answers' %}" style=" font-size: small;">Test Answers </a></li>
+           <li><a  href="{% url 'test_results' %}" style=" font-size: small;">Test Reults </a></li>
+      </ul>
+    </li>
+     <!-- show the institution  communication elements if aloged -->  
+     <li><a>communication</a>
+      <ul class="dropdown">
+          <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
+          <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
+          <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
+          <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
+          <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
+          <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
+      </ul>
+  </li>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <li><a href="{% url 'logout' %}"style="color:brown;">Logout</a></li>
+  {% if user.subscription_active == False  %}
+  <li><a href="{% url 'subscription_page' %}"><strong style="color:black; font-size:medium;">subscribe </a></li>
+  {% endif %}
+  <!-- show login if user  loged out-->
+  {% else %}
+  <li><a href="{% url 'login' %}"style="color:brown;">Login</a></li>
+  <!--show creating account if user loged out-->
+  <li><a >create account</a>
+    <ul class="dropdown">
+      <li><a  href="{% url 'register_student' %}" style="color: darkblue ; font-size: small;;">student account </a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a   href=" {% url 'register_teacher' %}"><strong style="color:black ; font-size: small;;">teacher account </a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a  href="{% url 'register_institution' %}"><strong style="color:darkred; font-size: small;;">institution account </a></li>
+    </ul>
+</li>
+<!-- show subscribe if user subscription is expired-->
+
+
+{% endif %}
+ 
+
+        
+
+      <!-- Dark/Light Mode Toggle and Mobile Menu Icon -->
+        <div class="navbar-actions">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
+            </label>
+            <div class="menu-icon" onclick="toggleMobileMenu()">☰</div>
+        </div>
+    </nav>
+
+ 
+
+    <!-- JavaScript for Dark Mode and Mobile Menu -->
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        function toggleMobileMenu() {
+            document.querySelector('.navbar-links').classList.toggle('active');
+        }
+    </script>
+ 
+ <style>
+
+
+  /* Basic Reset */
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  /* Body Styling */
+  body {
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .dark-mode {
+      background-color: #121212;
+      color:grey;
+  }
+  
+  /* Navbar Styling */
+  .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      }
+   
+   .logo-oval {
+      padding: 10px 20px;
+      border: 2px solid #4CAF50;
+      border-radius: 50px; /* Creates the oval shape */
+      font-weight: bold;
+      color: #4CAF50;
+      font-size: 24px;
+      display: inline-block;
+      background-color: #ffffff; /* Optional: Set background color */
+      transition: all 0.3s;
+  }
+  
+  .logo-oval .brand-highlight {
+      color: #333333;
+  }
+  
+  .logo-oval:hover {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border-color: #4CAF50;
+  }
+     
+     
+  }
+  
+  .navbar .navbar-brand .logo {
+      font-weight: bold;
+      color:green;
+      font-size: 24px;
+  }
+  
+  .navbar .brand-highlight {
+      color:black;
+  }
+  
+  .navbar-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+  }
+  
+  .navbar-links .nav-item {
+      display: flex;
+      align-items: center;
+  }
+  
+  .navbar-links .nav-item .profile-picture {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin-right: 10px;
+  }
+  
+  .navbar-links a {
+      color: #333333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+  }
+  
+  .navbar-links a:hover {
+      color: #4CAF50;
+  }
+  
+  /* Dropdown Menu */
+  .dropdown {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      list-style: none;
+      padding: 10px;
+      margin-top: 8px;
+  }
+  
+  .navbar-links li:hover .dropdown {
+      display: block;
+  }
+  
+  /* Dark Mode Toggle */
+  .navbar-actions .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+  }
+  
+  .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+  }
+  
+  .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 24px;
+  }
+  
+  .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+      background-color: #4CAF50;
+  }
+  
+  input:checked + .slider:before {
+      transform: translateX(26px);
+  }
+  
+  /* Responsive Mobile Styling */
+  @media (max-width: 768px) {
+      .navbar-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          position: absolute;
+          top: 60px;
+          background-color: #ffffff;
+          box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+      }
+  
+      .navbar-links.active {
+          display: flex;
+      }
+  
+      .menu-icon {
+          font-size: 28px;
+          cursor: pointer;
+          color: #333333;
+      }
+  }
+  
+  <style/>
+
