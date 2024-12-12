@@ -1,0 +1,454 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ 
+
+
+<style>
+    /* General styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+    .container {
+      padding: 40px 20px;
+    }
+    .section-heading {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #333;
+      margin-top: 30px;
+      padding-bottom: 5px;
+    }
+    .section-content {
+      padding-top: 20px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 20px;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .icon-box {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #f0f8ff;
+    }
+    .icon-box i {
+      color: #007bff;
+    }
+    .text-muted {
+      font-size: 0.9rem;
+      color: #888;
+    }
+    .team-member {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .team-member img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .team-member img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .scrolling-cards {
+      display: flex;
+      overflow-x: auto;
+      padding: 10px 0;
+      gap: 10px;
+    }
+    .scrolling-cards .card {
+      min-width: 250px;
+    }
+ 
+    .container {
+      padding: 40px 20px;
+    }
+    .header-image {
+      width: 100%;
+      height: 500px;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 20px;
+    }
+    .video-container {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .section-heading {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #333;
+      margin-top: 30px;
+      padding-bottom: 5px;
+    }
+    .section-content {
+      padding-top: 20px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 20px;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .icon-box {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #f0f8ff;
+    }
+    .icon-box i {
+      color: #007bff;
+    }
+    .text-muted {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .icon-section i {
+            font-size: 3rem;
+            color: #007bff; /* Set icon color to blue */
+            margin-bottom: 1rem;
+        }
+        .icon-section h3 {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        .icon-section p {
+            color: #666;
+        }
+
+  </style>
+</head>
+<body>
+
+  <!-- Large Header Image -->
+<div class="header-image" >
+
+  <img  style="width: 1200px;;" src="media/boy.jpg"  alt="Team Member">
+
+</div>
+<br/>
+
+<!-- Large Video Section -->
+ <!--
+
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/example_video_id?autoplay=1&mute=1&loop=1&playlist=example_video_id"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+  </iframe>
+</div>
+
+
+ -->
+
+ 
+
+<div class="container">
+  <!-- Mission and Vision Section -->
+  <div class="section">
+    <h2 class="section-heading">Our Mission and Vision</h2>
+    <p class="section-content">At LearnLi, we aim to democratize education by offering an accessible, engaging, and diverse learning experience. Our vision is to empower individuals worldwide by connecting them to knowledge and skills for lifelong learning.</p>
+  </div>
+
+  <!-- What We Do Section -->
+  <div class="section">
+    <h2 class="section-heading">What We Do</h2>
+    <div class="section-content">LearnLi provides a user-friendly platform for content creators, students, and educational institutions to connect and collaborate in a vibrant learning community. Through a variety of tools, we support customized learning journeys.</div>
+  </div>
+
+  <!-- Platform Features Section -->
+  <div class="section">
+    <h2 class="section-heading">Platform Features</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon-box"><i class="fas fa-book feature-icon"></i></div>
+              <div>
+                <h5>Courses and Library Access</h5>
+                <p class="text-muted">Browse a diverse selection of books and courses tailored for all levels and fields of study.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon-box"><i class="fas fa-chalkboard-teacher feature-icon"></i></div>
+              <div>
+                <h5>Interactive Learning Tools</h5>
+                <p class="text-muted">Features like font customization, dark mode, translation, and AI assistance personalize learning.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon-box"><i class="fas fa-video feature-icon"></i></div>
+              <div>
+                <h5>Advanced Video Player</h5>
+                <p class="text-muted">Control playback, download, edit, and seamlessly navigate between lessons.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon-box"><i class="fas fa-comments feature-icon"></i></div>
+              <div>
+                <h5>Messaging System</h5>
+                <p class="text-muted">Stay connected with instructors and classmates through our integrated messaging system.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon-box"><i class="fas fa-money-bill-wave feature-icon"></i></div>
+              <div>
+                <h5>Secure Payment System</h5>
+                <p class="text-muted">Make secure transactions with our reliable and convenient payment options.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon-box"><i class="fas fa-user-shield feature-icon"></i></div>
+              <div>
+                <h5>Data Privacy and Security</h5>
+                <p class="text-muted">LearnLi is dedicated to safeguarding user data with industry-standard security protocols.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <main class="container my-5">
+     
+    <div class="row">
+        <div class="col-md-4 text-center icon-section">
+            <i class="fas fa-book-reader"></i>
+            <h3>Our Goal</h3>
+            <p>Empowering learners and educators with the best digital resources and tools to make learning accessible for everyone.</p>
+        </div>
+        <div class="col-md-4 text-center icon-section">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>Experienced Instructors</h3>
+            <p>Partnering with top educators and institutions to deliver high-quality content tailored for your success.</p>
+        </div>
+        <div class="col-md-4 text-center icon-section">
+            <i class="fas fa-globe"></i>
+            <h3>Global Reach</h3>
+            <p>Connecting learners and teachers worldwide, fostering collaboration and knowledge-sharing across cultures.</p>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-4 text-center icon-section">
+            <i class="fas fa-lock"></i>
+            <h3>Secure Platform</h3>
+            <p>Ensuring the safety of your data with advanced security measures and a privacy-focused approach.</p>
+        </div>
+        <div class="col-md-4 text-center icon-section">
+            <i class="fas fa-users"></i>
+            <h3>Community Engagement</h3>
+            <p>Building a vibrant community for learners and educators to interact, grow, and share ideas.</p>
+        </div>
+        <div class="col-md-4 text-center icon-section">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Innovative Learning</h3>
+            <p>Providing cutting-edge tools and resources to revolutionize the way you learn and teach.</p>
+        </div>
+    </div>
+</main>
+
+
+
+
+  <!-- Meet Our Team Section -->
+  <div class="section">
+    <h2 class="section-heading">Meet Our Team</h2>
+    <div class="row">
+      <div class="col-md-3 team-member">
+        <img src="https://via.placeholder.com/120" alt="Team Member">
+        <h5>John Doe</h5>
+        <p class="text-muted">Founder & CEO</p>
+      </div>
+      <div class="col-md-3 team-member">
+        <img src="https://via.placeholder.com/120" alt="Team Member">
+        <h5>Jane Smith</h5>
+        <p class="text-muted">Head of Content</p>
+      </div>
+      <div class="col-md-3 team-member">
+        <img src="https://via.placeholder.com/120" alt="Team Member">
+        <h5>Emma Johnson</h5>
+        <p class="text-muted">Lead Developer</p>
+      </div>
+      <div class="col-md-3 team-member">
+        <img src="https://via.placeholder.com/120" alt="Team Member">
+        <h5>Mike Lee</h5>
+        <p class="text-muted">Marketing Specialist</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Services Section with Scrolling Cards -->
+  <div class="section">
+    <h2 class="section-heading">Our Services</h2>
+    <div class="scrolling-cards">
+      <div class="card">
+        <div class="card-body">
+          <h5>Personalized Learning</h5>
+          <p class="text-muted">Customized learning paths tailored to each student’s needs and goals.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5>Institutional Partnerships</h5>
+          <p class="text-muted">Collaborations with top institutions to ensure quality content.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5>Flexible Subscription Plans</h5>
+          <p class="text-muted">Affordable and adaptable plans for both short-term and long-term access.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5>Content Creation Support</h5>
+          <p class="text-muted">Tools and resources to help content creators build impactful courses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+ <!-- chart with us -->
+ <div id="chat-button" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; background-color:green; padding: 10px 20px; border-radius: 30px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); display: flex; align-items: center;">
+  <i class="fas fa-comment-alt" style="color:blue; font-size: 24px; margin-right: 10px;"></i>
+  <span style="color: white; font-size: 16px;">Chat with us</span>
+</div>
+
+<div id="chat-form" style="display: none; position: fixed; bottom: 80px; right: 0px; background: pink; border: 1px solid #ccc; padding: 20px; width: 300px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);">
+  <form id="chatForm" method="post" action="{% url 'contact_message' %} ">
+      {% csrf_token %}
+      
+      <div style="display: flex; flex-direction: column;">
+           
+         
+          <label for="id_message" style="color: blue;">chart:</label>
+          <textarea name="message" id="id_message" required>Type a message...</textarea>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+              <button type="submit" style="background-color: green; color: white;">Send</button>
+              <button id="close-chat" type="button" style="background-color: red; color: white;">Close</button>
+          </div>
+      </div>
+  </form>
+</div>
+
+<script>
+  // Show the chat form when the button is clicked
+  document.getElementById('chat-button').onclick = function() {
+      document.getElementById('chat-form').style.display = 'block';
+  };
+ 
+  // Hide the chat form when the close button is clicked
+  
+  document.getElementById('close-chat').onclick = function() {
+      document.getElementById('chat-form').style.display = 'none';
+  };
+ 
+  // Change the text area color and placeholder on focus and blur
+  const messageField = document.getElementById('id_message');
+  messageField.style.color = 'black';
+ 
+  messageField.onfocus = function() {
+      if (messageField.value === 'Type a message...') {
+          messageField.value = '';
+      }
+      messageField.style.color = 'white';
+      messageField.style.backgroundColor = 'black';
+  };
+ 
+  messageField.onblur = function() {
+      if (messageField.value === '') {
+          messageField.value = 'Type a message...';
+          messageField.style.color = 'black';
+          messageField.style.backgroundColor = 'white';
+      }
+  };
+</script>
+
+
+
+ 
+ 
+{% endblock %}
