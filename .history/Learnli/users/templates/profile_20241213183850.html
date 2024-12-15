@@ -1,0 +1,310 @@
+ 
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnLi Profile</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            margin: 40px auto;
+            max-width: 1200px;
+        }
+
+        h2 {
+            color: #333;
+            margin: 20px 0;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 3px solid #ddd;
+        }
+
+        .profile-details h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .profile-details p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Follow Button */
+        .follow-btn {
+            position: absolute;
+            top: 15px;
+            left: -25px;
+            width: 30px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .follow-btn:hover {
+            background-color: #4CAF50;
+        }
+
+        .follow-btn span {
+            color: white;
+            font-size: 16px;
+        }
+
+        /* Recommendations Section */
+        .recommendations {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            gap: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .recommendation-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            padding: 15px;
+            min-width: 250px;
+            max-width: 250px;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .recommendation-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .recommendation-card h4 {
+            margin: 10px 0 5px;
+            font-size: 1.2rem;
+        }
+
+        .recommendation-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .recommendation-card .author {
+            font-size: 0.9rem;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            margin-top: 30px;
+        }
+
+        .dashboard table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard table th,
+        .dashboard table td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .dashboard table th {
+            background-color: #ccc;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .dashboard table tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        /* Button Styling */
+        .btn {
+            background-color: #ccc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #b3b3b3;
+        }
+
+        /* Animation for Carousel */
+        .recommendations {
+            animation: scrollCarousel 10s linear infinite;
+        }
+
+        @keyframes scrollCarousel {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Profile Card -->
+    <div class="profile-card">
+        <img src="https://via.placeholder.com/120" alt="User Image" class="profile-image">
+        <div class="profile-details">
+            <h3>John Doe</h3>
+            <p>Email: johndoe@example.com</p>
+            <p>Joined: January 1, 2023</p>
+            <p>School: XYZ University</p>
+            <p>Phone: +1234567890</p>
+            <p>Followers: 150 | Following: 80</p>
+            <p>Subscription: Active</p>
+            <button class="btn">Edit Profile</button>
+            <div>
+                <a href="#" class="btn" style="margin-right: 10px;">E-Library</a>
+                <a href="#" class="btn">Library</a>
+            </div>
+        </div>
+        <div class="follow-btn">
+            <span>+</span>
+        </div>
+    </div>
+
+    <!-- Recommendations Section -->
+    <h2>Recommended for You</h2>
+    <div class="recommendations">
+        <div class="recommendation-card">
+            <img src="https://via.placeholder.com/250x150" alt="eBook Image">
+            <h4>Learn Python</h4>
+            <p>Master Python programming with this course.</p>
+            <p class="author">Author: Jane Smith</p>
+        </div>
+        <div class="recommendation-card">
+            <img src="https://via.placeholder.com/250x150" alt="eBook Image">
+            <h4>Data Science Basics</h4>
+            <p>Get started with data science fundamentals.</p>
+            <p class="author">Author: John Doe</p>
+        </div>
+        <div class="recommendation-card">
+            <img src="https://via.placeholder.com/250x150" alt="eBook Image">
+            <h4>Web Development</h4>
+            <p>Learn how to build stunning websites from scratch.</p>
+            <p class="author">Author: Sarah Lee</p>
+        </div>
+        <div class="recommendation-card">
+            <img src="https://via.placeholder.com/250x150" alt="eBook Image">
+            <h4>Machine Learning</h4>
+            <p>Understand the basics of machine learning and AI.</p>
+            <p class="author">Author: Mark Johnson</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div class="dashboard">
+        <h2>Your Dashboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Section</th>
+                    <th>Count</th>
+                    <th>Material Sold</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Programming</td>
+                    <td>12</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>Data Science</td>
+                    <td>8</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>Web Development</td>
+                    <td>15</td>
+                    <td>30</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+ 
+ 
+
+
+
+{% endblock %}
+
+
+  
