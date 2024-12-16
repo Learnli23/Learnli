@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -99,7 +98,7 @@ FLUTTERWAVE_SECRET_KEY = os.getenv('FLUTTERWAVE_SECRET_KEY')
 FLUTTERWAVE_SECRET_KEY = 'FLWSECK_TEST-3167d251d49a00bccb920091765b7994-X'
 FLUTTERWAVE_PUBLIC_KEY = "FLWPUBK_TEST-e100344f252a9bc2bfda7319c8a3f200-X"
 #openai api key
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("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")
 
 # Twilio SMS Configuration (Optional)
 TWILIO_ACCOUNT_SID = 'your_twilio_account_sid'

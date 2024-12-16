@@ -1,3 +1,2 @@
 #ignore sqlite database 
 db.sqlite3
-.env

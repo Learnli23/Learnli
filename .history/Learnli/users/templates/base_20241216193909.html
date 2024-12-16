@@ -1880,7 +1880,7 @@
           #assistant-button {
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            right: 20px;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -1904,7 +1904,7 @@
         #chat-window {
             position: fixed;
             bottom: 90px;
-            left: 20px;
+            right: 20px;
             width: 350px;
             background-color: white;
             border: 1px solid #ccc;
@@ -2111,7 +2111,7 @@
   
               <div id="chat-messages">
                   <div class="bot-message message">
-                      <img src="media/amos.jpg" class="profile-pic" alt="Laner" />
+                      <img src="https://via.placeholder.com/30" class="profile-pic" alt="Laner" />
                       <div class="message-content">Hi! I'm Laner. How can I assist you today?</div>
                   </div>
               </div>
@@ -2143,8 +2143,8 @@
         const userInput = document.getElementById("user-input");
         const chatMessages = document.getElementById("chat-messages");
 
-        const userImage = "{{ user.profile_image.url }}";
-        const botImage = "media/amos.jpg";
+        const userImage = "https://via.placeholder.com/30";
+        const botImage = "https://via.placeholder.com/30";
 
         // Toggle chat window
         function toggleChatWindow() {

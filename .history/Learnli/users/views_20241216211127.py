@@ -33,12 +33,7 @@ from.forms import ReportContentForm
 from.models import FlaggedContent
 import openai
 
-
-# Set up the OpenAI API key
-openai.api_key = settings.OPENAI_API_KEY
-
 #Assistant view
-
 @csrf_exempt
 def chat(request):
     if request.method == "POST":
@@ -60,8 +55,6 @@ def chat(request):
 
             except Exception as e:
                 return JsonResponse({"message": f"Error: {str(e)}"})
-
-    return JsonResponse({"message": "Invalid request method."})
 
 
 

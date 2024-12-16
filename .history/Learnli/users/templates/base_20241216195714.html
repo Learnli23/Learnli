@@ -1876,11 +1876,30 @@
              }
          }
 
-          /* Assistant Button */
-          #assistant-button {
+         
+ 
+  }
+ 
+     </style>
+
+
+
+
+
+
+<!-- templates/base.html or appropriate template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laner - Your Personal Assistant</title>
+    <style>
+        /* Assistant Button */
+        #assistant-button {
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            right: 20px;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -1904,7 +1923,7 @@
         #chat-window {
             position: fixed;
             bottom: 90px;
-            left: 20px;
+            right: 20px;
             width: 350px;
             background-color: white;
             border: 1px solid #ccc;
@@ -2008,18 +2027,46 @@
 
         #send-btn:hover {
             background-color: #388e3c;
-        }       
+        }
+    </style>
+</head>
+<body>
+    <div id="assistant-container">
+        <button id="assistant-button">Laner</button>
+
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>Laner: Your Personal Assistant</span>
+                <button id="close-chat">✖</button>
+            </div>
+
+            <div id="chat-messages">
+                <div class="bot-message message">
+                    <img src="https://via.placeholder.com/30" class="profile-pic" alt="Laner" />
+                    <div class="message-content">Hi! I'm Laner. How can I assist you today?</div>
+                </div>
+            </div>
+
+            <div id="message-input">
+                <input type="text" id="user-input" placeholder="Type your message..." />
+                <button id="send-btn">➤</button>
+            </div>
+        </div>
+    </div>
+
+   
+</body>
+</html>
+
+
+
+
+
+
  
+
   
- 
-     </style>
-
-
-
-
-
-
- 
+  
  
      <!-- Footer -->
      <footer class="footer">
@@ -2099,29 +2146,8 @@
          <div class="copyright">
              &copy; <span id="current-year"></span> LearnLi. All rights reserved.
          </div>
-           <!--assistant-->
-         <div id="assistant-container">
-          <button id="assistant-button">Laner</button>
-  
-          <div id="chat-window">
-              <div id="chat-header">
-                  <span>Laner: Your Personal Assistant</span>
-                  <button id="close-chat">✖</button>
-              </div>
-  
-              <div id="chat-messages">
-                  <div class="bot-message message">
-                      <img src="media/amos.jpg" class="profile-pic" alt="Laner" />
-                      <div class="message-content">Hi! I'm Laner. How can I assist you today?</div>
-                  </div>
-              </div>
-  
-              <div id="message-input">
-                  <input type="text" id="user-input" placeholder="Type your message..." />
-                  <button id="send-btn">➤</button>
-              </div>
-          </div>
-      </div>
+
+
  
     
 
@@ -2134,76 +2160,76 @@
      </script>
  
   <!--script for the  assistant-->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const assistantButton = document.getElementById("assistant-button");
-        const chatWindow = document.getElementById("chat-window");
-        const closeChat = document.getElementById("close-chat");
-        const sendButton = document.getElementById("send-btn");
-        const userInput = document.getElementById("user-input");
-        const chatMessages = document.getElementById("chat-messages");
+   <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const assistantButton = document.getElementById("assistant-button");
+            const chatWindow = document.getElementById("chat-window");
+            const closeChat = document.getElementById("close-chat");
+            const sendButton = document.getElementById("send-btn");
+            const userInput = document.getElementById("user-input");
+            const chatMessages = document.getElementById("chat-messages");
 
-        const userImage = "{{ user.profile_image.url }}";
-        const botImage = "media/amos.jpg";
+            const userImage = "https://via.placeholder.com/30";
+            const botImage = "https://via.placeholder.com/30";
 
-        // Toggle chat window
-        function toggleChatWindow() {
-            chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
-        }
+            // Toggle chat window
+            function toggleChatWindow() {
+                chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
+            }
 
-        assistantButton.addEventListener("click", toggleChatWindow);
-        closeChat.addEventListener("click", toggleChatWindow);
+            assistantButton.addEventListener("click", toggleChatWindow);
+            closeChat.addEventListener("click", toggleChatWindow);
 
-        // Send message
-        function sendMessage() {
-            const message = userInput.value.trim();
-            if (message === "") return;
+            // Send message
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message === "") return;
 
-            displayMessage(message, "user");
+                displayMessage(message, "user");
 
-            fetch("/assistant/chat/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: `message=${message}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                displayMessage(data.message, "bot");
-            })
-            .catch(error => {
-                displayMessage("Something went wrong. Please try again.", "bot");
+                fetch("/assistant/chat/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `message=${message}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    displayMessage(data.message, "bot");
+                })
+                .catch(error => {
+                    displayMessage("Something went wrong. Please try again.", "bot");
+                });
+
+                userInput.value = "";
+            }
+
+            function displayMessage(message, sender) {
+                const messageContainer = document.createElement("div");
+                messageContainer.classList.add("message", sender === "user" ? "user-message" : "bot-message");
+
+                const profileImage = document.createElement("img");
+                profileImage.src = sender === "user" ? userImage : botImage;
+                profileImage.classList.add("profile-pic");
+
+                const messageContent = document.createElement("div");
+                messageContent.classList.add("message-content");
+                messageContent.textContent = message;
+
+                messageContainer.appendChild(profileImage);
+                messageContainer.appendChild(messageContent);
+
+                chatMessages.appendChild(messageContainer);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            sendButton.addEventListener("click", sendMessage);
+            userInput.addEventListener("keypress", (event) => {
+                if (event.key === "Enter") sendMessage();
             });
-
-            userInput.value = "";
-        }
-
-        function displayMessage(message, sender) {
-            const messageContainer = document.createElement("div");
-            messageContainer.classList.add("message", sender === "user" ? "user-message" : "bot-message");
-
-            const profileImage = document.createElement("img");
-            profileImage.src = sender === "user" ? userImage : botImage;
-            profileImage.classList.add("profile-pic");
-
-            const messageContent = document.createElement("div");
-            messageContent.classList.add("message-content");
-            messageContent.textContent = message;
-
-            messageContainer.appendChild(profileImage);
-            messageContainer.appendChild(messageContent);
-
-            chatMessages.appendChild(messageContainer);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        sendButton.addEventListener("click", sendMessage);
-        userInput.addEventListener("keypress", (event) => {
-            if (event.key === "Enter") sendMessage();
         });
-    });
-</script>
+    </script>
  
 
 

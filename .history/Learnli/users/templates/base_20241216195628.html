@@ -1745,7 +1745,14 @@
  <!--footer-->
 
      <style>
-
+         body {
+             margin: 0;
+             padding: 0;
+             font-family: Arial, sans-serif;
+             display: flex;
+             flex-direction: column;
+             min-height: 100vh;
+         }
  
          /* Main Content Area */
          .content {
@@ -1875,151 +1882,133 @@
                  justify-content: center;
              }
          }
-
-          /* Assistant Button */
-          #assistant-button {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #4caf50; /* Green */
-            color: white;
-            border: none;
-            font-weight: bold;
-            font-size: 14px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
-        }
-
-        #assistant-button:hover {
-            background-color: #777; /* Gray */
-            color: white;
-        }
-
-        /* Chat Window */
-        #chat-window {
-            position: fixed;
-            bottom: 90px;
-            left: 20px;
-            width: 350px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 1000;
-            height: 400px;
-        }
-
-        /* Chat Header */
-        #chat-header {
-            background-color: #777;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-            position: relative;
-        }
-
-        #close-chat {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        /* Chat Messages */
-        #chat-messages {
-            flex-grow: 1;
-            padding: 10px;
-            overflow-y: auto;
-            background-color: #f9f9f9;
-        }
-
-        .message {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .user-message {
-            flex-direction: row-reverse;
-            justify-content: flex-end;
-        }
-
-        .message-content {
-            padding: 8px 12px;
-            border-radius: 10px;
-            max-width: 70%;
-            word-wrap: break-word;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .user-message .message-content {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        .bot-message .message-content {
-            background-color: #ddd;
-            color: #333;
-        }
-
-        .profile-pic {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-
-        /* Message Input */
-        #message-input {
-            display: flex;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border-top: 1px solid #ccc;
-        }
-
-        #user-input {
-            flex-grow: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        #send-btn {
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #send-btn:hover {
-            background-color: #388e3c;
-        }       
- 
-  
- 
      </style>
 
+<style>
+  /* Button Styles */
+  #assistant-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color:#218838; /* Green background */
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
+  #assistant-btn:hover {
+    background-color:gray; /* Darker green on hover */
+  }
 
+  #assistant-btn img {
+    width: 30px;
+    height: 30px;
+  }
 
+  /* Modal Styles */
+  #assistant-modal {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    width: 350px;
+    background-color:gray;
+    border-radius: 10px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+  }
 
+  .assistant-header {
+    background-color:gray; /* Green background */
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
 
- 
+  .assistant-header .close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .assistant-body {
+    padding: 15px;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+  }
+
+  #messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .message {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    max-width: 70%;
+  }
+
+  .assistant-message {
+    background-color:gray; /* Green message */
+    color: #fff;
+    align-self: flex-start;
+  }
+
+  /* Footer */
+  .assistant-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+  }
+
+  .assistant-footer input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #e9e9e9;
+    margin-right: 10px;
+  }
+
+  .assistant-footer button {
+    background-color:gray; /* Green background */
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .assistant-footer button:hover {
+    background-color: #218838; /* Darker green */
+  }
+</style>
+
+     <!-- Add Font Awesome for social media and contact icons -->
+     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
  
      <!-- Footer -->
      <footer class="footer">
@@ -2099,31 +2088,35 @@
          <div class="copyright">
              &copy; <span id="current-year"></span> LearnLi. All rights reserved.
          </div>
-           <!--assistant-->
-         <div id="assistant-container">
-          <button id="assistant-button">Laner</button>
-  
-          <div id="chat-window">
-              <div id="chat-header">
-                  <span>Laner: Your Personal Assistant</span>
-                  <button id="close-chat">✖</button>
-              </div>
-  
-              <div id="chat-messages">
-                  <div class="bot-message message">
-                      <img src="media/amos.jpg" class="profile-pic" alt="Laner" />
-                      <div class="message-content">Hi! I'm Laner. How can I assist you today?</div>
-                  </div>
-              </div>
-  
-              <div id="message-input">
-                  <input type="text" id="user-input" placeholder="Type your message..." />
-                  <button id="send-btn">➤</button>
-              </div>
-          </div>
+
+
+<!-- AI Assistant Button -->
+<div id="ai-assistant">
+  <button id="assistant-btn" onclick="toggleAssistant()">
+  <p style = " color:white;">Chart</P>  
+  </button>
+
+  <!-- Assistant Modal -->
+  <div id="assistant-modal">
+    <div class="assistant-header">
+      <span>Laner:Your Personal Assistant</span>
+     
+      <button class="close-btn" onclick="toggleAssistant()">×</button>
+    </div>
+    <div class="assistant-body">
+      <div id="messages">
+        <!-- Example message -->
+        <div class="message assistant-message">
+          Hi! I'm Laner. How can I assist you today?
+        </div>
       </div>
- 
-    
+    </div>
+    <div class="assistant-footer">
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button id="send-btn">➤</button>
+    </div>
+  </div>
+</div>
 
 
      </footer>
@@ -2133,78 +2126,24 @@
          document.getElementById('current-year').textContent = new Date().getFullYear();
      </script>
  
-  <!--script for the  assistant-->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const assistantButton = document.getElementById("assistant-button");
-        const chatWindow = document.getElementById("chat-window");
-        const closeChat = document.getElementById("close-chat");
-        const sendButton = document.getElementById("send-btn");
-        const userInput = document.getElementById("user-input");
-        const chatMessages = document.getElementById("chat-messages");
+ <script>
+  function toggleAssistant() {
+    const modal = document.getElementById("assistant-modal");
+    modal.style.display = modal.style.display === "none" || modal.style.display === "" ? "flex" : "none";
+  }
 
-        const userImage = "{{ user.profile_image.url }}";
-        const botImage = "media/amos.jpg";
-
-        // Toggle chat window
-        function toggleChatWindow() {
-            chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
-        }
-
-        assistantButton.addEventListener("click", toggleChatWindow);
-        closeChat.addEventListener("click", toggleChatWindow);
-
-        // Send message
-        function sendMessage() {
-            const message = userInput.value.trim();
-            if (message === "") return;
-
-            displayMessage(message, "user");
-
-            fetch("/assistant/chat/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: `message=${message}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                displayMessage(data.message, "bot");
-            })
-            .catch(error => {
-                displayMessage("Something went wrong. Please try again.", "bot");
-            });
-
-            userInput.value = "";
-        }
-
-        function displayMessage(message, sender) {
-            const messageContainer = document.createElement("div");
-            messageContainer.classList.add("message", sender === "user" ? "user-message" : "bot-message");
-
-            const profileImage = document.createElement("img");
-            profileImage.src = sender === "user" ? userImage : botImage;
-            profileImage.classList.add("profile-pic");
-
-            const messageContent = document.createElement("div");
-            messageContent.classList.add("message-content");
-            messageContent.textContent = message;
-
-            messageContainer.appendChild(profileImage);
-            messageContainer.appendChild(messageContent);
-
-            chatMessages.appendChild(messageContainer);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        sendButton.addEventListener("click", sendMessage);
-        userInput.addEventListener("keypress", (event) => {
-            if (event.key === "Enter") sendMessage();
-        });
-    });
+  document.getElementById("send-btn").addEventListener("click", function () {
+    const userInput = document.getElementById("user-input");
+    const message = userInput.value.trim();
+    if (message) {
+      const messageDiv = document.createElement("div");
+      messageDiv.className = "message user-message";
+      messageDiv.textContent = message;
+      document.getElementById("messages").appendChild(messageDiv);
+      userInput.value = "";
+    }
+  });
 </script>
- 
 
 
  

@@ -159,6 +159,7 @@
         .icon-section p {
             color: #666;
         }
+        
 
   </style>
 </head>
@@ -391,13 +392,13 @@
 
 
  <!-- chart with us -->
- <div id="chatt-button" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; background-color:green; padding: 10px 20px; border-radius: 30px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); display: flex; align-items: center;">
+ <div id="chat-button" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; background-color:green; padding: 10px 20px; border-radius: 30px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); display: flex; align-items: center;">
   <i class="fas fa-comment-alt" style="color:blue; font-size: 24px; margin-right: 10px;"></i>
   <span style="color: white; font-size: 16px;">Chat with us</span>
 </div>
 
-<div id="chatt-form" style="display: none; position: fixed; bottom: 80px; right: 0px; background: pink; border: 1px solid #ccc; padding: 20px; width: 300px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);">
-  <form id="chattForm" method="post" action="{% url 'contact_message' %} ">
+<div id="chat-form" style="display: none; position: fixed; bottom: 80px; right: 0px; background: pink; border: 1px solid #ccc; padding: 20px; width: 300px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);">
+  <form id="chatForm" method="post" action="{% url 'contact_message' %} ">
       {% csrf_token %}
       
       <div style="display: flex; flex-direction: column;">
@@ -408,7 +409,7 @@
 
           <div style="display: flex; justify-content: space-between; margin-top: 10px;">
               <button type="submit" style="background-color: green; color: white;">Send</button>
-              <button id="close-chatt" type="button" style="background-color: red; color: white;">Close</button>
+              <button id="close-chat_1" type="button" style="background-color: red; color: white;">Close</button>
           </div>
       </div>
   </form>
@@ -416,14 +417,14 @@
 
 <script>
   // Show the chat form when the button is clicked
-  document.getElementById('chatt-button').onclick = function() {
-      document.getElementById('chatt-form').style.display = 'block';
+  document.getElementById('chat-button').onclick = function() {
+      document.getElementById('chat-form').style.display = 'block';
   };
  
   // Hide the chat form when the close button is clicked
   
-  document.getElementById('close-chatt').onclick = function() {
-      document.getElementById('chatt-form').style.display = 'none';
+  document.getElementById('close_1-chat').onclick = function() {
+      document.getElementById('chat-form').style.display = 'none';
   };
  
   // Change the text area color and placeholder on focus and blur
