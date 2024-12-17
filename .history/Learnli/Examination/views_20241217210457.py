@@ -1,15 +1,14 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Exam,Answer,Test,Test_answer,RegisterforExam,Test_answer_response,Exam_answer_response
-from .forms import AnswerForm ,ExamForm,TestForm,Test_answerForm,Test_answer_responseForm,Exam_answer_responseForm
+from .forms import AnswerForm ,ExamForm,TestForm,Test_answerForm,RegisterforExamForm,Test_answer_responseForm,Exam_answer_responseForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib import messages
-from users.models import user_Profile
 
 
 # Create your views here.
- # creating an exam
+ 
 @login_required
 def exam(request): 
     submitted = False
@@ -30,7 +29,7 @@ def exam(request):
     return render(request,'Exam.html' ,{'form':form, 'submitted':submitted})
 
 
-# reistering for the xam view
+# reisterin for the xam view
 @login_required
 def register(request): 
     candidate_profile = request.user #created_by in  request.user.follows.all
@@ -42,11 +41,10 @@ def register(request):
     if request.method == 'POST':
         exam_id = request.POST.get('exam_id')
         exam = get_object_or_404(Exam, id=exam_id)
-        exam.candidates.add(candidate_profile)
-        messages.success(request,('you have successfully registered for this examination'))
-        return redirect('home')
+        exam.registered_students.add(candidate_profile)
+        return redirect('registered_exams')
 
-    return render(request, 'RegisterforExamForm.html', {'exams': exams})
+    return render(request, 'register_for_exam.html', {'exams': exams})
 
 
 '''
@@ -69,24 +67,13 @@ def register(request):
 
 '''
 
-#All students who registered for exams created by the logged-in teacher.
+
 @login_required
 def examRegister(request):
-    teacher_profile = request.user
-   
-    # Fetch all exams created by this teacher
-    teacher_exams = Exam.objects.filter(created_by=teacher_profile,candidates__isnull =False).distinct()
-    # Collect all students registered for those exams
-    candidates =user_Profile.objects.filter(exam_registered__created_by=teacher_profile).distinct()
-
-    return render(request, 'Examregistration.html', {'candidates': candidates})
-
-'''
     candidates = RegisterforExam.objects.all()
     return render(request, 'Examregistration.html',{
         'candidates':candidates
     })
-'''
 
 #deleting a canndidate
 @login_required

@@ -16,7 +16,6 @@
           <tr>
               <th>Student Name</th>
               <th>Registered Exams</th>
-              <th>Teacher</th>
               <th>Action</th>
           </tr>
       </thead>
@@ -33,16 +32,12 @@
                       {% endfor %}
                    
               </td>
-              {% for exam in candidate.exam_registered.all %}
-              <td>{{ exam.created_by }}</td>
-              {% endfor %}
-
           {% for exam in candidate.exam_registered.all %}
            {% if exam.created_by == request.user %}   
            <td> 
 
           
-           <a><p style="font-size: small;">Remove </p></a>
+           <p style="font-size: small;">Remove </p>
 
            </td>
           {% endif %}

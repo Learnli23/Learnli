@@ -16,8 +16,6 @@
           <tr>
               <th>Student Name</th>
               <th>Registered Exams</th>
-              <th>Teacher</th>
-              <th>Action</th>
           </tr>
       </thead>
       <tbody>
@@ -25,39 +23,20 @@
           <tr>
               <td>{{ candidate.username }}</td>
               <td>
-                  
+                  <ul>
                       {% for exam in candidate.exam_registered.all %}
                           {% if exam.created_by == request.user %}
-                          <p>{{ exam.Examination_name }} - {{ exam.Date }}</p>
+                          <li>{{ exam.Examination_name }} - {{ exam.Date }}</li>
                           {% endif %}
                       {% endfor %}
-                   
+                  </ul>
               </td>
-              {% for exam in candidate.exam_registered.all %}
-              <td>{{ exam.created_by }}</td>
-              {% endfor %}
-
-          {% for exam in candidate.exam_registered.all %}
-           {% if exam.created_by == request.user %}   
-           <td> 
-
-          
-           <a><p style="font-size: small;">Remove </p></a>
-
-           </td>
-          {% endif %}
-          {% endfor %}
           </tr>
           {% empty %}
           <tr>
               <td colspan="2"> <strong style="font-size: small;"></strong>No candidates have registered for your exams.</td>
           </tr>
-          
-       
-      
           {% endfor %}
-
-
       </tbody>
   </table>
   

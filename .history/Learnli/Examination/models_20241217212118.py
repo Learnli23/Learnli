@@ -18,7 +18,7 @@ class Exam(models.Model):
     Question = RichTextField()
     created_by  = models.ForeignKey(user_Profile, on_delete=models.CASCADE,related_name='created_by')
     release = models.BooleanField(default=False)
-    candidates = models.ManyToManyField(user_Profile, related_name ="exam_registered", blank=True)
+    candidates = models.ManyToManyField(user_Profile, related_name ="exam_registered" blank=True)
 
     def __str__(self):
         return  f" {self.Examination_name} creeated by {self.created_by}"

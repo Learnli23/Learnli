@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Exam,Answer,Test,Test_answer,RegisterforExam,Test_answer_response,Exam_answer_response
-from .forms import AnswerForm ,ExamForm,TestForm,Test_answerForm,Test_answer_responseForm,Exam_answer_responseForm
+from .forms import AnswerForm ,ExamForm,TestForm,Test_answerForm,RegisterforExamForm,Test_answer_responseForm,Exam_answer_responseForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib import messages

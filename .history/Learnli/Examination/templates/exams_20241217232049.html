@@ -16,7 +16,7 @@
 
 
 {% for exam  in exams %}
- 
+{%  %}
 {% if exam.created_by in  request.user.follows.all and request.user in exam.candidates.all or request.user == exam.created_by %}
   <div class="exam-card">
     <!-- Exam Header -->
