@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<button type="button" class="btn btn-primary">
+
+  <span class="badge bg-danger">{{candidates.count}} </span> registered
+  
+  </button>
+  <br/><br/>
+
+
+ 
+  <p style="font-size: small;">Candidate List</p>
+  <table border="1">
+      <thead>
+          <tr>
+              <th>Student Name</th>
+              <th>Registered Exams</th>
+              <th>Teacher</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+         
+        {% for candidate in candidates %}
+        {% for exam in candidate.exam_registered.all %}
+        {% if exam.created_by == request.user %}
+          <tr>
+           
+              <td>{{ candidate.username }}</td>
+              <td>
+                  
+                 <p>{{ exam.Examination_name }} - {{ exam.Date }}</p>
+                         
+              </td>
+              
+              <td>{{ exam.created_by }}</td>
+           <td> 
+           <a><p style="font-size: small;">Remove </p></a>
+
+           </td>
+          {% endif %}
+          {% endfor %}
+          </tr>
+         
+    
+          {% endfor %}
+          <tr>
+            <td colspan="2"> <strong style="font-size: small;"></strong>No candidates have registered for your exams.</td>
+        </tr>
+
+
+      </tbody>
+  </table>
+  
+
+
+
+
+
+
+
+{% endblock %}
