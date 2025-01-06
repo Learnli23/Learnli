@@ -32,10 +32,7 @@ SECRET_KEY = os.environ.get('Learnli_SECRET_KEY'),
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('Learnli_DEBUG')
 
-ALLOWED_HOSTS = ['learnlee-production.up.railway.app','https//:learnlee-production.up.railway.app']
-#csrf_token configuration to adid ngrok
-CSRF_TRUSTED_ORIGINS = ['learnlee-production.up.railway.app','https//:learnlee-production.up.railway.app']
-
+ALLOWED_HOSTS = ['learnlee-production.up.railway.app']
 AUTH_USER_MODEL ='users.user_Profile'
 
 
@@ -142,6 +139,10 @@ SESSION_COOKIE_AGE = 3600  # 1 hour
 
 
 '''
+
+
+#csrf_token configuration to adid ngrok
+CSRF_TRUSTED_ORIGINS =['https://261b-41-210-146-72.ngrok-free.app']
 
 # Timezone settings
 USE_TZ = True
