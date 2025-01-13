@@ -27,14 +27,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('Learnli_SECRET_KEY'),
+SECRET_KEY = '8q@(8$v*3g4$=o%v41_ms+ztlt36+$ljl(o9%cg4in#ptv00=u' #os.environ.get('Learnli_SECRET_KEY'),
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('Learnli_DEBUG')
+DEBUG = True #os.environ.get('Learnli_DEBUG')
 
-ALLOWED_HOSTS = ['learnlee-production.up.railway.app','https//:learnlee-production.up.railway.app']
+ALLOWED_HOSTS = ['*'] #['learnlee-production.up.railway.app','https//:learnlee-production.up.railway.app']
 #csrf_token configuration to adid ngrok
-CSRF_TRUSTED_ORIGINS = ['learnlee-production.up.railway.app','https//:learnlee-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = []
 
 AUTH_USER_MODEL ='users.user_Profile'
 
@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'djangoflutterwave',
     'crispy_forms',
     'phonenumber_field',
-    'whitenoise.runserver_nostatic',
+    #'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_otp.middleware.OTPMiddleware',
     'Learnli.middleware.CheckSubscriptionMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 
 
     
