@@ -16,13 +16,13 @@ from django.contrib.contenttypes.models import ContentType
  
 # ***** MODEL TO HANDLE USERS****
 class  user_Profile(AbstractUser):
-    phone = models.CharField(max_length=1000,blank=True)
-    school =models.CharField(max_length=1000,blank =True)
-    major =models.CharField(max_length=1000,blank =True)
-    subject =models.CharField(max_length=1000,blank =True)
-    contact = models.CharField(max_length=1000,blank =True)
-    location =models.CharField(max_length=1000,blank =True)
-    website =models.URLField(max_length=1000,blank=True)
+    phone = models.CharField(max_length=200,blank=True)
+    school =models.CharField(max_length=200,blank =True)
+    major =models.CharField(max_length=200,blank =True)
+    subject =models.CharField(max_length=200,blank =True)
+    contact = models.CharField(max_length=200,blank =True)
+    location =models.CharField(max_length=200,blank =True)
+    website =models.URLField(max_length=200,blank=True)
     follows = models.ManyToManyField('self',related_name = 'followed_by', symmetrical = False, blank = True)
     date_modified = models.DateTimeField(User,auto_now = True)
     profile_image = models.ImageField(null = True, blank = True, upload_to ="media/") 

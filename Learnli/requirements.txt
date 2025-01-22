@@ -23,6 +23,7 @@ colorama==0.4.6
 contourpy==1.2.0
 cycler==0.12.1
 distro==1.9.0
+dj-database-url==2.3.0
 Django==5.1.1
 django-chartjs==2.3.0
 django-ckeditor==6.7.1
@@ -75,6 +76,7 @@ PyJWT==2.9.0
 pyparsing==3.1.1
 pypng==0.20220715.0
 python-dateutil==2.8.2
+python-decouple==3.8
 python-dotenv==1.0.1
 pytz==2024.1
 qrcode==7.4.2

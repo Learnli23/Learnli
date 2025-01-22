@@ -10,8 +10,8 @@ from ckeditor.fields import RichTextField
 
 class Exam(models.Model):
     Cours_name = models.ForeignKey(Classes, on_delete=models.CASCADE,related_name='Cours_name')
-    Examination_name =models.CharField(max_length=2550)
-    semester = models.CharField(max_length=2550)
+    Examination_name =models.CharField(max_length=200)
+    semester = models.CharField(max_length=200)
     Date =models.DateField(auto_now=True)
     instructins = RichTextField()
     Duration = models.IntegerField()
@@ -50,7 +50,7 @@ class Answer(models.Model):
 class Exam_answer_response(models.Model):
    Course = models.ForeignKey(Classes, on_delete=models.CASCADE,related_name='course',null=True)
    Examination  = models.ForeignKey(Exam, on_delete=models.CASCADE,related_name='Exam',null=True)
-   semester = models.CharField(max_length=255 )
+   semester = models.CharField(max_length=200 )
    responseby = models.ForeignKey(user_Profile, on_delete=models.CASCADE,related_name='responseby')
    responseto = models.ForeignKey(user_Profile, on_delete=models.CASCADE,related_name='responseto',null=True)
    scores = models.IntegerField()
@@ -64,7 +64,7 @@ class Exam_answer_response(models.Model):
      
 class Test(models.Model):
     Subject_name = models.ForeignKey(Subjects, on_delete=models.CASCADE,related_name='Subject_name',null=True)
-    semester = models.CharField(max_length=2550)
+    semester = models.CharField(max_length=200)
     Date =models.DateField(auto_now=True)
     instructins = RichTextField()
     Duration = models.IntegerField()
@@ -81,7 +81,7 @@ class Test(models.Model):
 
 class Test_answer(models.Model):
     Subject_name = models.ForeignKey(Subjects, on_delete=models.CASCADE,related_name='Subjectname',null=True)
-    semester = models.CharField(max_length=2550)
+    semester = models.CharField(max_length=200)
     Date =models.DateField(auto_now=True)
     Answered_by = models.ForeignKey(user_Profile, on_delete=models.CASCADE,related_name='Answere_given_by')
     Answered_to = models.ForeignKey(user_Profile, on_delete=models.CASCADE,related_name='Answeredto',null=True)
@@ -96,7 +96,7 @@ class Test_answer(models.Model):
 class Test_answer_response(models.Model):
     Subject = models.ForeignKey(Subjects, on_delete=models.CASCADE,related_name='Subject',null=True)
     answer = models.ForeignKey(Test_answer, on_delete=models.CASCADE,related_name='answer',null=True)
-    semester = models.CharField(max_length=255 )
+    semester = models.CharField(max_length=200 )
     response_by = models.ForeignKey(user_Profile, on_delete=models.CASCADE,related_name='response_by')
     response_to = models.ForeignKey(user_Profile, on_delete=models.CASCADE,related_name='response_to',null=True)
     marks = models.IntegerField()

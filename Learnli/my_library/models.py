@@ -52,7 +52,7 @@ class Ebook(models.Model):
     description = RichTextField()
     display_image = models.ImageField(upload_to = 'display_images/',null=True)
     date_updated = models.DateField(auto_now=True)
-    ISBN = models.CharField(max_length=2000,blank=True)
+    ISBN = models.CharField(max_length=200,blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)  #field for price
     language = models.CharField(max_length=50, blank=True, null=True)  # Optional field for language
     pages = models.PositiveIntegerField(blank=True, null=True)  # Optional field for pages

@@ -10,8 +10,8 @@ from ckeditor.fields import RichTextField
    
 class BlogPost(models.Model):
     author = models.ForeignKey(user_Profile, on_delete=models.CASCADE)
-    author_title = models.CharField(max_length=1000)
-    blog_title = models.CharField(max_length=1000)
+    author_title = models.CharField(max_length=200)
+    blog_title = models.CharField(max_length=200)
     content = RichTextField()
     image = models.ImageField(upload_to='blog_images', blank=True, null=True)
     video = models.FileField(upload_to='blog_videos', blank=True, null=True)

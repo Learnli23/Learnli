@@ -7,7 +7,7 @@ from my_library.models  import Ebook
 #*****MODEELS TO HANDLE TEACHER CONTENT*******
   # model to hundle the lessons
 class Lessons(models.Model):
-    title =models.CharField(max_length=1000000) 
+    title =models.CharField(max_length=200) 
     power = models.CharField(max_length=11) 
     position =models.IntegerField(blank=True,null=True)
     created_on =models.DateField(auto_now_add=True)
@@ -26,7 +26,7 @@ class Lessons(models.Model):
 
  # model to hundel the  subjects
 class Subjects(models.Model):
-    title =models.CharField(max_length=100000)
+    title =models.CharField(max_length=200)
     description = RichTextField()
     created_on =models.DateField(auto_now=True)
     image = models.ImageField(null = True, blank = True, upload_to ="media")
@@ -50,16 +50,16 @@ class Classes(models.Model):
         ('others','others'),
         ('Religios_studies','Religious_studies')
     ]
-    level = models.CharField(max_length=1000000)
-    title = models.CharField(max_length=1000000)
+    level = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     description = RichTextField()
     image = models.ImageField(null = True, blank = True, upload_to ="media")
     created_by =models.ForeignKey(user_Profile,on_delete= models.CASCADE)
     with_subjects = models.ManyToManyField(Subjects,symmetrical=False,blank=True)
     Enroll = models.ManyToManyField(user_Profile,related_name = 'enrolled_in', symmetrical = False, blank = True)
-    Duration = models.CharField(max_length=2000)
+    Duration = models.CharField(max_length=200)
     created_on =models.DateField(auto_now=True)
-    category = models.CharField(max_length=100000000, choices=CATEGORY)
+    category = models.CharField(max_length=200, choices=CATEGORY)
     price = models.DecimalField(max_digits=10, decimal_places=2)  #field for price
     language = models.CharField(max_length=50, blank=True, null=True)  # Optional field for language
     paid_users = models.ManyToManyField(user_Profile,related_name='paid_course', blank=True)  # Track paid users
