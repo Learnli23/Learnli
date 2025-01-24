@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '8q@(8$v*3g4$=o%v41_ms+ztlt36+$ljl(o9%cg4in#ptv00=u' #os.environ.get('Learnli_SECRET_KEY'),
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #os.environ.get('Learnli_DEBUG')
+DEBUG = True #os.environ.get('Learnli_DEBUG')
 
 ALLOWED_HOSTS = ['*'] #['learnlee-production.up.railway.app','https//:learnlee-production.up.railway.app']
 #csrf_token configuration to adid ngrok
