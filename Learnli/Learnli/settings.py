@@ -30,7 +30,7 @@ DEBUG = True #os.environ.get('Learnli_DEBUG')
 
 ALLOWED_HOSTS = ['*'] #['learnlee-production.up.railway.app','https//:learnlee-production.up.railway.app']
 #csrf_token configuration to adid ngrok
-CSRF_TRUSTED_ORIGINS = []
+CSRF_TRUSTED_ORIGINS = ['https://learnli-production.up.railway.app/']
 
 AUTH_USER_MODEL ='users.user_Profile'
 
@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'djangoflutterwave',
     'crispy_forms',
     'phonenumber_field',
-    #'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +76,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_otp.middleware.OTPMiddleware',
     'Learnli.middleware.CheckSubscriptionMiddleware',
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 
     
