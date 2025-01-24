@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'ckeditor',
     'ckeditor_uploader',
-    'djangoflutterwave',
     'crispy_forms',
     'phonenumber_field',
     'whitenoise.runserver_nostatic',
