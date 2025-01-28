@@ -114,7 +114,7 @@ def content_payment_page(request, content_id):
                 "amount":float(price),  # Amount to be charged
                 "currency":currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
-                "redirect_url": " https://261b-41-210-146-72.ngrok-free.app/content_payment_success",  # Redirect URL after payment
+                "redirect_url": "https://learnli-production.up.railway.app/content_payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
@@ -337,7 +337,7 @@ def book_payment_page(request, book_id):
                 "amount":float(price),  # Amount to be charged
                 "currency":currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
-                "redirect_url": "https://261b-41-210-146-72.ngrok-free.app/book_payment_success",  # Redirect URL after payment
+                "redirect_url": "https://learnli-production.up.railway.app/book_payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
