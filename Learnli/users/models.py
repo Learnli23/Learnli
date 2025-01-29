@@ -21,6 +21,7 @@ class  user_Profile(AbstractUser):
     major =models.CharField(max_length=200,blank =True)
     subject =models.CharField(max_length=200,blank =True)
     contact = models.CharField(max_length=200,blank =True)
+    country =models.CharField(max_length=200,blank =True)
     location =models.CharField(max_length=200,blank =True)
     website =models.URLField(max_length=200,blank=True)
     follows = models.ManyToManyField('self',related_name = 'followed_by', symmetrical = False, blank = True)
