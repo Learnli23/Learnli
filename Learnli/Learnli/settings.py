@@ -28,9 +28,9 @@ SECRET_KEY = '8q@(8$v*3g4$=o%v41_ms+ztlt36+$ljl(o9%cg4in#ptv00=u' #os.environ.ge
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True #os.environ.get('Learnli_DEBUG')
 
-ALLOWED_HOSTS = ['*'] #['https://learnli.com', 'https://learnli.com', 'https://learnli-production.up.railway.app']
+ALLOWED_HOSTS = ['*'] #['https://learnlii.com', 'https://learnlii.com', 'https://learnli-production.up.railway.app']
 #csrf_token configuration to adid ngrok
-CSRF_TRUSTED_ORIGINS = ['https://learnli.com', 'https://learnli-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://learnlii.com', 'https://learnli-production.up.railway.app']
 
 AUTH_USER_MODEL ='users.user_Profile'
 
@@ -173,6 +173,14 @@ WSGI_APPLICATION = 'Learnli.wsgi.application'
  
 
 '''
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')  # Load the DATABASE_URL from .env
+    )
+}
+ '''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -180,13 +188,7 @@ DATABASES = {
     }
 }
 
- '''
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')  # Load the DATABASE_URL from .env
-    )
-}
 
 
 
