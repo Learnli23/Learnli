@@ -90,6 +90,33 @@
               
           </ul>
       </li> 
+
+<!--creating free courses-->
+ 
+<li><a>Open Hands</a>
+  <ul class="dropdown">
+      <li><a href="{% url 'courses' %}" style="font-size: small;">Open Hand courses</a></li>
+      <li><a href="{% url 'my_free_courses' %}" style="font-size: small;">My contribution</a></li>
+      <li><a href="{% url 'create_free_course' %}" style="font-size: small;">create free course</a></li>
+      <li><a href="{% url 'course_units' %}" style="font-size: small;">course units</a></li>
+      <li><a href="{% url 'create_course_unit' %} " style="font-size: small;">create free course unit</a></li>
+      <li><a href="{% url 'free_lessons' %}" style="font-size: small;">Free lessons</a></li>
+      <li><a href="{% url 'create_free_lesson' %}" style="font-size: small;">create  free lesson</a></li>
+      
+  </ul>
+</li> 
+
+      <!--show open library-->
+      <li><a>Open Library</a>
+        <ul class="dropdown">
+          <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My contribution</a></li>
+          <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
+          <li><a   href="{% url 'book_list' %}" style=" font-size: small;">Ebooks</a></li>
+          <li><a   href="{% url 'content_list' %}"  style="  font-size: small;">Open eBooks</a></li>
+          <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Open Books </a></li>
+        </ul>
+      </li>
+
       <!--show teacher's library if loged in-->
       <li><a>Library</a>
         <ul class="dropdown">
@@ -100,6 +127,7 @@
           <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Upload Books </a></li>
         </ul>
       </li>
+
       <!--show teacher's  Examinations if loged in-->
       <li><a>Examinations</a>
         <ul class="dropdown">

@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% block content %}
+
+ 
+    <p><strong>Edit this  Lesson</strong></p>
+    
+    <div>
+
+        {% if user.is_authenticated %}
+        <br/><br/>
+        {% if submitted %}
+        your  Lesson has been ediited sucessfully 
+        {% else %}
+            
+        <P>
+        
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.media }}
+                <button type="submit">Edit</button>
+              </form>
+        
+        </p>
+        
+        {% endif %}
+        {%else%}
+        <h1>You need to be loged in to access this page</h1>
+        <a href="{% url 'log in' %}">log in</a>
+        
+        {%endif%}
+
+    </div>
+ 
+
+ 
+ 
+ 
+
+{% endblock %}  

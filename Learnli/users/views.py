@@ -615,11 +615,11 @@ def subscription_page(request):
             
             # Calculate amount based on user type and subscription duration
             if user_profile.is_student:
-               amount = 1000 * int(months)  # $1 per month for students
+               amount = 3000 * int(months)  # $1 per month for students
             elif user_profile.is_teacher:
-               amount = 2500* int(months)  # $5 per month for teachers
+               amount = 5000* int(months)  # $5 per month for teachers
             elif user_profile.is_institution:
-               amount =  5000 * int(months)  # $10 per month for institutions
+               amount =  10000 * int(months)  # $10 per month for institutions
             user_profile.subscription_amount = amount
 
             # store the calculated varriables in sessions to be retrieved in the payment success view

@@ -29,6 +29,7 @@ urlpatterns = [
     path('',include('Messages.urls')),
     path('',include('Examination.urls')),
     path('', include('blogs.urls')),
+    path('', include('free.urls')),
     path('', include('my_library.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include(tf_urls)),
