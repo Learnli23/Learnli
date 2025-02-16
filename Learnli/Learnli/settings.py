@@ -30,7 +30,7 @@ DEBUG = True #os.environ.get('Learnli_DEBUG')
 
 ALLOWED_HOSTS = ['*'] #['https://learnli.com', 'https://learnli.com', 'https://learnli-production.up.railway.app']
 #csrf_token configuration to adid ngrok
-CSRF_TRUSTED_ORIGINS = ['https://learnli.com', 'https://learnli-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://learnlii.com', 'https://learnli-production.up.railway.app']
 
 AUTH_USER_MODEL ='users.user_Profile'
 
