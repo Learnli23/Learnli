@@ -177,14 +177,7 @@ DATABASES = {
         default=config('DATABASE_URL')  # Load the DATABASE_URL from .env
     )
 }
- '''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
+ 
 
 
 
