@@ -648,7 +648,7 @@ def subscription_page(request):
                 "amount":amount,  # Amount to be charged https://461b-197-239
                 "currency": currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda,mobilemoneykenya, ussd,banktransfer",
-                "redirect_url": "https://https://learnlii.com/payment_success",  # Redirect URL after payment
+                "redirect_url": "https://learnlii.com//payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
