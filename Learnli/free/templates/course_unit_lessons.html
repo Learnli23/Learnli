@@ -24,10 +24,15 @@
       <ul id="myMenu" class="lesson-list">
         {% for lesson in lessons_for_course_unit %}  
           <li><a href="#" onclick="loadVideo({{ forloop.counter0 }})">{{ lesson.title }}</a></li>
-        {% if forloop.last %}
+       <!--
+          
+          {% if forloop.last %}
         <a href="{% url 'tests' %}"><p style="color:green;">Take the test</p></a>
         {% endif %}
+         -->
         {% endfor %}
+      
+      
       </ul>
     </div>
 
@@ -92,7 +97,7 @@
 <script>
 // Video data array populated dynamically
 const videos = [
-{% for lesson in lessons_for_subject %}  
+{% for lesson in lessons_for_course_unit %} 
     {
       title: "{{ lesson.title }}",
       src: "{{ lesson.video.url }}",

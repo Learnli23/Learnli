@@ -1,0 +1,16 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+ 
+<body>
+    <h1>Add Ebook</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'book_list' %}">Back to Ebooks</a>
+</body>
+</html>
+{% endblock %}

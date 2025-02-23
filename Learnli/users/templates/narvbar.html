@@ -1,7 +1,6 @@
 {% load static %}
 
-
-    <!-- Navbar Container -->
+    <!-- Navbar C0ontainer -->
     <nav class="navbar">
         <!-- Logo and Brand Name -->
         <div class="navbar-brand">
@@ -22,194 +21,8 @@
                 <span class="user-name" style = "color:green;" >{{user}}</span>
               {% endif %}  
             </li>
-          <!-- showing posts and about if the user is loged in or out respectively--->  
-            {% if user.is_authenticated and user.subscription_active == True %}
-            <li><a href="{% url 'blog_list' %}" >Post</a></li>
-            {% else %}
-            <li><a href="{% url 'about' %}" >About</a></li>
-            {% endif %}
-         <!-- show user categories if user is logeg in-->   
-         {% if user.is_authenticated and user.subscription_active == True %}
-            <li class="nav_drop_drown"  style="color: #4CAF50;"><a >Users</a>
-                <ul class="dropdown">
-                    <li><a href="{% url 'students' %}" style="font-size: small;">Students</a></li>
-                    <li><a href="{% url 'teachers' %}" style="font-size: small;">Teachers</a></li>
-                    <li><a href="{% url 'institutions' %}" style="font-size: small;">Institutions</a></li>
-                    <li><a href="{% url 'profiles' %}" style="font-size: small;">All Users</a></li>
-                </ul>
-            </li>
-            <li><a href="{% url 'profile' user.id %}" >My Profile</a></li>
-            {% endif %}
-          <!-- show the office ,study or depending on the user type--> 
-          {% if user.is_student and user.subscription_active == True %} 
-            <li><a>Study</a>
-                <ul class="dropdown">
-                    <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
-                    <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
-                    <li><a href="{% url 'exams' %}" style="font-size: small;">Exams</a></li>
-                    <li><a href="{% url 'answers' %}" style="font-size: small;">Exams Answers</a></li>
-                    <li><a href="{% url 'exam_results' %}" style="font-size: small;">Exam Reults</a></li>
-                    <li><a href="{% url 'RegisterforExam' %}" style="font-size: small;">Register for Exam</a></li>
-                    <li><a href="{% url 'test_answers' %}" style="font-size: small;">Test Answers</a></li>
-                    <li><a href="{% url 'test_results' %}" style="font-size: small;">Test Reults</a></li>
-                </ul>
-            </li>
-          <!-- show the  communication elements for aloged in student-->  
-          <li><a>Communication</a>
-            <ul class="dropdown">
-                <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
-                <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
-                <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
-                <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
-                <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
-                <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
-            </ul>
-        </li>    
-        <!--show library for the student if loged in-->  
-        <li><a>Library</a>
-          <ul class="dropdown">
-              <li><a href="{% url 'profile_library' user.id %}" style="font-size: small;">My Uploaded books</a></li>
-              <li><a href="{% url 'book_list' %}" style="font-size: small;">Ebooks</a></li>
-              <li><a href="{% url 'content_list' %} " style="font-size: small;">uploaded books</a></li>
-              <li><a href="{% url 'upload_content' %}" style="font-size: small;">upload book</a></li>
-            </ul>  
-      </li>  
-        {% endif %}
-
-        <!---- show office for teacher if loged in---> 
-        {% if user.is_teacher and user.subscription_active == True %} 
-        <li><a>Office</a>
-          <ul class="dropdown">
-              <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
-              <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
-              <li><a href="{% url 'create_class' %}" style="font-size: small;">create course</a></li>
-              <li><a href="{% url 'subjects' %}" style="font-size: small;">course units</a></li>
-              <li><a href="{% url 'create_subject' %} " style="font-size: small;">create course unit</a></li>
-              <li><a href="{% url 'lessons' %}" style="font-size: small;">lessons</a></li>
-              <li><a href="{% url 'create_lesson' %}" style="font-size: small;">create lesson</a></li>
-              
-          </ul>
-      </li> 
-
-<!--creating free courses-->
+           
  
-<li><a>Open Hands</a>
-  <ul class="dropdown">
-      <li><a href="{% url 'courses' %}" style="font-size: small;">Open Hand courses</a></li>
-      <li><a href="{% url 'my_free_courses' %}" style="font-size: small;">My contribution</a></li>
-      <li><a href="{% url 'create_free_course' %}" style="font-size: small;">create free course</a></li>
-      <li><a href="{% url 'course_units' %}" style="font-size: small;">course units</a></li>
-      <li><a href="{% url 'create_course_unit' %} " style="font-size: small;">create free course unit</a></li>
-      <li><a href="{% url 'free_lessons' %}" style="font-size: small;">Free lessons</a></li>
-      <li><a href="{% url 'create_free_lesson' %}" style="font-size: small;">create  free lesson</a></li>
-      
-  </ul>
-</li> 
-
-      <!--show open library-->
-      <li><a>Open Library</a>
-        <ul class="dropdown">
-          <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My contribution</a></li>
-          <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
-          <li><a   href="{% url 'book_list' %}" style=" font-size: small;">Ebooks</a></li>
-          <li><a   href="{% url 'content_list' %}"  style="  font-size: small;">Open eBooks</a></li>
-          <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Open Books </a></li>
-        </ul>
-      </li>
-
-      <!--show teacher's library if loged in-->
-      <li><a>Library</a>
-        <ul class="dropdown">
-          <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My Ebooks </a></li>
-          <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
-          <li><a   href="{% url 'book_list' %}" style=" font-size: small;"> Ebooks </a></li>
-          <li><a   href="{% url 'content_list' %}"  style="  font-size: small;"> Uploaded books </a></li>
-          <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Upload Books </a></li>
-        </ul>
-      </li>
-
-      <!--show teacher's  Examinations if loged in-->
-      <li><a>Examinations</a>
-        <ul class="dropdown">
-          <li><a  href="{% url 'my_exams' %}" style=" font-size: small;">My Exams </a></li>
-              <li><a  href="{% url 'exams' %}" style=" font-size: small;">Exams </a></li>
-              <li><a   href="{% url 'exam' %}" style=" font-size: small;">creat Exam </a></li>
-              <li><a   href="{% url 'answers' %}"  style="font-size: small;">Exams Answers </a></li>
-              <li><a   href="{% url 'exam_results' %}" style="  font-size: small;">Exam Reults </a></li>
-              <li><a   href="{% url 'RegisterforExam' %}" style="  font-size: small;">Register for Exam </a></li>
-              <li><a   href="{% url 'examRegister' %}" style=" font-size: small;">candidates </a></li>
-              <li><a  href="{% url 'my_tests' %}" style=" font-size: small;">My tests </a></li>
-              <li><a  href="{% url 'tests' %}" style=" font-size: small;">Tests </a></li>
-              <li><a  href="{% url 'test' %}" style=" font-size: small;">creat test </a></li>
-              <li><a  href="{% url 'test_answers' %}" style=" font-size: small;">Test Answers </a></li>
-             <li><a  href="{% url 'test_results' %}" style=" font-size: small;">Test Reults </a></li>
-        </ul>
-      </li>
-       <!-- show the teacher's  communication elements if aloged -->  
-       <li><a>Communication</a>
-        <ul class="dropdown">
-            <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
-            <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
-            <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
-            <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
-            <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
-            <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
-        </ul>
-    </li>      
-       {% endif %}
-       <!--show institution compass if loged in-->
-       {% if user.is_institution and user.subscription_active == True %}
-       <li><a>Compass</a>
-        <ul class="dropdown">
-            <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
-            <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
-            <li><a href="{% url 'create_class' %}" style="font-size: small;">create course</a></li>
-            <li><a href="{% url 'subjects' %}" style="font-size: small;">course units</a></li>
-            <li><a href="{% url 'create_subject' %} " style="font-size: small;">create course unit</a></li>
-            <li><a href="{% url 'lessons' %}" style="font-size: small;">lessons</a></li>
-            <li><a href="{% url 'create_lesson' %}" style="font-size: small;">create lesson</a></li>
-            
-        </ul>
-    </li> 
-    <!--show inmstitution library if loged in-->
-    <li><a>Library</a>
-      <ul class="dropdown">
-        <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My Ebooks </a></li>
-        <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
-        <li><a   href="{% url 'book_list' %}" style=" font-size: small;"> Ebooks </a></li>
-        <li><a   href="{% url 'content_list' %}"  style="  font-size: small;"> Uploaded books </a></li>
-        <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Upload Books </a></li>
-      </ul>
-    </li>
-    <!--show  institution  Examinations if loged in-->
-    <li><a>Examinations</a>
-      <ul class="dropdown">
-        <li><a  href="{% url 'my_exams' %}" style=" font-size: small;">My Exams </a></li>
-            <li><a  href="{% url 'exams' %}" style=" font-size: small;">Exams </a></li>
-            <li><a   href="{% url 'exam' %}" style=" font-size: small;">creat Exam </a></li>
-            <li><a   href="{% url 'answers' %}"  style="font-size: small;">Exams Answers </a></li>
-            <li><a   href="{% url 'exam_results' %}" style="  font-size: small;">Exam Reults </a></li>
-            <li><a   href="{% url 'RegisterforExam' %}" style="  font-size: small;">Register for Exam </a></li>
-            <li><a   href="{% url 'examRegister' %}" style=" font-size: small;">candidates </a></li>
-            <li><a  href="{% url 'tests' %}" style=" font-size: small;">Tests </a></li>
-            <li><a  href="{% url 'my_tests' %}" style=" font-size: small;">My tests </a></li>
-            <li><a  href="{% url 'test' %}" style=" font-size: small;">creat test </a></li>
-            <li><a  href="{% url 'test_answers' %}" style=" font-size: small;">Test Answers </a></li>
-           <li><a  href="{% url 'test_results' %}" style=" font-size: small;">Test Reults </a></li>
-      </ul>
-    </li>
-     <!-- show the institution  communication elements if aloged -->  
-     <li><a>Communication</a>
-      <ul class="dropdown">
-          <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
-          <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
-          <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
-          <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
-          <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
-          <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
-      </ul>
-  </li>
-  {% endif %}
 
   {% if user.is_authenticated %}
   <li><a href="{% url 'logout' %}"style="color:brown;">Logout</a></li>
@@ -233,33 +46,260 @@
 
 
 {% endif %}
- 
-
-        
 
       <!-- Dark/Light Mode Toggle and Mobile Menu Icon -->
         <div class="navbar-actions">
             <label class="switch">
                 <input type="checkbox" id="darkModeToggle">
                 <span class="slider round"></span>
-            </label>
-            <div class="menu-icon" onclick="toggleMobileMenu()">☰</div>
+            </label>            
+              <span class="toggle-btn" onclick="toggleMenu()">☰</span>
+           
+            </div>
         </div>
     </nav>
+<!--side bar menu-->
+          <!-- showing posts and about if the user is loged in or out respectively--->  
+    <div class="sidebar" id="sidebar">
+        <ul>
+            {% if user.is_authenticated and user.subscription_active == True %}
+            <li><a href="{% url 'blog_list' %}"><i class="fas fa-edit"></i> </a>Posts</li>
+            {% else %}
+            <li> <a href="{% url 'about' %}"><i class="fas fa-edit"></i> </a><a></a>About</li>
+            {% endif %}
 
- 
+         <!-- show user categories if user is logeg in-->   
+         {% if user.is_authenticated and user.subscription_active == True %}
+             <li class="dropdown">
+                <i class="fas fa-users"></i>Users
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'students' %}" style="font-size: small;">Students</a></li>
+                    <li><a href="{% url 'teachers' %}" style="font-size: small;">Teachers</a></li>
+                    <li><a href="{% url 'institutions' %}" style="font-size: small;">Institutions</a></li>
+                    <li><a href="{% url 'profiles' %}" style="font-size: small;">All Users</a></li>
+                </ul>
+            </li>
+            {% endif %}
+
+            {% if user.is_authenticated and user.subscription_active == True %}
+            <li><a href="{% url 'profile' user.id %} "><i class="fas fa-user"></i></a>Profile</li>
+            {% endif %}
+        
+        <!-- show the office ,study or depending on the user type--> 
+        {% if user.is_student and user.subscription_active == True %} 
+            <li class="dropdown">
+                <i class="fa fa-book"></i>Study
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
+                    <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
+                    <li><a href="{% url 'exams' %}" style="font-size: small;">Exams</a></li>
+                    <li><a href="{% url 'answers' %}" style="font-size: small;">Exams Answers</a></li>
+                    <li><a href="{% url 'exam_results' %}" style="font-size: small;">Exam Reults</a></li>
+                    <li><a href="{% url 'RegisterforExam' %}" style="font-size: small;">Register for Exam</a></li>
+                    <li><a href="{% url 'test_answers' %}" style="font-size: small;">Test Answers</a></li>
+                    <li><a href="{% url 'test_results' %}" style="font-size: small;">Test Reults</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <i class="fas fa-comments"></i>Communication
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
+                    <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
+                    <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
+                    <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
+                    <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
+                    <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
+                </ul>
+            </li>
+
+        <!--show library for the student if loged in-->  
+        
+        <li class="dropdown">
+            <i class="fas fa-book"></i>Library
+            <ul class="dropdown-content">
+                <li><a href="{% url 'profile_library' user.id %}" style="font-size: small;">My Uploaded books</a></li>
+                <li><a href="{% url 'book_list' %}" style="font-size: small;">Ebooks</a></li>
+                <li><a href="{% url 'content_list' %} " style="font-size: small;">uploaded books</a></li>
+                <li><a href="{% url 'upload_content' %}" style="font-size: small;">upload book</a></li>
+            </ul>
+        </li>  
+          {% endif %}
+        <!---- show office for teacher if loged in---> 
+        {% if user.is_teacher and user.subscription_active == True %} 
+      </li> 
+               <li class="dropdown">
+                <i class="fas fa-briefcase"></i>Office
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
+                    <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
+                    <li><a href="{% url 'create_class' %}" style="font-size: small;">create course</a></li>
+                    <li><a href="{% url 'subjects' %}" style="font-size: small;">course units</a></li>
+                    <li><a href="{% url 'create_subject' %} " style="font-size: small;">create course unit</a></li>
+                    <li><a href="{% url 'lessons' %}" style="font-size: small;">lessons</a></li>
+                    <li><a href="{% url 'create_lesson' %}" style="font-size: small;">create lesson</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <i class="fas fa-book"></i>Library
+                <ul class="dropdown-content">
+                    <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My Ebooks </a></li>
+                    <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
+                    <li><a   href="{% url 'book_list' %}" style=" font-size: small;"> Ebooks </a></li>
+                    <li><a   href="{% url 'content_list' %}"  style="  font-size: small;"> Uploaded books </a></li>
+                    <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Upload Books </a></li>
+                </ul>
+            </li> 
+            <li class="dropdown">
+                <i class="fas fa-file-alt"></i>Examination
+                <ul class="dropdown-content">
+                    <li><a  href="{% url 'my_exams' %}" style=" font-size: small;">My Exams </a></li>
+                    <li><a  href="{% url 'exams' %}" style=" font-size: small;">Exams </a></li>
+                    <li><a   href="{% url 'exam' %}" style=" font-size: small;">creat Exam </a></li>
+                    <li><a   href="{% url 'answers' %}"  style="font-size: small;">Exams Answers </a></li>
+                    <li><a   href="{% url 'exam_results' %}" style="  font-size: small;">Exam Reults </a></li>
+                    <li><a   href="{% url 'RegisterforExam' %}" style="  font-size: small;">Register for Exam </a></li>
+                    <li><a   href="{% url 'examRegister' %}" style=" font-size: small;">candidates </a></li>
+                    <li><a  href="{% url 'my_tests' %}" style=" font-size: small;">My tests </a></li>
+                    <li><a  href="{% url 'tests' %}" style=" font-size: small;">Tests </a></li>
+                    <li><a  href="{% url 'test' %}" style=" font-size: small;">creat test </a></li>
+                    <li><a  href="{% url 'test_answers' %}" style=" font-size: small;">Test Answers </a></li>
+                   <li><a  href="{% url 'test_results' %}" style=" font-size: small;">Test Reults </a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <i class="fas fa-comments"></i>Communication
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
+                    <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
+                    <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
+                    <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
+                    <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
+                    <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <i class="fas fa-hands-helping"></i>Open Hands
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'courses' %}" style="font-size: small;">Open Hand courses</a></li>
+                    <li><a href="{% url 'my_free_courses' %}" style="font-size: small;">My contribution</a></li>
+                    <li><a href="{% url 'create_free_course' %}" style="font-size: small;">create free course</a></li>
+                    <li><a href="{% url 'course_units' %}" style="font-size: small;">course units</a></li>
+                    <li><a href="{% url 'create_course_unit' %} " style="font-size: small;">create free course unit</a></li>
+                    <li><a href="{% url 'free_lessons' %}" style="font-size: small;">Free lessons</a></li>
+                    <li><a href="{% url 'create_free_lesson' %}" style="font-size: small;">create  free lesson</a></li>
+                </ul>
+            </li>                  
+             <li class="dropdown">
+                <i class="fas fa-book"></i>Open Library
+                <ul class="dropdown-content">
+                    <li><a   href="{% url 'profile_Freebooks' user.id %}"  style="  font-size: small;">  My contribution</a></li>
+                    <li><a   href="{% url 'profile_Freelibrary' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
+                    <li><a   href="{% url 'Freebook_list' %}" style=" font-size: small;">Ebooks</a></li>
+                    <li><a   href="{% url 'Freecontent_list' %}"  style="  font-size: small;">Open eBooks</a></li>
+                    <li><a   href="{% url 'upload_Freecontent' %}"  style=" font-size: small;">Open Books </a></li>
+                </ul>
+            </li> 
+        </ul>
+    </div>
+    {% endif %}
+
+ <!---- show office for teacher if loged in---> 
+ {% if user.is_institution and user.subscription_active == True %} 
+</li> 
+         <li class="dropdown">
+          <i class="fas fa-briefcase"></i>Compass
+          <ul class="dropdown-content">
+              <li><a href="{% url 'classes' %}" style="font-size: small;">Courses</a></li>
+              <li><a href="{% url 'my_courses' %}" style="font-size: small;">My courses</a></li>
+              <li><a href="{% url 'create_class' %}" style="font-size: small;">create course</a></li>
+              <li><a href="{% url 'subjects' %}" style="font-size: small;">course units</a></li>
+              <li><a href="{% url 'create_subject' %} " style="font-size: small;">create course unit</a></li>
+              <li><a href="{% url 'lessons' %}" style="font-size: small;">lessons</a></li>
+              <li><a href="{% url 'create_lesson' %}" style="font-size: small;">create lesson</a></li>
+          </ul>
+      </li>
+
+      <li class="dropdown">
+          <i class="fas fa-book"></i>Library
+          <ul class="dropdown-content">
+              <li><a   href="{% url 'profile_books' user.id %}"  style="  font-size: small;">  My Ebooks </a></li>
+              <li><a   href="{% url 'profile_library' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
+              <li><a   href="{% url 'book_list' %}" style=" font-size: small;"> Ebooks </a></li>
+              <li><a   href="{% url 'content_list' %}"  style="  font-size: small;"> Uploaded books </a></li>
+              <li><a   href="{% url 'upload_content' %}"  style=" font-size: small;">Upload Books </a></li>
+          </ul>
+      </li> 
+      <li class="dropdown">
+          <i class="fas fa-file-alt"></i>Examination
+          <ul class="dropdown-content">
+              <li><a  href="{% url 'my_exams' %}" style=" font-size: small;">My Exams </a></li>
+              <li><a  href="{% url 'exams' %}" style=" font-size: small;">Exams </a></li>
+              <li><a   href="{% url 'exam' %}" style=" font-size: small;">creat Exam </a></li>
+              <li><a   href="{% url 'answers' %}"  style="font-size: small;">Exams Answers </a></li>
+              <li><a   href="{% url 'exam_results' %}" style="  font-size: small;">Exam Reults </a></li>
+              <li><a   href="{% url 'RegisterforExam' %}" style="  font-size: small;">Register for Exam </a></li>
+              <li><a   href="{% url 'examRegister' %}" style=" font-size: small;">candidates </a></li>
+              <li><a  href="{% url 'my_tests' %}" style=" font-size: small;">My tests </a></li>
+              <li><a  href="{% url 'tests' %}" style=" font-size: small;">Tests </a></li>
+              <li><a  href="{% url 'test' %}" style=" font-size: small;">creat test </a></li>
+              <li><a  href="{% url 'test_answers' %}" style=" font-size: small;">Test Answers </a></li>
+             <li><a  href="{% url 'test_results' %}" style=" font-size: small;">Test Reults </a></li>
+          </ul>
+      </li>
+      <li class="dropdown">
+          <i class="fas fa-comments"></i>Communication
+          <ul class="dropdown-content">
+              <li><a href="{% url 'compose' %}" style="font-size: small;">messages</a></li>
+              <li><a href="{% url 'inbox' %}" style="font-size: small;">inbox</a></li>
+              <li><a href="{% url 'outbox' %} " style="font-size: small;">outbox</a></li>
+              <li><a href="{% url 'calendar' %}" style="font-size: small;">Events</a></li>
+              <li><a href="{% url 'add_event' %}" style="font-size: small;">Add event</a></li>
+              <li><a href="{% url 'create_blog' %}" style="font-size: small;">create blog</a></li>
+          </ul>
+      </li>
+      <li class="dropdown">
+          <i class="fas fa-hands-helping"></i>Open Hands
+          <ul class="dropdown-content">
+              <li><a href="{% url 'courses' %}" style="font-size: small;">Open Hand courses</a></li>
+              <li><a href="{% url 'my_free_courses' %}" style="font-size: small;">My contribution</a></li>
+              <li><a href="{% url 'create_free_course' %}" style="font-size: small;">create free course</a></li>
+              <li><a href="{% url 'course_units' %}" style="font-size: small;">course units</a></li>
+              <li><a href="{% url 'create_course_unit' %} " style="font-size: small;">create free course unit</a></li>
+              <li><a href="{% url 'free_lessons' %}" style="font-size: small;">Free lessons</a></li>
+              <li><a href="{% url 'create_free_lesson' %}" style="font-size: small;">create  free lesson</a></li>
+          </ul>
+      </li>                  
+       <li class="dropdown">
+          <i class="fas fa-book"></i>Open Library
+          <ul class="dropdown-content">
+              <li><a   href="{% url 'profile_Freebooks' user.id %}"  style="  font-size: small;">  My contribution</a></li>
+              <li><a   href="{% url 'profile_Freelibrary' user.id %}" style=" font-size: small;"> My Uploaded books</a></li>
+              <li><a   href="{% url 'Freebook_list' %}" style=" font-size: small;">Ebooks</a></li>
+              <li><a   href="{% url 'Freecontent_list' %}"  style="  font-size: small;">Open eBooks</a></li>
+              <li><a   href="{% url 'upload_Freecontent' %}"  style=" font-size: small;">Open Books </a></li>
+          </ul>
+      </li>
+     {% endif %}
+            
+  </ul>
+</div>
+
 
     <!-- JavaScript for Dark Mode and Mobile Menu -->
     <script>
         const darkModeToggle = document.getElementById('darkModeToggle');
         darkModeToggle.addEventListener('change', () => {
             document.body.classList.toggle('dark-mode');
-        });
-
-        function toggleMobileMenu() {
-            document.querySelector('.navbar-links').classList.toggle('active');
-        }
+        });   
     </script>
+        <script>
+            function toggleMenu() {
+                document.getElementById("sidebar").classList.toggle("active");
+                document.getElementById("main-content").classList.toggle("active");
+            }
+        </script>
  
  <style>
 
@@ -296,13 +336,15 @@
       z-index: 10;
       }
    
+
+
    .logo-oval {
-      padding: 10px 20px;
+      padding: 5px 15px;
       border: 2px solid #4CAF50;
-      border-radius: 50px; /* Creates the oval shape */
+      border-radius: 25px; /* Creates the oval shape */
       font-weight: bold;
       color: #4CAF50;
-      font-size: 24px;
+      font-size: 20px;
       display: inline-block;
       background-color: #ffffff; /* Optional: Set background color */
       transition: all 0.3s;
@@ -318,8 +360,6 @@
       border-color: #4CAF50;
   }
      
-     
-  }
   
   .navbar .navbar-brand .logo {
       font-weight: bold;
@@ -421,18 +461,64 @@
   input:checked + .slider:before {
       transform: translateX(26px);
   }
+
+  .sidebar {
+            width: 250px;
+            background:#4CAF50;
+            height:fit-content;
+            padding-top: 20px;
+            position: fixed;
+            left: -250px;
+            transition: left 0.3s;
+        }
+        .sidebar.active {
+            left: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding:0;
+        }
+        .sidebar ul li {
+            padding:10px;
+            border-bottom:1px solid #ddd;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .sidebar ul li i {
+            margin-right: 10px;
+        }
+        .toggle-btn {
+            font-size: 15px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            background:#4CAF50;
+            min-width: 200px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
   
   /* Responsive Mobile Styling */
   @media (max-width: 768px) {
-      .navbar-links {
-          display: none;
-          flex-direction: column;
-          width: 100%;
-          position: absolute;
-          top: 60px;
-          background-color: #ffffff;
-          box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-      }
+            .sidebar {
+                left: -250px;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
   
       .navbar-links.active {
           display: flex;
@@ -447,3 +533,6 @@
   
   <style/>
 
+
+ 
+ 

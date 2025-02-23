@@ -33,7 +33,7 @@
           <div>
             <h2 id="lesson-title">{{ lessons.0.title }}</h2>
             <p><strong>Uploaded on:</strong> <span id="lesson-date">{{ lessons.0.created_on }}</span></p>
-            <p><strong>Instructor:</strong> <span id="lesson-instructor">{{ lessons.0.taught_by }}</span></p>
+            <p><strong>Instructor:</strong> <span id="lesson-instructor">{{ lessons.0.lesson_teacher }}</span></p>
           </div>
           <!-- Next and Previous Buttons -->
           <div class="d-flex">
@@ -56,7 +56,7 @@
 
         <!-- Video Controls (Download, Edit, Delete) -->
         <div class="d-flex justify-content-between mt-3">
-          <a href="{%  url 'classes'%}">
+          <a href="{%  url 'courses'%}">
             <button class="btn btn-outline-primary btn-oval flex-fill mx-1">
               <i class="fas fa-arrow-left"></i> Back to Courses
             </button>
@@ -91,7 +91,7 @@ const videos = [
       notes: "{{ lesson.notes.url }}",
       id: "{{ lesson.id }}",
       created_on: "{{ lesson.created_on }}",
-      taught_by: "{{ lesson.taught_by }}"
+      taught_by: "{{ lesson.lesson_teacher }}"
     },
   {% endfor %}
 ];
@@ -110,7 +110,7 @@ function loadVideo(index) {
   // Update metadata
   document.getElementById("lesson-title").innerText = video.title;
   document.getElementById("lesson-date").innerText = video.created_on;
-  document.getElementById("lesson-instructor").innerText = video.taught_by;
+  document.getElementById("lesson-instructor").innerText = video.lesson_teacher;
 
   // Update download links and edit/delete URLs
   document.getElementById("download-notes").href = video.notes;

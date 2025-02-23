@@ -43,9 +43,9 @@
         <!-- Sample Course Card -->
         
         <div class="course-card" data-title="Course Title" data-creator="Creator Name" data-language="English" data-field="Science">
-          <a href="{% url 'enroll' course.id%}" class="course-title">{{course.title}}</a>
+          <a href="{% url 'free_course_details' course.id%}" class="course-title">{{course.title}}</a>
           <div class="course-image">
-              <a  href="{% url 'enroll' course.id%}"><img src="{{course.image.url }}"> </a>
+              <a  href="{% url 'free_course_details' course.id%}"><img src="{{course.image.url }}"> </a>
             </div>
             <div class="course-details">
               <a href="{% url 'profile' course.teacher.id %} " style="font-size: small;">Created by:{{ course.teacher }}</a>
@@ -56,7 +56,7 @@
                 <p class="course-level">category:{{ course.category }}</p>
                 <p class="course-level">Level:{{ course.level }}</p>
                 <p class="course-level">Duration:{{ course.Duration}}</p>
-                <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="{% url 'enroll' course.id%}">Details</a></button>
+                <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="{% url 'free_course_details' course.id%}">Details</a></button>
          
                 {% if request.user == course.taecher %}
                         

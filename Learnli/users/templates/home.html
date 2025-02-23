@@ -10,17 +10,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learnli Home</title>
-    
+    <!DOCTYPE html>
+    <title>LearnLi - Unlock Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script> <!-- CountUp.js for number animation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script> <!-- Typed.js for typing effect -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> <!-- Lottie for logo animation -->
 </head>
 <body>
 <div style="text-align:left;"><a href="{% url 'about' %}">About Learnli</a></div>    
-
- 
-
-
 <!-- Place this in your static folder under static/your_app/images/animated-logo.svg -->
 <svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <circle cx="50" cy="50" r="45" stroke="blue" stroke-width="10" fill="transparent">
@@ -44,9 +45,87 @@
 <div class="animated-text">
     <span id="typed"></span>
 </div>
-<!--
-
  
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h1>Empowering Educators. Unlocking Learning.</h1>
+        <p>The future of education is here. Learn, teach, and earn with LearnLi.</p>
+        <a href="{% url 'register_student' %}" class="btn">Start Learning</a>
+        <a href="{% url 'register_teacher' %}" class="btn">Become a Teacher</a>
+        <a href="{% url 'register_institution' %}" class="btn">Be a partner institute</a>
+    </header>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <h2>Why Choose LearnLi?</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>Affordable Learning</h3>
+                <p>Access quality education at the lowest cost.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-brain"></i>
+                <h3>AI-Powered Learning</h3>
+                <p>Meet Laner, your personal AI study assistant.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Monetize Your Teaching</h3>
+                <p>Teachers earn from their expertise.</p>
+            </div>
+        </div>
+    </section>
+   
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial">"LearnLi has changed the way I learn! Affordable and interactive!" - Kyeyune Robert</div>
+            <div class="testimonial">"I can now teach and earn from my knowledge. Amazing platform!" - Bwire Allan</div>
+            <div class="testimonial">"Laner has helped me understand complex concepts so easily!" - Gimmy ssekate</div>
+            <div class="testimonial">"This platform has helped me connect and share knowledge!" - Hope mutesi</div>
+        </div>
+    </section>
+   
+    <!-- PRICING -->
+    <section class="pricing">
+        <h2>Choose Your Plan</h2>
+        <div class="pricing-grid">
+            <div class="pricing-item">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Students</h3>
+                <p>From UGX 3,000/month</p>
+            </div>
+            <div class="pricing-item">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Teachers</h3>
+                <p>From UGX 5,000/month</p>
+            </div>
+            <div class="pricing-item">
+                <i class="fas fa-school"></i>
+                <h3>Institutions</h3>
+                <p>From UGX 10,000/month</p>
+            </div>
+        </div>
+    </section>
+
+   
+    <script>
+        const testimonials = document.querySelectorAll(".testimonial");
+        let index = 0;
+        function showTestimonial() {
+            testimonials.forEach((t, i) => t.style.display = i === index ? "block" : "none");
+            index = (index + 1) % testimonials.length;
+        }
+        setInterval(showTestimonial, 5000);
+        showTestimonial();
+    </script>
+
+</body>
+</html>
+
+<!--
 <div class="counts-container">
     <div class="count-item">
         <srtong style="font-size: small;">Books Created</strong>
@@ -75,8 +154,6 @@
         <div id="student-count" class="count-number">{{ student_count }}</div>
     </div>
 </div>
-
-
 -->
 
 
@@ -100,9 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     new CountUp('student-count', {{ student_count }}, options).start();
 });
 </script>
-
-</body>
-</html>
 
 <style>
 
@@ -147,7 +221,143 @@ body {
     margin-top: 10px;
 }
 
-</style>
+<style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+    
+        /* HERO SECTION */
+        .hero {/
+            text-align: center;
+            color:black;
+            padding: 10px 20px;
+            margin-top: 60px;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            background: white;
+            color: #007BFF;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+       
+        /* FEATURES */
+        .features {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .feature-item {
+            width: 100%;
+            max-width: 300px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .feature-item i {
+            font-size: 40px;
+            color:#4CAF50;
+            margin-bottom: 10px;
+        }
+
+        /* PRICING */
+        .pricing {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .pricing-item {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            max-width: 250px;
+            text-align: center;
+            width: 100%;
+        }
+        .pricing-item h3 {
+            color:#4CAF50;
+        }
+        .pricing-item i {
+            font-size: 40px;
+            color:#4CAF50;
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #222;
+            color: white;
+        }
+       
+        /* TESTIMONIALS */
+        .testimonials {
+            background: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .testimonial-slider {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testimonial {
+            display: none;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                background: white;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                padding: 10px 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+
 
 
 

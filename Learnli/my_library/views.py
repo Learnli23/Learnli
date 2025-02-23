@@ -114,7 +114,7 @@ def content_payment_page(request, content_id):
                 "amount":float(price),  # Amount to be charged
                 "currency":currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
-                "redirect_url": "https://learnli-production.up.railway.app/content_payment_success",  # Redirect URL after payment
+                "redirect_url": "https://https://learnlii.com/content_payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
@@ -215,14 +215,6 @@ def extract_content_and_rest_of_tx_ref_from_tx_ref(tx_ref):
      _,content_id, rest_of_tx_ref= tx_ref.split('_',2)
      return int(content_id), str(rest_of_tx_ref)
 
-
-
-
-
-
-
-
-
 @login_required
 def content_list(request):
     contents = Content.objects.filter(is_hiden = False).order_by('-upload_date')
@@ -234,16 +226,11 @@ def profile_library(request,pk):
     contents = Content.objects.all().order_by('-upload_date')
     return render(request, 'profile_library.html', {'contents': contents, 'profile':profile})    
 
-
-
 #Ebook views
 @login_required
 def book_list(request):
     books = Ebook.objects.filter(is_hiden = False)
     return render(request, 'book_list.html', {'books': books})
-
-  
-
 
 #Profile Ebook views
 @login_required
@@ -275,9 +262,7 @@ def delete_ebook(request, ebook_id):
         ebook.delete()
         messages.success(request,('Ebook Deleted!!'))
         return redirect('book_list')    
-    
-    
-
+        
 def book_details(request, pk):
     book = get_object_or_404(Ebook, pk=pk)
     ebook_content_type = ContentType.objects.get_for_model(Ebook)  # Get ContentType for ebook mode
@@ -337,7 +322,7 @@ def book_payment_page(request, book_id):
                 "amount":float(price),  # Amount to be charged
                 "currency":currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
-                "redirect_url": "https://learnli-production.up.railway.app/book_payment_success",  # Redirect URL after payment
+                "redirect_url": "https://https://learnlii.com/book_payment_success",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number

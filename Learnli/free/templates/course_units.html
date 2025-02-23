@@ -28,21 +28,21 @@
         <!-- Sample Course Card -->
         
         <div class="course-card" data-title="Course Title" data-creator="Creator Name" data-language="English" data-field="Science">
-          <a href="" class="course-title">{{subject.title}}</a>
+          <a href="" class="course-title">{{course_unit.title}}</a>
           <div class="course-image">
-              <a  href=""><img src="{{course_units.image.url }}"> </a>
+              <a  href=""><img src="{{course_unit.image.url }}"> </a>
             </div>
             <div class="course-details">
-              <a href="{% url 'profile' course_units.unit_teacher.id %} " style="font-size: small;">Created by:{{ course_units.unit_taecher }}</a>
+              <a href="{% url 'profile' course_unit.unit_teacher.id %} " style="font-size: small;">Created by:{{ course_unit.unit_teacher }}</a>
                 <p class="course-date">Uploaded on:{{ course_unit.created_on }}</p>
                 <button class="btn btn-outline-primary" name="Enroll" value="unEnroll" type="submit"><a href="{% url 'course_unit_lessons' course_unit.id %}">lessons</a></button>
          
-                {% if request.user == course_units.unit_teacher %}
+                {% if request.user == course_unit.unit_teacher %}
                         
-                <button class="btn btn-outline-secondary"><a href=" {% url 'edit_course_unit' course_unit.id %}"><strong 
+                <button class="btn btn-outline-secondary"><a href=" {% url 'edit_course_units' course_unit.id %}"><strong 
                 style="color:black;">Edit</strong></a>
                 </button>
-                <button class="btn btn-outline-danger"><a href=" {% url 'delete_course_unit' course_unit.id %}"><strong 
+                <button class="btn btn-outline-danger"><a href=" {% url 'delete_course_units' course_unit.id %}"><strong 
                   style="color:black;">delete</strong></a>
                   </button>
                 {% endif %}

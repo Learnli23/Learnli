@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+
+ 
+    <body>
+        <h1>Add Section to {{ book.title }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <div>
+                    {{ form.as_p }}
+                    {{ form.media }}
+            
+                </div>
+            {% endfor %}
+            <button type="submit">Save</button>
+        </form>
+        <a href="{% url 'book_details' book.pk %}">Back to Ebook</a>
+    </body>
+    </html>
+
+
+
+{% endblock %}

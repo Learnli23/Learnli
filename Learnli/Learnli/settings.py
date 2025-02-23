@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '8q@(8$v*3g4$=o%v41_ms+ztlt36+$ljl(o9%cg4in#ptv00=u' #os.environ.get('Learnli_SECRET_KEY'),
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #os.environ.get('Learnli_DEBUG')
+DEBUG = False #os.environ.get('Learnli_DEBUG')
 
 ALLOWED_HOSTS = ['*'] #['https://learnlii.com', 'https://learnlii.com', 'https://learnli-production.up.railway.app']
 #csrf_token configuration to adid ngrok
@@ -171,7 +171,7 @@ WSGI_APPLICATION = 'Learnli.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
  
-
+ 
 '''
 DATABASES = {
     'default': {
@@ -181,14 +181,15 @@ DATABASES = {
 }
 
 '''
+
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')  # Load the DATABASE_URL from .env
     )
-}
+}  
 
 
-
+ 
 
 
 
