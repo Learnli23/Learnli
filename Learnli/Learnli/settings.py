@@ -28,7 +28,7 @@ SECRET_KEY = '8q@(8$v*3g4$=o%v41_ms+ztlt36+$ljl(o9%cg4in#ptv00=u' #os.environ.ge
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False #os.environ.get('Learnli_DEBUG')
 
-ALLOWED_HOSTS = ['*'] #['https://learnlii.com', 'https://learnlii.com', 'https://learnli-production.up.railway.app']
+ALLOWED_HOSTS = ['*'] #['https://learnlii.com', 'www.learnlii.com', 'https://learnli-production.up.railway.app']
 #csrf_token configuration to adid ngrok
 CSRF_TRUSTED_ORIGINS = ['https://learnlii.com', 'https://learnli-production.up.railway.app']
 
@@ -262,3 +262,32 @@ LOGIN_REDIRECT_URL ='/'
 LOGOUT_URL = 'logout'  # The URL name for the logout view
 LOGIN_REDIRECT_URL = '/'  # The default URL to redirect to after login
 #LOGOUT_REDIRECT_URL = '/'  # The URL to redirect to after logout
+
+
+#Log errors in production
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django_errors.log',  # Change this path if needed
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
