@@ -76,14 +76,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_otp.middleware.OTPMiddleware',
     'Learnli.middleware.CheckSubscriptionMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
-
-    
+    'whitenoise.middleware.WhiteNoiseMiddleware',  
    
 ]
 
- 
 
 # Gmail's SMTP server CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -93,8 +89,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'learnli759@gmail.com'  # Replace with your email
 EMAIL_HOST_PASSWORD = '@learnli5895'  # Replace with your email passwor..........
 DEFAULT_FROM_EMAIL = 'webmaster@example.com'
-
-
 
 
 # Flutterwave configuration
@@ -179,14 +173,14 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 '''
-
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')  # Load the DATABASE_URL from .env
     )
-}  
+}
+
+  
 
 
  
@@ -263,7 +257,7 @@ LOGOUT_URL = 'logout'  # The URL name for the logout view
 LOGIN_REDIRECT_URL = '/'  # The default URL to redirect to after login
 #LOGOUT_REDIRECT_URL = '/'  # The URL to redirect to after logout
 
-
+'''
 #Log errors in production
 LOGGING = {
     'version': 1,
@@ -290,4 +284,7 @@ LOGGING = {
         },
     },
 }
+
+'''
+
 
