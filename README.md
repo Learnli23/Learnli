@@ -1,5 +1,4 @@
 **README.md for LearnLi Open Source Project**
-**LearnLi - Open Source Learning Platform  **
 
 About LearnLi 
 LearnLi is a **digital learning platform** that allows students, teachers, and institutions to create, share, and access educational content. It supports **courses, eBooks, exams, and a content moderation system**, making online education **affordable, flexible, and accessible**.  
@@ -71,7 +70,7 @@ Access **LearnLi** at: `http://127.0.0.1:8000/`
 ---
 
 ## 🛠️ Deployment Guide  
-LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [DEPLOYMENT.md](DEPLOYMENT.md) for step-by-step deployment instructions.  
+LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [[DEPLOYMENT.md](DEPLOYMENT.md](https://docs.vendure.io/)) for step-by-step deployment instructions.  
 
 ---
 
