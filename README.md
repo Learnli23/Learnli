@@ -114,7 +114,7 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 For discussions, issues, or feature requests, please open a GitHub **Issue** or reach out via:  
 
-📩 Email: **slearnli759@gmail.com**  
+📩 Email: **learnli759@gmail.com**  
 🌐 Website: [https://learnlii.com](https://learnlii.com)  
 **Happy Learning!**  
  
