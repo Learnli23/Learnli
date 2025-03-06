@@ -70,7 +70,7 @@ Access **LearnLi** at: `http://127.0.0.1:8000/`
 ---
 
 ## 🛠️ Deployment Guide  
-LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [[DEPLOYMENT.md](https://docs.vendure.io/)) for step-by-step deployment instructions.  
+LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [DEPLOYMENT.md](https://docs.vendure.io/)) for step-by-step deployment instructions.  
 
 ---
 
@@ -116,9 +116,6 @@ For discussions, issues, or feature requests, please open a GitHub **Issue** or 
 
 📩 Email: **slearnli759@gmail.com**  
 🌐 Website: [https://learnlii.com](https://learnlii.com)  
-
-🚀 **Happy Learning!**  
-```
-
----
+**Happy Learning!**  
+ 
  
