@@ -1,5 +1,5 @@
-README.md for LearnLi Open Source Project
-LearnLi - Open Source Learning Platform  
+**README.md for LearnLi Open Source Project**
+**LearnLi - Open Source Learning Platform  **
 
 About LearnLi 
 LearnLi is a **digital learning platform** that allows students, teachers, and institutions to create, share, and access educational content. It supports **courses, eBooks, exams, and a content moderation system**, making online education **affordable, flexible, and accessible**.  
