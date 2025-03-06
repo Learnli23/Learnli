@@ -30,7 +30,7 @@ Ensure you have the following installed on your system:
 
 ### **2️⃣ Clone the Repository**  
 ```sh
-git clone https://github.com/your-username/learnli.git
+git clone https://github.com/Learnli23/learnli.git
 cd learnli
 ```
 
@@ -70,7 +70,7 @@ Access **LearnLi** at: `http://127.0.0.1:8000/`
 ---
 
 ## 🛠️ Deployment Guide  
-LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [[DEPLOYMENT.md](DEPLOYMENT.md](https://docs.vendure.io/)) for step-by-step deployment instructions.  
+LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [[DEPLOYMENT.md](https://docs.vendure.io/)) for step-by-step deployment instructions.  
 
 ---
 
@@ -114,15 +114,11 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 For discussions, issues, or feature requests, please open a GitHub **Issue** or reach out via:  
 
-📩 Email: **support@learnli.com**  
-🌐 Website: [https://learnli.com](https://learnli.com)  
+📩 Email: **slearnli759@gmail.com**  
+🌐 Website: [https://learnlii.com](https://learnlii.com)  
 
 🚀 **Happy Learning!**  
 ```
 
 ---
-
-### **How to Use This README**
-1. Replace `https://github.com/your-username/learnli.git` with your **GitHub repo link**.
-2. Replace `https://your-logo-url.com` with your **actual LearnLi logo**.
-3. Update `support@learnli.com
+ 
