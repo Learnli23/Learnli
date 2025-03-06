@@ -23,14 +23,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8q@(8$v*3g4$=o%v41_ms+ztlt36+$ljl(o9%cg4in#ptv00=u' #os.environ.get('Learnli_SECRET_KEY'),
+SECRET_KEY = os.environ.get('YOUR_DJANDO_SECRET_KEY'),
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #os.environ.get('Learnli_DEBUG')
+DEBUG = os.environ.get('YOUR_DEBUG')
 
-ALLOWED_HOSTS = ['*'] #['https://learnlii.com', 'www.learnlii.com', 'https://learnli-production.up.railway.app']
+ALLOWED_HOSTS = ['*'] 
 #csrf_token configuration to adid ngrok
-CSRF_TRUSTED_ORIGINS = ['https://learnlii.com', 'https://learnli-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = [ 'YOUR_URLS/SITES']
 
 AUTH_USER_MODEL ='users.user_Profile'
 
@@ -86,21 +86,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'learnli759@gmail.com'  # Replace with your email
-EMAIL_HOST_PASSWORD = '@learnli5895'  # Replace with your email passwor..........
+EMAIL_HOST_USER = 'learnlI@gmail.com'  # Replace with your email
+EMAIL_HOST_PASSWORD = ' PASS_WORD'  # Replace with your email passwor
 DEFAULT_FROM_EMAIL = 'webmaster@example.com'
 
 
 # Flutterwave configuration
  
 #FLWSECK_TESTe38b7f33b30d
-FLUTTERWAVE_PUBLIC_KEY = os.getenv('FLUTTERWAVE_PUBLIC_KEY')
+FLUTTERWAVE_PUBLIC_KEY = os.getenv('FLUTTERWAVE_PUBLIC_KEY') #configure thyes secrete keys in your .env files
 FLUTTERWAVE_SECRET_KEY = os.getenv('FLUTTERWAVE_SECRET_KEY')
 # Flutterwave Secret Key
-FLUTTERWAVE_SECRET_KEY = 'FLWSECK_TEST-3167d251d49a00bccb920091765b7994-X'
-FLUTTERWAVE_PUBLIC_KEY = "FLWPUBK_TEST-e100344f252a9bc2bfda7319c8a3f200-X"
 #openai api key
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")#configure thyes secrete keys in your .env files
 
 # Twilio SMS Configuration (Optional)
 TWILIO_ACCOUNT_SID = 'your_twilio_account_sid'
@@ -174,6 +172,7 @@ DATABASES = {
     }
 }
 '''
+# configure your database
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')  # Load the DATABASE_URL from .env
