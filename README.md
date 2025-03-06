@@ -3,7 +3,7 @@
 About LearnLi 
 LearnLi is a **digital learning platform** that allows students, teachers, and institutions to create, share, and access educational content. It supports **courses, eBooks, exams, and a content moderation system**, making online education **affordable, flexible, and accessible**.  
 
-This open-source version of LearnLi allows developers, educators, and organizations like **UNICEF** to contribute and extend its capabilities.  
+This open-source version of LearnLi allows developers, educators, and organizations to contribute and extend its capabilities.  
 
 ---
 
@@ -70,13 +70,13 @@ Access **LearnLi** at: `http://127.0.0.1:8000/`
 ---
 
 ## 🛠️ Deployment Guide  
-LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [DEPLOYMENT.md](https://docs.vendure.io/)) for step-by-step deployment instructions.  
+LearnLi can be deployed on platforms like **Railway, AWS, or DigitalOcean**. See [DEPLOYMENT.md](https://docs.vendure.io/) for step-by-step deployment instructions.  
 
 ---
 
 ## 🤝 Contributing  
 
-We welcome contributions from developers, educators, and organizations like **UNICEF**. Follow these steps:  
+We welcome contributions from developers, educators, and organizations. Follow these steps:  
 
 1. **Fork the repository**  
 2. **Create a feature branch**  
