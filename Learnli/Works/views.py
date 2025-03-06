@@ -210,7 +210,7 @@ def course_payment_page(request, course_id):
                 "amount":float(price),  # Amount to be charged
                 "currency":currency,  # Currency
                 "payment_options": "card, mobilemoneyuganda, ussd,banktransfer",
-                "redirect_url": "https://learnlii.com/course_payment_success",  # Redirect URL after payment
+                "redirect_url": "YOUR REDICT URL",  # Redirect URL after payment
                 "customer": {
                     "email": user_profile.email,  # User's email for payment receipt
                     "phonenumber": user_profile.contact,  # User's phone number
